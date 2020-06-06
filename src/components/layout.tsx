@@ -1,5 +1,3 @@
-import '../style/index.css';
-
 import { Moon, Sun } from 'react-feather';
 import React, { useEffect, useState } from 'react';
 import SEO, { SEOProps } from '../utils/seo';

@@ -1,13 +1,13 @@
-import React from 'react';
-import { MDXProvider } from '@mdx-js/react';
-import { graphql, PageProps } from 'gatsby';
-import Layout from '../components/layout';
-import Img from 'gatsby-image';
-import { Calendar } from 'react-feather';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { Col, Row } from '../components/shortcodes/index';
+import { PageProps, graphql } from 'gatsby';
 
-import { Row, Col } from '../components/shortcodes/index';
+import { Calendar } from 'react-feather';
+import Img from 'gatsby-image';
+import Layout from '../components/layout';
+import { MDXProvider } from '@mdx-js/react';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { PortfolioQuery } from './__generated__/PortfolioQuery';
+import React from 'react';
 
 export default function porfolio({ location, data }: PageProps<PortfolioQuery, {}>) {
   return (

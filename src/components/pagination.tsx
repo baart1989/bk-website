@@ -1,10 +1,14 @@
-import React from 'react';
-import { Link } from 'gatsby';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 
-export default function({ pageContext, type }) {
-  if (pageContext.numPages > 1) {
-    const listItems = Array.from({ length: pageContext.numPages }).map((_, p) => (
+import { Link } from 'gatsby';
+import { PaginatedPageContext } from '../../gatsby-node';
+import React from 'react';
+import cns from 'classnames';
+
+export type PaginationProps = { pageContext: PaginatedPageContext; type: string };
+export const Pagination: React.FC<PaginationProps> = ({ pageContext, type }) => {
+  if (pageContext.totalPagesCount > 1) {
+    const listItems = Array.from({ length: pageContext.totalPagesCount }).map((_, p) => (
       <Item type={type} currentPage={pageContext.currentPage} page={p + 1} key={`p-b-i-${p}`} />
     ));
 
@@ -21,7 +25,7 @@ export default function({ pageContext, type }) {
             />
           )}
           {listItems}
-          {pageContext.currentPage !== pageContext.numPages && (
+          {pageContext.currentPage !== pageContext.totalPagesCount && (
             <Item
               type={type}
               currentPage={pageContext.currentPage}
@@ -36,9 +40,16 @@ export default function({ pageContext, type }) {
   } else {
     return <React.Fragment></React.Fragment>;
   }
-}
+};
 
-type ItemProps = { type: string; currentPage; title?: string; page: number; icon?: JSX.Element };
+type ItemProps = {
+  type: string;
+  currentPage: number;
+  title?: string;
+  page: number;
+  icon?: JSX.Element;
+};
+
 const Item: React.FC<ItemProps> = ({ type, currentPage, title, page, icon }) => {
   const to = `/${type}/${page === 1 ? '' : page}`;
   const active = icon ? false : page === currentPage;
@@ -50,12 +61,17 @@ const Item: React.FC<ItemProps> = ({ type, currentPage, title, page, icon }) => 
       <Link
         to={to}
         title={_title}
-        className={`rounded-full bg-bgalt flex items-center justify-center w-12 text-center h-12 m-3 transition-all duration-300 hover:shadow-2xl focus:shadow-2xl ${
-          active ? 'bg-gradient-primary text-white shadow-2xl' : ''
-        }`}
+        className={cns(
+          `rounded-full bg-bgalt flex items-center justify-center w-12 text-center h-12 m-3 transition-all duration-300 hover:shadow-2xl focus:shadow-2xl`,
+          {
+            'bg-gradient-primary text-white shadow-2xl': active,
+          },
+        )}
       >
         <span>{icon || page}</span>
       </Link>
     </li>
   );
 };
+
+export default Pagination;

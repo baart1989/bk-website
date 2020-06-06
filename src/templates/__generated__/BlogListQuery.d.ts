@@ -31,6 +31,7 @@ export interface BlogListQuery_allMdx_edges_node_frontmatter_image {
 export interface BlogListQuery_allMdx_edges_node_frontmatter {
   title: string;
   description: string | null;
+  author: string | null;
   date: any | null;
   image: BlogListQuery_allMdx_edges_node_frontmatter_image | null;
 }
@@ -41,6 +42,8 @@ export interface BlogListQuery_allMdx_edges_node_fields {
 
 export interface BlogListQuery_allMdx_edges_node {
   id: string;
+  timeToRead: number | null;
+  excerpt: string;
   frontmatter: BlogListQuery_allMdx_edges_node_frontmatter | null;
   fields: BlogListQuery_allMdx_edges_node_fields | null;
 }

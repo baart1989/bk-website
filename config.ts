@@ -43,10 +43,6 @@ const siteMetadata = {
       name: 'PRIVACY POLICY',
       url: '/privacy-policy',
     },
-    {
-      name: 'GitHub',
-      url: 'https://github.com/akzhy/gatsby-starter-elemental',
-    },
   ],
   social: [
     {
@@ -74,7 +70,7 @@ const siteMetadata = {
     // leave empty ('') or false to hide form
     api_url: 'https://getform.io/f/f227a36e-096a-4c6a-9963-9f1918a85bb3',
     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet accumsan arcu. Proin ac consequat arcu.`,
-    mail: 'hi@akzhy.com',
+    mail: 'baart1989@gmail.com',
     phone: '000-000-0000',
     address: '1234 \nLocation \nLocation',
   },

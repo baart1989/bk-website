@@ -1,6 +1,20 @@
-import { createFilePath } from 'gatsby-source-filesystem';
 import { GatsbyNode } from 'gatsby';
+import { createFilePath } from 'gatsby-source-filesystem';
 import path from 'path';
+
+const paginatedPageContext = (
+  itemPerPage: number,
+  currentIndex: number,
+  totalPagesCount: number,
+) => {
+  return {
+    limit: itemPerPage,
+    skip: currentIndex * itemPerPage,
+    totalPagesCount: totalPagesCount,
+    currentPage: currentIndex + 1,
+  };
+};
+export type PaginatedPageContext = ReturnType<typeof paginatedPageContext>;
 
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
@@ -78,12 +92,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
       createPage({
         path: i === 0 ? `/blog` : `/blog/${i + 1}`,
         component: path.resolve('./src/templates/blog-list.tsx'),
-        context: {
-          limit: blogPostsPerPage,
-          skip: i * blogPostsPerPage,
-          numPages: numBlogPages,
-          currentPage: i + 1,
-        },
+        context: paginatedPageContext(blogPostsPerPage, i, numBlogPages),
       });
     });
 
@@ -95,12 +104,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
       createPage({
         path: i === 0 ? `/portfolio` : `/portfolio/${i + 1}`,
         component: path.resolve('./src/templates/portfolio-list.tsx'),
-        context: {
-          limit: portfolioItemsPerPage,
-          skip: i * portfolioItemsPerPage,
-          numPages: numPortfolioItems,
-          currentPage: i + 1,
-        },
+        context: paginatedPageContext(portfolioItemsPerPage, i, numPortfolioItems),
       });
     });
   });
