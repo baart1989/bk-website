@@ -6,7 +6,7 @@ import { PaginatedPageContext } from '../../gatsby-node';
 import Pagination from '../components/pagination';
 import { PortfolioListQuery } from './__generated__/PortfolioListQuery';
 import PortfolioParallax from './components/portfolio-parallax';
-import { canUseDom } from '../utils/canUseDom';
+import { isRunningInBrowser } from '../utils/isRunningInBrowser';
 
 export default function portfolioList({
   data,
@@ -14,9 +14,7 @@ export default function portfolioList({
   location,
 }: PageProps<PortfolioListQuery, PaginatedPageContext>) {
   useEffect(() => {
-    if (canUseDom()) {
-      window.dispatchEvent(new CustomEvent('scroll'));
-    }
+    window.dispatchEvent(new CustomEvent('scroll'));
   }, []);
 
   const portfolioItems = data.allMdx.edges.map((item, i) => (
