@@ -15,7 +15,7 @@ type SiteContextState = CartState & {
   decreaseQty: (item: CartActions.CartItem) => void;
 };
 
-const usePersistedReducer = createPersistedReducer('AT_WEBSITE_BASKET', globalThis.localStorage);
+const usePersistedReducer = createPersistedReducer('AT_WEBSITE_BASKET');
 const SiteContext = React.createContext<SiteContextState>(INITIAL_STATE as SiteContextState);
 
 export const useSiteContext = () => React.useContext(SiteContext);

@@ -22,7 +22,10 @@ export type Clear = Action<typeof CLEAR_CART, undefined>;
 export const add = (item: CartItem): Add => ({ type: ADD_TO_CART, payload: item });
 export const remove = (item: CartItem): Remove => ({ type: REMOVE_FROM_CART, payload: item });
 export const clear = (): Clear => ({ type: CLEAR_CART, payload: undefined });
-export const changeQty = (item: CartItem, value: 1 | -1): ChangeQty => ({ type: CHANGE_QTY, payload: { item, value } });
+export const changeQty = (item: CartItem, value: 1 | -1): ChangeQty => ({
+  type: CHANGE_QTY,
+  payload: { item, value },
+});
 
 export const CartActions = {
   add,

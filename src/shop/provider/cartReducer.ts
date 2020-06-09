@@ -46,7 +46,10 @@ const pushOrReplace = (
   return newCart.concat(newValue);
 };
 
-export function cartReducer(state: CartState = INITIAL_STATE, action: CartActions.ActionTypes): CartState {
+export function cartReducer(
+  state: CartState = INITIAL_STATE,
+  action: CartActions.ActionTypes,
+): CartState {
   switch (action.type) {
     case CartActions.ADD_TO_CART: {
       const newCartState = pushOrReplace(state.cart, action.payload, action.payload.quantity);

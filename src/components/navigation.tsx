@@ -8,6 +8,7 @@ import { NavigationQuery } from './__generated__/NavigationQuery';
 import { Sidebar } from 'react-tailwind-component';
 import { Theme } from './layout';
 import { WindowLocation } from '@reach/router';
+import { canUseDom } from '../utils/canUseDom';
 import cns from 'classnames';
 
 type NavbarProps = {
@@ -51,12 +52,16 @@ const Navbar: React.FC<NavbarProps> = ({
       } else if (document.documentElement.scrollTop <= 50 && scrolled) changeState(false);
     };
 
-    window.addEventListener('scroll', onScroll);
+    if (canUseDom()) {
+      window.addEventListener('scroll', onScroll);
+    }
 
     setNavbarHeight(navbar.current.getBoundingClientRect().height);
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      if (canUseDom()) {
+        window.removeEventListener('scroll', onScroll);
+      }
     };
   }, [scrolled]);
 

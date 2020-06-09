@@ -3,24 +3,26 @@ import { IndexPageQuery, IndexPageQuery_site_siteMetadata } from './__generated_
 import { PageProps, graphql } from 'gatsby';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { ArrowRight } from 'react-feather';
+import BlogCard from '../blog/components/blog-card';
 import { Button } from '../components/ui';
-import ItemBlog from '../components/item-blog';
-import ItemPortfolio from '../components/item-portfolio';
+import Img from 'gatsby-image';
 import Layout from '../components/layout';
+import OfferDetails from '../offer/components/offer';
+import PortfolioParallax from '../portfolio/components/portfolio-parallax';
 import ScrollIntoView from 'react-scroll-into-view';
+import ShopCard from '../shop/components/shop-card';
 import cns from 'classnames';
 
 export default function IndexPage({ data, location }: PageProps<IndexPageQuery>) {
   const siteData = data.site.siteMetadata;
 
-  const portfolioList = data.portfolio.edges.map((item, _) => (
-    <ItemPortfolio data={item.node} key={`p-item-index-${item.node.id}`} even={(_ + 1) % 2 === 0} />
+  const portfolioList = data.portfolio.edges.map(({ node }, index) => (
+    <PortfolioParallax data={node} key={node.id} even={(index + 1) % 2 === 0} />
   ));
 
-  const blogList = data.blog.edges.map(item => (
-    <ItemBlog data={item.node} key={`b-item-index-${item.node.id}`} />
-  ));
+  const blogList = data.blog.edges.map(item => <BlogCard data={item.node} key={item.node.id} />);
+  const shopList = data.shop.edges.map(item => <ShopCard key={item.node.id} data={item.node} />);
+  const offer = <OfferDetails data={data.offer.edges} />;
 
   return (
     <Layout
@@ -31,18 +33,23 @@ export default function IndexPage({ data, location }: PageProps<IndexPageQuery>)
       navPlaceholder={false}
       location={location}
     >
-      <Wall data={siteData} />
+      <Wall data={siteData} image={data.wallImage.childImageSharp.fluid} />
       {siteData.about !== '' && <About data={siteData.about} />}
-      <div className="px-4 lg:px-0" id="portfolio">
+      {/* <div className="px-4 lg:px-0" id="portfolio">
         {portfolioList}
-      </div>
+      </div> */}
+      <Offer>{offer}</Offer>
+      <Shop>{shopList}</Shop>
       <Blog>{blogList}</Blog>
       <Contact data={siteData.contact} />
     </Layout>
   );
 }
 
-const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata }> = ({ data }) => {
+const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = ({
+  data,
+  image,
+}) => {
   const wall = useRef(null);
 
   const { twoColumnWall } = data;
@@ -87,8 +94,13 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata }> = ({ data }) =>
       <p className="text-lg lg:text-xl text-color-2 pt-4 lg:pt-0">{data.introTag}</p>
       <p className="text-base lg:text-lg mt-4">{data.description}</p>
       <ScrollIntoView selector="#portfolio">
-        <Button title="SEE WORKS" type="button" iconRight={<ArrowRight />} />
+        <Button to="/offer/" title="ZOBACZ OFERTĘ" />
       </ScrollIntoView>
+      <div>
+        <Button to="/shop/" title="SKLEP" />
+        <Button to="/blog/" title="BLOG" className="ml-2" />
+      </div>
+      <Button title="ZALOGUJ" type="button" />
     </React.Fragment>
   );
 
@@ -105,11 +117,7 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata }> = ({ data }) =>
               background: 'rgba(0,0,0,.75)',
             }}
           ></div>
-          <img
-            src={data.titleImage}
-            alt=""
-            className="h-full w-auto max-w-none lg:h-auto lg:w-full"
-          />
+          <Img fluid={image} className="h-full w-auto max-w-none lg:h-auto lg:w-full" />
         </div>
         <div className="flex-1 text-center p-3 relative z-10 lg:text-left lg:pl-8 text-white lg:text-color-default">
           {innerComponents}
@@ -129,9 +137,20 @@ const About: React.FC<{ data: string }> = ({ data }) => {
   return (
     <div className="boxed">
       <div className="px-4 py-20 text-center lg:py-40 lg:px-0">
-        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">About</h2>
+        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">O nas</h2>
         <p className="mt-5 text-lg">{data}</p>
       </div>
+    </div>
+  );
+};
+
+const Offer = ({ children }) => {
+  return (
+    <div className="container mx-auto px-0">
+      <div className="pt-20 pb-10 text-center lg:pt-40 lg:pb-20">
+        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">Współpraca</h2>
+      </div>
+      {children}
     </div>
   );
 };
@@ -147,12 +166,23 @@ const Blog = ({ children }) => {
   );
 };
 
+const Shop = ({ children }) => {
+  return (
+    <div className="container mx-auto px-0">
+      <div className="pt-20 pb-10 text-center lg:pt-40 lg:pb-20">
+        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">Sklep</h2>
+      </div>
+      <div className="flex flex-wrap">{children}</div>
+    </div>
+  );
+};
+
 const Contact = ({ data }) => {
   const hasContactForm = data.api_url;
   return (
     <div className="container mx-auto">
       <div className="pt-20 pb-10 lg:pt-40 lg:pb-20 text-center">
-        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">Contact</h2>
+        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">Kontakt</h2>
       </div>
       <div className="flex flex-wrap pb-40">
         {hasContactForm && (
@@ -170,6 +200,13 @@ const Contact = ({ data }) => {
 
 export const query = graphql`
   query IndexPageQuery {
+    wallImage: file(base: { eq: "landing.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1000) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
     site: site {
       siteMetadata {
         title
@@ -203,10 +240,12 @@ export const query = graphql`
             title
             description
             image {
+              publicURL
               childImageSharp {
                 fluid(maxWidth: 1000) {
                   ...GatsbyImageSharpFluid
                 }
+                id
               }
             }
           }
@@ -220,20 +259,91 @@ export const query = graphql`
       edges {
         node {
           id
+          timeToRead
+          excerpt
           frontmatter {
             title
             description
+            author
             date(formatString: "DD MMMM YYYY")
-            image {
+            authorImage {
               childImageSharp {
-                fluid(maxWidth: 1000) {
+                fluid(maxWidth: 200) {
                   ...GatsbyImageSharpFluid
                 }
+              }
+            }
+            image {
+              publicURL
+              childImageSharp {
+                fluid(maxWidth: 1920) {
+                  srcSet
+                  ...GatsbyImageSharpFluid
+                }
+                id
               }
             }
           }
           fields {
             slug
+          }
+        }
+      }
+    }
+    offer: allMdx(
+      filter: { fields: { sourceName: { eq: "offer" } } }
+      sort: { fields: [frontmatter___date] }
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            price
+            currency
+            details
+            description
+            image {
+              publicURL
+              childImageSharp {
+                fluid(maxWidth: 640) {
+                  srcSet
+                  ...GatsbyImageSharpFluid
+                }
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+    shop: allMdx(
+      limit: 3
+      filter: { fields: { sourceName: { eq: "shop" } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      edges {
+        node {
+          id
+          fields {
+            slug
+          }
+          excerpt
+          frontmatter {
+            title
+            price
+            currency
+            type
+            image {
+              publicURL
+              childImageSharp {
+                fluid(maxWidth: 640) {
+                  srcSet
+                  ...GatsbyImageSharpFluid
+                }
+                id
+              }
+            }
           }
         }
       }

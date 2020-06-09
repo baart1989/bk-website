@@ -1,23 +1,39 @@
 import React, { useState } from 'react';
+
 import { Link } from './utils';
+import cns from 'classnames';
 
 type ButtonProps = {
   title: string;
   to?: string;
   type?: any;
-  label?: string;
   disabled?: boolean;
   iconLeft?: JSX.Element;
   iconRight?: JSX.Element;
+  full?: boolean;
+  className?: string;
+  onClick?: () => void;
 };
-const Button: React.FC<ButtonProps> = props => {
-  const { title, to, type, label, disabled } = props;
+const Button: React.FC<ButtonProps> = ({
+  title,
+  to,
+  type,
+  disabled,
+  full,
+  className = '',
+  iconLeft,
+  iconRight,
+  ...rest
+}) => {
+  if (full) {
+    className = cns(className, 'w-full justify-center');
+  }
 
   const innerComponents = (
     <React.Fragment>
-      {props.iconLeft && <span className="icon icon-left">{props.iconLeft}</span>}
-      <span>{props.title}</span>
-      {props.iconRight && <span className="icon icon-right">{props.iconRight}</span>}
+      {iconLeft && <span className="icon icon-left">{iconLeft}</span>}
+      <span>{title}</span>
+      {iconRight && <span className="icon icon-right">{iconRight}</span>}
     </React.Fragment>
   );
 
@@ -27,14 +43,19 @@ const Button: React.FC<ButtonProps> = props => {
     const dis = disabled === undefined ? false : disabled;
     if (b[0] === 'button') {
       return (
-        <button type={t} disabled={dis} className={`btn btn-primary${dis ? ' disabled' : ''}`}>
+        <button
+          type={t}
+          disabled={dis}
+          className={cns(className, `btn btn-primary`, { disabled: dis })}
+          {...rest}
+        >
           {innerComponents}
         </button>
       );
     }
   }
   return (
-    <Link to={to} className="btn btn-primary" title={label || title}>
+    <Link to={to} className={cns(className, `btn btn-primary`)} title={title}>
       {innerComponents}
     </Link>
   );
@@ -77,7 +98,7 @@ const TextInput = ({ label, type = 'text', name, onChange, footer }) => {
     <div
       className={`${
         focused ? 'input focused shadow-2xl' : ''
-      } transition-all duration-300 py-3 lg:p-4 pb-6`}
+      } transition - all duration - 300 py - 3 lg: p - 4 pb - 6`}
     >
       <p className="text-color-3">{label}</p>
       <div className="bg-gradient-primary p-2px">{elem}</div>

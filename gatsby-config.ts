@@ -1,6 +1,6 @@
+import autoprefixer from 'autoprefixer';
 import { siteMetadata } from './config';
 import tailwindConfig from './tailwind.config';
-import autoprefixer from 'autoprefixer';
 import tailwindcss from 'tailwindcss';
 
 const plugins = [
@@ -12,8 +12,29 @@ const plugins = [
   {
     resolve: `gatsby-source-filesystem`,
     options: {
+      name: `images`,
+      path: `${__dirname}/src/images`,
+    },
+  },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
       name: `blog`,
       path: `${__dirname}/contents/blog/`,
+    },
+  },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      name: `offer`,
+      path: `${__dirname}/contents/offer/`,
+    },
+  },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      name: `shop`,
+      path: `${__dirname}/contents/shop/`,
     },
   },
   {
@@ -26,8 +47,8 @@ const plugins = [
   {
     resolve: `gatsby-source-filesystem`,
     options: {
-      name: `basepages`,
-      path: `${__dirname}/contents/basepages`,
+      name: `basepage`,
+      path: `${__dirname}/contents/basepage/`,
     },
   },
   {

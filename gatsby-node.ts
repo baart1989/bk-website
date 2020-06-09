@@ -1,5 +1,6 @@
 import { GatsbyNode } from 'gatsby';
 import { createFilePath } from 'gatsby-source-filesystem';
+import fs from 'fs';
 import path from 'path';
 
 const paginatedPageContext = (
@@ -21,7 +22,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, getNode, 
   if (node.internal.type === `Mdx`) {
     const slug = createFilePath({ node, getNode });
     const sourceName = getNode(node.parent).sourceInstanceName;
-    const prefix = sourceName === 'basepages' ? '' : '/' + sourceName;
+    const prefix = sourceName === 'basepage' ? '' : '/' + sourceName;
 
     createNodeField({
       node,
@@ -36,14 +37,15 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, getNode, 
   }
 };
 
-export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions }) => {
+export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 
-  return graphql<any>(`
+  const result = await graphql<any>(`
     query GatsbyNodeQuery {
       all: allMdx {
         edges {
           node {
+            id
             fields {
               slug
               sourceName
@@ -72,39 +74,54 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions 
         }
       }
     }
-  `).then(result => {
-    result.data.all.edges.forEach(({ node }) => {
-      const template = node.fields.sourceName;
-      createPage({
-        path: node.fields.slug,
-        component: path.resolve('./src/templates/' + template + '.tsx'),
-        context: {
-          slug: node.fields.slug,
-        },
-      });
+  `);
+
+  // Handle errors
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`);
+    return;
+  }
+
+  const sources: { [id: string]: any[] } = {};
+
+  result.data.all.edges.forEach(({ node }) => {
+    const template = node.fields.sourceName;
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve(`./src/${template}/${template}-item.tsx`),
+      context: {
+        slug: node.fields.slug,
+      },
     });
 
-    const blogPosts = result.data.blog.edges;
-    const blogPostsPerPage = result.data.limitPost.siteMetadata.blogItemsPerPage;
-    const numBlogPages = Math.ceil(blogPosts.length / blogPostsPerPage);
+    const sourceItems = sources[template] || [];
+    sourceItems.push(node);
 
-    Array.from({ length: numBlogPages }).forEach((_, i) => {
+    sources[template] = sourceItems;
+  });
+
+  console.log({ sources });
+
+  Object.keys(sources).forEach(sourceName => {
+    const listPagePath = `./src/${sourceName}/${sourceName}-list.tsx`;
+
+    if (!fs.existsSync(listPagePath)) {
+      console.warn(`ListPageCreateError: ${listPagePath} does not exists`);
+      console.info(`ListPageCreateError: ${listPagePath} skipped`);
+      return;
+    }
+
+    const edges = sources[sourceName];
+    const edgesPerPage = result.data.limitPost.siteMetadata[`${sourceName}ItemsPerPage`] || 10;
+    const pageCount = Math.ceil(edges.length / edgesPerPage);
+
+    Array.from({ length: pageCount }).forEach((_, i) => {
+      const slug = i === 0 ? `/${sourceName}` : `/${sourceName}/${i + 1}`;
+      console.log({ slug });
       createPage({
-        path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-        component: path.resolve('./src/templates/blog-list.tsx'),
-        context: paginatedPageContext(blogPostsPerPage, i, numBlogPages),
-      });
-    });
-
-    const portfolioItems = result.data.portfolio.edges;
-    const { portfolioItemsPerPage } = result.data.limitPost.siteMetadata;
-    const numPortfolioItems = Math.ceil(portfolioItems.length / portfolioItemsPerPage);
-
-    Array.from({ length: numPortfolioItems }).forEach((_, i) => {
-      createPage({
-        path: i === 0 ? `/portfolio` : `/portfolio/${i + 1}`,
-        component: path.resolve('./src/templates/portfolio-list.tsx'),
-        context: paginatedPageContext(portfolioItemsPerPage, i, numPortfolioItems),
+        path: slug,
+        component: path.resolve(listPagePath),
+        context: paginatedPageContext(edgesPerPage, i, pageCount),
       });
     });
   });
