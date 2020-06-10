@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './src/style/index.css';
 
 import { ContextProviderComponent } from './src/shop/provider';
+import Layout from './src/components/layout';
 import React from 'react';
 
 /**
@@ -10,7 +11,10 @@ import React from 'react';
  *
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
-
 export const wrapPageElement = ({ element }) => {
-  return <ContextProviderComponent>{element}</ContextProviderComponent>;
+  return (
+    <ContextProviderComponent>
+      <Layout>{element}</Layout>
+    </ContextProviderComponent>
+  );
 };

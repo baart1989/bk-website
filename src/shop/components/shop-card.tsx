@@ -14,7 +14,6 @@ export const ItemShop: React.FC<{ data: ShopListQuery_shop_edges_node }> = ({
   },
 }) => {
   const { addToCart } = useSiteContext();
-
   const footer = (
     <React.Fragment>
       <div>
@@ -28,7 +27,7 @@ export const ItemShop: React.FC<{ data: ShopListQuery_shop_edges_node }> = ({
           <Button
             onClick={() => addToCart({ ...frontmatter, id, description, path: slug })}
             type="button"
-            title="Dodaj do koszyka"
+            title="Dodaj"
           />
         </div>
       </div>
@@ -42,14 +41,20 @@ export const ItemShop: React.FC<{ data: ShopListQuery_shop_edges_node }> = ({
         fluid={frontmatter.image.childImageSharp.fluid}
         alt=""
       />
-      <div className="p-4 py-3">
-        <h4 className="text-color-2 font-black text-3xl pt-1">{frontmatter.title}</h4>
-        <p className="text-sm leading-5 font-medium">
-          <Link to={slug} className="hover:underline text-secondary">
-            Dowiedz się więcej
-          </Link>
-        </p>
-        <p className="p-3 text-color-default">{description}</p>
+      <div className="flex-1 p-3 flex flex-col justify-between">
+        <div className="flex-1">
+          <p className="text-sm leading-5 font-medium">
+            <Link to={slug} className="hover:underline text-secondary">
+              Dowiedz się więcej
+            </Link>
+          </p>
+          <span className="block">
+            <h3 className="mt-2 text-xl leading-7 font-semibold text-primary">
+              {frontmatter.title}
+            </h3>
+            <p className="mt-3 text-base leading-6">{description}</p>
+          </span>
+        </div>
         {footer}
       </div>
     </div>

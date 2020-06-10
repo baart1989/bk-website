@@ -1,17 +1,16 @@
 import { PageProps, graphql } from 'gatsby';
 import React, { useEffect } from 'react';
 
-import Layout from '../components/layout';
+import Helmet from 'react-helmet';
 import { PaginatedPageContext } from '../../gatsby-node';
 import Pagination from '../components/pagination';
 import { PortfolioListQuery } from './__generated__/PortfolioListQuery';
 import PortfolioParallax from './components/portfolio-parallax';
 
-export default function portfolioList({
+export const PortfolioList: React.FC<PageProps<PortfolioListQuery, PaginatedPageContext>> = ({
   data,
   pageContext,
-  location,
-}: PageProps<PortfolioListQuery, PaginatedPageContext>) {
+}) => {
   useEffect(() => {
     window.dispatchEvent(new CustomEvent('scroll'));
   }, []);
@@ -21,11 +20,8 @@ export default function portfolioList({
   ));
 
   return (
-    <Layout
-      seo={{
-        title: 'Portfolio',
-      }}
-    >
+    <>
+      <Helmet title="Portfolio" />
       <div className="py-12 px-4 lg:px-0">
         <div className="title py-8 text-center">
           <h2 className="font-black text-5xl text-color-1">Portfolio</h2>
@@ -35,9 +31,9 @@ export default function portfolioList({
           <Pagination pageContext={pageContext} type="portfolio" />
         </div>
       </div>
-    </Layout>
+    </>
   );
-}
+};
 
 export const query = graphql`
   query PortfolioListQuery($skip: Int!, $limit: Int!) {
@@ -72,3 +68,5 @@ export const query = graphql`
     }
   }
 `;
+
+export default PortfolioList;

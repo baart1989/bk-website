@@ -3,21 +3,19 @@ import { PageProps, graphql } from 'gatsby';
 
 import { Calendar } from 'react-feather';
 import Img from 'gatsby-image';
-import Layout from '../components/layout';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { PortfolioQuery } from './__generated__/PortfolioQuery';
 import React from 'react';
 
 export default function PortfolioItem({ data }: PageProps<PortfolioQuery, {}>) {
+  // seo={{
+  //   title: data.mdx.frontmatter.title,
+  //   description: data.mdx.frontmatter.description,
+  //   image: data.mdx.frontmatter.banner.publicURL,
+  // }}
   return (
-    <Layout
-      seo={{
-        title: data.mdx.frontmatter.title,
-        description: data.mdx.frontmatter.description,
-        image: data.mdx.frontmatter.banner.publicURL,
-      }}
-    >
+    <>
       <div className="md:px-4 mt-12 py-6 md:w-11/12 mx-auto">
         <div className="mx-auto relative">
           <Img fluid={data.mdx.frontmatter.banner.childImageSharp.fluid} />
@@ -40,7 +38,7 @@ export default function PortfolioItem({ data }: PageProps<PortfolioQuery, {}>) {
           </MDXProvider>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 

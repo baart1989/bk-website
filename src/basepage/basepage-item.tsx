@@ -1,20 +1,18 @@
 import { PageProps, graphql } from 'gatsby';
 
 import { BasePagesQuery } from './__generated__/BasePagesQuery';
-import Layout from '../components/layout';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
 
 export default function BasePageItem({ data }: PageProps<BasePagesQuery, {}>) {
+  // seo={{
+  //   title: data.mdx.frontmatter.title,
+  //   description: data.mdx.frontmatter.description,
+  //   image: data.mdx.frontmatter.image?.publicURL,
+  // }}
   return (
-    <Layout
-      seo={{
-        title: data.mdx.frontmatter.title,
-        description: data.mdx.frontmatter.description,
-        image: data.mdx.frontmatter.image?.publicURL,
-      }}
-    >
+    <>
       <div className="boxed">
         <div className="title py-12 text-center">
           <h2 className="font-black text-5xl text-color-1">{data.mdx.frontmatter.title}</h2>
@@ -25,7 +23,7 @@ export default function BasePageItem({ data }: PageProps<BasePagesQuery, {}>) {
           </MDXProvider>
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 

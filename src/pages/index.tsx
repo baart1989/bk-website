@@ -5,43 +5,35 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import BlogCard from '../blog/components/blog-card';
 import { Button } from '../components/ui';
+import Helmet from 'react-helmet';
 import Img from 'gatsby-image';
-import Layout from '../components/layout';
 import OfferDetails from '../offer/components/offer';
-import PortfolioParallax from '../portfolio/components/portfolio-parallax';
 import ScrollIntoView from 'react-scroll-into-view';
 import ShopCard from '../shop/components/shop-card';
 import cns from 'classnames';
 
 export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
   const siteData = data.site.siteMetadata;
-
-  const portfolioList = data.portfolio.edges.map(({ node }, index) => (
-    <PortfolioParallax data={node} key={node.id} even={(index + 1) % 2 === 0} />
-  ));
-
+  // const portfolioList = data.portfolio.edges.map(({ node }, index) => (
+  //   <PortfolioParallax data={node} key={node.id} even={(index + 1) % 2 === 0} />
+  // ));
+  // <div className="px-4 lg:px-0" id="portfolio">
+  //   {portfolioList}
+  // </div>;
   const blogList = data.blog.edges.map(item => <BlogCard data={item.node} key={item.node.id} />);
   const shopList = data.shop.edges.map(item => <ShopCard key={item.node.id} data={item.node} />);
   const offer = <OfferDetails data={data.offer.edges} />;
 
   return (
-    <Layout
-      seo={{
-        title: 'Home',
-        description: siteData.description,
-      }}
-      navPlaceholder={false}
-    >
+    <>
+      <Helmet title="Start" />
       <Wall data={siteData} image={data.wallImage.childImageSharp.fluid} />
-      {siteData.about !== '' && <About data={siteData.about} />}
-      {/* <div className="px-4 lg:px-0" id="portfolio">
-        {portfolioList}
-      </div> */}
+      <About data={siteData.about} />
       <Offer>{offer}</Offer>
       <Shop>{shopList}</Shop>
       <Blog>{blogList}</Blog>
       <Contact data={siteData.contact} />
-    </Layout>
+    </>
   );
 }
 

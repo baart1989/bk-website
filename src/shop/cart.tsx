@@ -2,7 +2,7 @@ import { ActionButton, SectionHeading } from './components/shop-ui';
 
 import { CartItems } from '../shop/components/cart-items';
 import { Heading } from '../components/ui';
-import Layout from '../components/layout';
+import Helmet from 'react-helmet';
 import React from 'react';
 import { useSiteContext } from '../shop/provider';
 
@@ -32,16 +32,13 @@ const Cart: React.FC<{}> = () => {
   }
 
   return (
-    <Layout
-      seo={{
-        title: 'Contact',
-      }}
-    >
+    <>
+      <Helmet title="Koszyk" />
       <div className="container mx-auto py-12">
         <Heading title="Koszyk" />
         {content}
       </div>
-    </Layout>
+    </>
   );
 };
 

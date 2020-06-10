@@ -1,20 +1,18 @@
 import { Moon, Sun } from 'react-feather';
 import React, { useEffect, useState } from 'react';
-import SEO, { SEOProps } from '../utils/seo';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import Footer from './footer';
 import Helmet from 'react-helmet';
 import Navbar from './navigation';
+import SEO from './seo';
 import { ThemeQuery } from './__generated__/ThemeQuery';
 
 export type Theme = { name: string; label: string; icon: JSX.Element };
 type LayoutProps = {
   children: any;
-  seo: Partial<SEOProps>;
-  navPlaceholder?: boolean;
 };
-export const Layout: React.FC<LayoutProps> = ({ children, seo, navPlaceholder = true }) => {
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const query = useStaticQuery<ThemeQuery>(graphql`
     query ThemeQuery {
       site {
@@ -60,11 +58,10 @@ export const Layout: React.FC<LayoutProps> = ({ children, seo, navPlaceholder = 
   return (
     <React.Fragment>
       <Head data={query} />
-      <SEO {...seo} />
+      <SEO />
       <div className={`wrapper ${themes[theme].name}`}>
         <div className="text-color-default bg-bg">
           <Navbar
-            navPlaceholder={navPlaceholder}
             currentTheme={theme}
             switchTheme={switchTheme}
             themes={themes}

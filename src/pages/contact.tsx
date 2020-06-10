@@ -2,18 +2,15 @@ import { Description, Form } from '../components/contact';
 import { PageProps, graphql } from 'gatsby';
 
 import { ContactQuery } from './__generated__/ContactQuery';
-import Layout from '../components/layout';
+import Helmet from 'react-helmet';
 import React from 'react';
 
-export default function contact({ data }: PageProps<ContactQuery>) {
+export const Contact: React.FC<PageProps<ContactQuery>> = ({ data }) => {
   const { api_url } = data.site.siteMetadata.contact;
   const hasContactForm = api_url;
   return (
-    <Layout
-      seo={{
-        title: 'Contact',
-      }}
-    >
+    <>
+      <Helmet title="Kontakt" />
       <div className="container mx-auto py-12">
         <div className="title py-12 text-center">
           <h2 className="font-black text-5xl text-color-1">Contact</h2>
@@ -29,9 +26,9 @@ export default function contact({ data }: PageProps<ContactQuery>) {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
-}
+};
 
 export const query = graphql`
   query ContactQuery {
@@ -48,3 +45,5 @@ export const query = graphql`
     }
   }
 `;
+
+export default Contact;

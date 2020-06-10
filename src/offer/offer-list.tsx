@@ -1,23 +1,20 @@
 import { PageProps, graphql } from 'gatsby';
 
 import { Heading } from '../components/ui';
-import Layout from '../components/layout';
+import Helmet from 'react-helmet';
 import Offer from './components/offer';
 import { OfferListQuery } from './__generated__/OfferListQuery';
 import React from 'react';
 
 export const OfferList: React.FC<PageProps<OfferListQuery, {}>> = ({ data }) => {
   return (
-    <Layout
-      seo={{
-        title: 'Oferta',
-      }}
-    >
+    <>
+      <Helmet title="Oferta" />
       <div className="container mx-auto py-12">
         <Heading title="Diety" />
         <Offer data={data.allMdx.edges} />
       </div>
-    </Layout>
+    </>
   );
 };
 

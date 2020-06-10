@@ -11,14 +11,12 @@ import cns from 'classnames';
 import { useLocation } from '@reach/router';
 
 type NavbarProps = {
-  navPlaceholder: boolean;
   currentTheme: number;
   switchTheme: () => void;
   themes: Theme[];
   allowThemeSwitch: boolean;
 };
 const Navbar: React.FC<NavbarProps> = ({
-  navPlaceholder,
   currentTheme,
   switchTheme,
   themes,
@@ -38,9 +36,8 @@ const Navbar: React.FC<NavbarProps> = ({
   `);
 
   const navbar = useRef(null);
-
   const [scrolled, changeState] = useState(false);
-  const [navbarHeight, setNavbarHeight] = useState(0);
+  // const [navbarHeight, setNavbarHeight] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -51,8 +48,7 @@ const Navbar: React.FC<NavbarProps> = ({
     };
 
     window.addEventListener('scroll', onScroll);
-
-    setNavbarHeight(navbar.current.getBoundingClientRect().height);
+    // setNavbarHeight(navbar.current.getBoundingClientRect().height);
 
     return () => {
       window.removeEventListener('scroll', onScroll);
@@ -122,7 +118,6 @@ const Navbar: React.FC<NavbarProps> = ({
         </div>
         <div className="absolute line h-px left-0 bottom-0 bg-gradient-primary"></div>
       </div>
-      {navPlaceholder && <div style={{ height: `${navbarHeight}px` }}></div>}
     </React.Fragment>
   );
 };

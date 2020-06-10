@@ -6,7 +6,7 @@ import { Heading, SpinIcon } from '../components/ui';
 import { CartForm } from '../shop/components/cart-form';
 import { CartItems } from '../shop/components/cart-items';
 import { Formik } from 'formik';
-import Layout from '../components/layout';
+import Helmet from 'react-helmet';
 import React from 'react';
 import { useSiteContext } from './provider';
 
@@ -55,11 +55,8 @@ export const Checkout = () => {
   );
 
   return (
-    <Layout
-      seo={{
-        title: 'Contact',
-      }}
-    >
+    <>
+      <Helmet title="Potwierdź zamówienie" />
       <div className="container mx-auto py-12">
         <Heading title="Twoje zamówienie" />
         <SectionHeading
@@ -70,7 +67,7 @@ export const Checkout = () => {
         {form}
         <SectionHeading title={`Do zapłaty: ${total} pln`} button={submitButton} />
       </div>
-    </Layout>
+    </>
   );
 };
 

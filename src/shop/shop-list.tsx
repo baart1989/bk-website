@@ -1,7 +1,6 @@
 import { PageProps, graphql } from 'gatsby';
 
 import { Heading } from '../components/ui';
-import Layout from '../components/layout';
 import React from 'react';
 import ShopCard from './components/shop-card';
 import { ShopListQuery } from './__generated__/ShopListQuery';
@@ -16,19 +15,13 @@ export const ShopList: React.FC<PageProps<ShopListQuery, {}>> = ({ data }) => {
     .map(item => <ShopCard key={item.node.id} data={item.node} />);
 
   return (
-    <Layout
-      seo={{
-        title: 'Sklep',
-      }}
-    >
-      <div className="container mx-auto py-12">
-        <Heading title="Sklep" />
-        <h4 className="text-color-default">Diety</h4>
-        <div className="flex flex-wrap">{dietList}</div>
-        <h4 className="text-color-default">Ebooki</h4>
-        <div className="flex flex-wrap">{ebookList}</div>
-      </div>
-    </Layout>
+    <div className="container mx-auto py-12">
+      <Heading title="Sklep" />
+      <h4 className="text-color-default">Diety</h4>
+      <div className="flex flex-wrap">{dietList}</div>
+      <h4 className="text-color-default">Ebooki</h4>
+      <div className="flex flex-wrap">{ebookList}</div>
+    </div>
   );
 };
 

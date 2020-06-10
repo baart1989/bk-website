@@ -4,21 +4,19 @@ import { PageProps, graphql } from 'gatsby';
 import { Calendar } from 'react-feather';
 import Comments from '../components/comments';
 import Img from 'gatsby-image';
-import Layout from '../components/layout';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
 import { ShopItemQuery } from './__generated__/ShopItemQuery';
 
 const ShopItem: React.FC<PageProps<ShopItemQuery, {}>> = ({ data }) => {
+  // seo={{
+  //   title: data.mdx.frontmatter.title,
+  //   description: data.mdx.frontmatter.description,
+  //   image: data.mdx.frontmatter.image.publicURL,
+  // }}
   return (
-    <Layout
-      seo={{
-        title: data.mdx.frontmatter.title,
-        description: data.mdx.frontmatter.description,
-        image: data.mdx.frontmatter.image.publicURL,
-      }}
-    >
+    <>
       <div className="md:px-4 mt-12 py-6 md:w-11/12 mx-auto">
         <div className="mx-auto relative">
           <Img
@@ -44,7 +42,7 @@ const ShopItem: React.FC<PageProps<ShopItemQuery, {}>> = ({ data }) => {
           <Comments title={data.mdx.frontmatter.title} />
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

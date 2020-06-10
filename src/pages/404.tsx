@@ -1,14 +1,10 @@
-import Layout from '../components/layout';
-import { PageProps } from 'gatsby';
+import Helmet from 'react-helmet';
 import React from 'react';
 
-export default function errorPage({ location }: PageProps<{}, {}>) {
+export const ErrorPage = () => {
   return (
-    <Layout
-      seo={{
-        title: '404',
-      }}
-    >
+    <>
+      <Helmet title="404" />
       <div className="container mx-auto py-12">
         <div className="title py-12 text-center">
           <h2 className="font-black text-7xl text-color-1">
@@ -34,6 +30,8 @@ export default function errorPage({ location }: PageProps<{}, {}>) {
           </p>
         </div>
       </div>
-    </Layout>
+    </>
   );
-}
+};
+
+export default ErrorPage;

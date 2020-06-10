@@ -49,7 +49,7 @@ export const BlogCard: React.FC<{ data: BlogListQuery_allMdx_edges_node }> = ({
       <div className="flex-shrink-0">
         <Img className="h-64 w-full object-cover" fluid={image.childImageSharp.fluid} alt="" />
       </div>
-      <div className="flex-1 p-6 flex flex-col justify-between">
+      <div className="flex-1 p-3 flex flex-col justify-between">
         <div className="flex-1">
           <p className="text-sm leading-5 font-medium">
             <span className="hover:underline text-secondary">Czytaj dalej</span>
