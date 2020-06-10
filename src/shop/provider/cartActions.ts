@@ -7,6 +7,7 @@ export type CartItem = {
   path?: string;
   currency: string;
   quantity?: number;
+  description?: string;
 };
 
 export const ADD_TO_CART = 'AT_ADD_TO_CART';

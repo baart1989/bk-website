@@ -1,7 +1,11 @@
-import React from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
+import { Link, graphql, useStaticQuery } from 'gatsby';
+
+import { CartIcon } from '../shop/components/cart-icon';
 import { NavigationListQuery } from './__generated__/NavigationListQuery';
+import React from 'react';
+import { ShoppingCart } from 'react-feather';
 import { Theme } from './layout';
+import cns from 'classnames';
 
 type NavigationListProps = {
   name?: string;
@@ -52,9 +56,15 @@ const List: React.FC<NavigationListProps> = ({
       const next = i !== themes.length - 1 ? i + 1 : 0;
       return (
         <button
-          className={`text-color-2 transition-transform duration-200 transform top-0 left-0 ${
-            i === currentTheme ? 'scale-100' : 'scale-0 absolute'
-          }`}
+          className={cns(
+            'text-color-2 transition-transform duration-200 transform top-0 left-0',
+            {
+              'scale-100': i === currentTheme,
+            },
+            {
+              'scale-0 absolute': i !== currentTheme,
+            },
+          )}
           title={`Switch to ${themes[next].label}`}
           key={`${name}-theme-switch-btn-${item.name}`}
           onClick={switchTheme}
@@ -64,7 +74,12 @@ const List: React.FC<NavigationListProps> = ({
       );
     });
     list.push(
-      <li className="theme-switcher" key={`${name}-theme-switcher relative`}>
+      <li className="theme-switcher" key="cart">
+        <CartIcon className="text-color-2 transition-transform duration-200 transform top-0 left-0" />
+      </li>,
+    );
+    list.push(
+      <li className="theme-switcher" key={name}>
         {themeButtons}
       </li>,
     );
@@ -75,8 +90,8 @@ const List: React.FC<NavigationListProps> = ({
 
 const ListItem = ({ data, active, liClassName }) => {
   return (
-    <li className={`${liClassName} ${active ? 'active' : ''}`}>
-      <Link to={data.url} title={data.name} className="text-color-2 focus:text-primary">
+    <li className={cns(liClassName, { active: active })}>
+      <Link to={data.url} title={data.name} className="link text-color-2 focus:text-primary">
         <span>{data.name}</span>
       </Link>
     </li>

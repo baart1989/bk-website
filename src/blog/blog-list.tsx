@@ -2,6 +2,7 @@ import { PageProps, graphql } from 'gatsby';
 
 import BlogCard from './components/blog-card';
 import { BlogListQuery } from './__generated__/BlogListQuery';
+import { Heading } from '../components/ui';
 import Layout from '../components/layout';
 import { PaginatedPageContext } from '../../gatsby-node';
 import Pagination from '../components/pagination';
@@ -21,9 +22,7 @@ export const BlogList: React.FC<PageProps<BlogListQuery, PaginatedPageContext>> 
       location={location}
     >
       <div className="container mx-auto py-12">
-        <div className="title py-12 text-center">
-          <h2 className="font-black text-5xl text-color-1">Blog</h2>
-        </div>
+        <Heading title="Blog" />
         <div className="flex flex-wrap">{blogItems}</div>
         <Pagination pageContext={pageContext} type="blog" />
       </div>

@@ -9,7 +9,6 @@ import { Sidebar } from 'react-tailwind-component';
 import { Theme } from './layout';
 import { WindowLocation } from '@reach/router';
 import cns from 'classnames';
-import { isRunningInBrowser } from '../utils/isRunningInBrowser';
 
 type NavbarProps = {
   navPlaceholder: boolean;

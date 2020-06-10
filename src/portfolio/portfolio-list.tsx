@@ -6,7 +6,6 @@ import { PaginatedPageContext } from '../../gatsby-node';
 import Pagination from '../components/pagination';
 import { PortfolioListQuery } from './__generated__/PortfolioListQuery';
 import PortfolioParallax from './components/portfolio-parallax';
-import { isRunningInBrowser } from '../utils/isRunningInBrowser';
 
 export default function portfolioList({
   data,

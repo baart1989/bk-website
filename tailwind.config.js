@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const plugin = require('tailwindcss/plugin');
 const _ = require('lodash');
 
-const gradient = plugin(function({ addUtilities, e, theme, variants }) {
+const gradient = plugin(({ addUtilities, e, theme, variants }) => {
   const gradients = theme('gradients', {});
   const gradientVariants = variants('gradients', []);
 
@@ -61,6 +62,12 @@ module.exports = {
     gradients: theme => ({
       primary: [theme('colors.primary'), theme('colors.secondary')],
     }),
+    screens: {
+      sm: '480px',
+      md: '640px',
+      lg: '768px',
+      xl: '1024px',
+    },
     themes: {
       dark: {
         bg: '#111',
@@ -68,6 +75,8 @@ module.exports = {
         'color-default': '#eee',
         'color-1': '#c35fde',
         'color-2': '#adbfef',
+        'color-3': '#aeb4c5',
+        'color-4': '#d8d8d8',
         border: '#718096',
         primary: '#f55555',
         medium: '#222',
@@ -88,6 +97,7 @@ module.exports = {
         'color-1': '#8e24aa',
         'color-2': '#673ab7',
         'color-3': '#aeb4c5',
+        'color-4': '#d8d8d8',
         primary: '#f55555',
         secondary: '#6888df',
         link: '#0a71c5',

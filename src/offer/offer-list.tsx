@@ -1,5 +1,6 @@
 import { PageProps, graphql } from 'gatsby';
 
+import { Heading } from '../components/ui';
 import Layout from '../components/layout';
 import Offer from './components/offer';
 import { OfferListQuery } from './__generated__/OfferListQuery';
@@ -14,9 +15,7 @@ export const OfferList: React.FC<PageProps<OfferListQuery, {}>> = ({ location, d
       location={location}
     >
       <div className="container mx-auto py-12">
-        <div className="text-center">
-          <h2 className="text-color-1">Diety</h2>
-        </div>
+        <Heading title="Diety" />
         <Offer data={data.allMdx.edges} />
       </div>
     </Layout>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
 import { Link } from './utils';
+import { Loader } from 'react-feather';
 import cns from 'classnames';
 
-type ButtonProps = {
+export type ButtonProps = {
   title: string;
   to?: string;
   type?: any;
@@ -14,7 +15,7 @@ type ButtonProps = {
   className?: string;
   onClick?: () => void;
 };
-const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   title,
   to,
   type,
@@ -61,7 +62,7 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
-const TextInput = ({ label, type = 'text', name, onChange, footer }) => {
+export const TextInput = ({ label, type = 'text', name, onChange, footer }) => {
   const [focused, changeFocused] = useState(false);
 
   let elem = (
@@ -98,7 +99,7 @@ const TextInput = ({ label, type = 'text', name, onChange, footer }) => {
     <div
       className={`${
         focused ? 'input focused shadow-2xl' : ''
-      } transition - all duration - 300 py - 3 lg: p - 4 pb - 6`}
+        } transition - all duration - 300 py - 3 lg: p - 4 pb - 6`}
     >
       <p className="text-color-3">{label}</p>
       <div className="bg-gradient-primary p-2px">{elem}</div>
@@ -107,4 +108,28 @@ const TextInput = ({ label, type = 'text', name, onChange, footer }) => {
   );
 };
 
-export { Button, TextInput };
+export const Heading = ({ title }) => {
+  return (
+    <div className="title py-12 text-center">
+      <h2 className="font-black text-5xl text-color-1">{title}</h2>
+    </div>
+  );
+};
+
+export const SpinIcon = ({ spin = false }) => {
+  if (spin) {
+    return (
+      <span
+        className="spin"
+        style={{
+          display: 'inline-block',
+          verticalAlign: 'middle',
+          animationDuration: '5s',
+        }}
+      >
+        <Loader />
+      </span>
+    );
+  }
+  return null;
+};

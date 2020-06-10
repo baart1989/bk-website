@@ -34,7 +34,7 @@ p {
     @apply relative inline-block mx-2;
 }
 
-.nav .nav-links li a{
+.nav .nav-links li a.link{
     @apply inline-block p-1 relative z-10;
 }
 
@@ -267,10 +267,6 @@ p {
 
 .post-content iframe {
     max-width: 100%;
-}
-
-.input.focused {
-    @apply px-4;
 }
 
 .theme-dark .input.focused {

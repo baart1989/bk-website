@@ -2,6 +2,7 @@ import { GatsbyNode } from 'gatsby';
 import { createFilePath } from 'gatsby-source-filesystem';
 import fs from 'fs';
 import path from 'path';
+import { siteMetadata } from './config';
 
 const paginatedPageContext = (
   itemPerPage: number,
@@ -71,6 +72,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
         siteMetadata {
           blogItemsPerPage
           portfolioItemsPerPage
+          sourcePages {
+            shop
+          }
         }
       }
     }
@@ -100,7 +104,15 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     sources[template] = sourceItems;
   });
 
-  console.log({ sources });
+  Object.keys(siteMetadata.sourcePages).forEach(sourceName => {
+    siteMetadata.sourcePages[sourceName].forEach(pageName => {
+      createPage({
+        path: pageName,
+        component: path.resolve(`./src/${sourceName}/${pageName}.tsx`),
+        context: {},
+      });
+    });
+  });
 
   Object.keys(sources).forEach(sourceName => {
     const listPagePath = `./src/${sourceName}/${sourceName}-list.tsx`;

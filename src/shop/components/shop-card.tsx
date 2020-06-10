@@ -3,14 +3,18 @@ import Img from 'gatsby-image';
 import { Link } from 'gatsby';
 import React from 'react';
 import { ShopListQuery_shop_edges_node } from '../__generated__/ShopListQuery';
+import { useSiteContext } from '../provider';
 
 export const ItemShop: React.FC<{ data: ShopListQuery_shop_edges_node }> = ({
   data: {
+    id,
     frontmatter,
     excerpt: description,
     fields: { slug },
   },
 }) => {
+  const { addToCart } = useSiteContext();
+
   const footer = (
     <React.Fragment>
       <div>
@@ -21,7 +25,11 @@ export const ItemShop: React.FC<{ data: ShopListQuery_shop_edges_node }> = ({
             </span>
             <span className="text-2xl leading-8 font-medium">{frontmatter.currency}</span>
           </div>
-          <Button type="button" title="Dodaj do koszyka" />
+          <Button
+            onClick={() => addToCart({ ...frontmatter, id, description, path: slug })}
+            type="button"
+            title="Dodaj do koszyka"
+          />
         </div>
       </div>
     </React.Fragment>

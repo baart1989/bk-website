@@ -8,7 +8,6 @@ const standOutClassNames = ['transition', 'duration-150', 'transform', 'hover:-t
 
 export const BlogCard: React.FC<{ data: BlogListQuery_allMdx_edges_node }> = ({
   data: {
-    id,
     timeToRead,
     excerpt,
     frontmatter: { title, image, date, description, author, authorImage },

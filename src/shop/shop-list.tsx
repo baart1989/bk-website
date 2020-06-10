@@ -1,5 +1,6 @@
 import { PageProps, graphql } from 'gatsby';
 
+import { Heading } from '../components/ui';
 import Layout from '../components/layout';
 import React from 'react';
 import ShopCard from './components/shop-card';
@@ -22,9 +23,7 @@ export const ShopList: React.FC<PageProps<ShopListQuery, {}>> = ({ location, dat
       location={location}
     >
       <div className="container mx-auto py-12">
-        <div className="text-center">
-          <h2 className="text-color-1">Sklep</h2>
-        </div>
+        <Heading title="Sklep" />
         <h4 className="text-color-default">Diety</h4>
         <div className="flex flex-wrap">{dietList}</div>
         <h4 className="text-color-default">Ebooki</h4>

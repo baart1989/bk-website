@@ -16,6 +16,9 @@ const siteMetadata = {
   portfolioItemsPerPage: 10,
   darkmode: true,
   switchTheme: true,
+  sourcePages: {
+    shop: ['cart', 'checkout'],
+  },
   navLinks: [
     {
       name: 'BLOG',
