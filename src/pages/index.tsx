@@ -13,7 +13,7 @@ import ScrollIntoView from 'react-scroll-into-view';
 import ShopCard from '../shop/components/shop-card';
 import cns from 'classnames';
 
-export default function IndexPage({ data, location }: PageProps<IndexPageQuery>) {
+export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
   const siteData = data.site.siteMetadata;
 
   const portfolioList = data.portfolio.edges.map(({ node }, index) => (
@@ -31,7 +31,6 @@ export default function IndexPage({ data, location }: PageProps<IndexPageQuery>)
         description: siteData.description,
       }}
       navPlaceholder={false}
-      location={location}
     >
       <Wall data={siteData} image={data.wallImage.childImageSharp.fluid} />
       {siteData.about !== '' && <About data={siteData.about} />}

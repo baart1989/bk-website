@@ -11,7 +11,6 @@ import React from 'react';
 export const BlogList: React.FC<PageProps<BlogListQuery, PaginatedPageContext>> = ({
   data,
   pageContext,
-  location,
 }) => {
   const blogItems = data.allMdx.edges.map(item => <BlogCard key={item.node.id} data={item.node} />);
   return (
@@ -19,7 +18,6 @@ export const BlogList: React.FC<PageProps<BlogListQuery, PaginatedPageContext>> 
       seo={{
         title: 'Blog',
       }}
-      location={location}
     >
       <div className="container mx-auto py-12">
         <Heading title="Blog" />

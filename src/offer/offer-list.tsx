@@ -6,13 +6,12 @@ import Offer from './components/offer';
 import { OfferListQuery } from './__generated__/OfferListQuery';
 import React from 'react';
 
-export const OfferList: React.FC<PageProps<OfferListQuery, {}>> = ({ location, data }) => {
+export const OfferList: React.FC<PageProps<OfferListQuery, {}>> = ({ data }) => {
   return (
     <Layout
       seo={{
         title: 'Oferta',
       }}
-      location={location}
     >
       <div className="container mx-auto py-12">
         <Heading title="Diety" />

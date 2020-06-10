@@ -5,7 +5,7 @@ import { ContactQuery } from './__generated__/ContactQuery';
 import Layout from '../components/layout';
 import React from 'react';
 
-export default function contact({ data, location }: PageProps<ContactQuery>) {
+export default function contact({ data }: PageProps<ContactQuery>) {
   const { api_url } = data.site.siteMetadata.contact;
   const hasContactForm = api_url;
   return (
@@ -13,7 +13,6 @@ export default function contact({ data, location }: PageProps<ContactQuery>) {
       seo={{
         title: 'Contact',
       }}
-      location={location}
     >
       <div className="container mx-auto py-12">
         <div className="title py-12 text-center">

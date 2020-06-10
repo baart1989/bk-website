@@ -3,7 +3,6 @@ import { Link, graphql, useStaticQuery } from 'gatsby';
 import { CartIcon } from '../shop/components/cart-icon';
 import { NavigationListQuery } from './__generated__/NavigationListQuery';
 import React from 'react';
-import { ShoppingCart } from 'react-feather';
 import { Theme } from './layout';
 import cns from 'classnames';
 

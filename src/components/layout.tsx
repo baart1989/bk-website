@@ -7,16 +7,14 @@ import Footer from './footer';
 import Helmet from 'react-helmet';
 import Navbar from './navigation';
 import { ThemeQuery } from './__generated__/ThemeQuery';
-import { WindowLocation } from '@reach/router';
 
 export type Theme = { name: string; label: string; icon: JSX.Element };
 type LayoutProps = {
   children: any;
   seo: Partial<SEOProps>;
   navPlaceholder?: boolean;
-  location: WindowLocation<{}>;
 };
-export default ({ children, seo, navPlaceholder = true, location }: LayoutProps) => {
+export const Layout: React.FC<LayoutProps> = ({ children, seo, navPlaceholder = true }) => {
   const query = useStaticQuery<ThemeQuery>(graphql`
     query ThemeQuery {
       site {
@@ -67,7 +65,6 @@ export default ({ children, seo, navPlaceholder = true, location }: LayoutProps)
         <div className="text-color-default bg-bg">
           <Navbar
             navPlaceholder={navPlaceholder}
-            location={location}
             currentTheme={theme}
             switchTheme={switchTheme}
             themes={themes}
@@ -92,3 +89,5 @@ const Head = ({ data }) => {
     </Helmet>
   );
 };
+
+export default Layout;

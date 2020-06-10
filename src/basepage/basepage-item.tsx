@@ -6,7 +6,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
 
-export default function BasePageItem({ data, location }: PageProps<BasePagesQuery, {}>) {
+export default function BasePageItem({ data }: PageProps<BasePagesQuery, {}>) {
   return (
     <Layout
       seo={{
@@ -14,7 +14,6 @@ export default function BasePageItem({ data, location }: PageProps<BasePagesQuer
         description: data.mdx.frontmatter.description,
         image: data.mdx.frontmatter.image?.publicURL,
       }}
-      location={location}
     >
       <div className="boxed">
         <div className="title py-12 text-center">

@@ -9,7 +9,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { PortfolioQuery } from './__generated__/PortfolioQuery';
 import React from 'react';
 
-export default function PortfolioItem({ location, data }: PageProps<PortfolioQuery, {}>) {
+export default function PortfolioItem({ data }: PageProps<PortfolioQuery, {}>) {
   return (
     <Layout
       seo={{
@@ -17,7 +17,6 @@ export default function PortfolioItem({ location, data }: PageProps<PortfolioQue
         description: data.mdx.frontmatter.description,
         image: data.mdx.frontmatter.banner.publicURL,
       }}
-      location={location}
     >
       <div className="md:px-4 mt-12 py-6 md:w-11/12 mx-auto">
         <div className="mx-auto relative">

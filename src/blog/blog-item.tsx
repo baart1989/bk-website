@@ -10,7 +10,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
 
-export const BlogItem: React.FC<PageProps<BlogQuery, {}>> = ({ location, data }) => {
+export const BlogItem: React.FC<PageProps<BlogQuery, {}>> = ({ data }) => {
   return (
     <Layout
       seo={{
@@ -18,7 +18,6 @@ export const BlogItem: React.FC<PageProps<BlogQuery, {}>> = ({ location, data })
         description: data.mdx.frontmatter.description,
         image: data.mdx.frontmatter.banner.publicURL,
       }}
-      location={location}
     >
       <div className="md:px-4 mt-12 py-6 md:w-11/12 mx-auto">
         <div className="mx-auto relative">
@@ -39,7 +38,7 @@ export const BlogItem: React.FC<PageProps<BlogQuery, {}>> = ({ location, data })
           </MDXProvider>
         </div>
         <div className="comments mt-8">
-          <Comments title={data.mdx.frontmatter.title} location={location} />
+          <Comments title={data.mdx.frontmatter.title} />
         </div>
       </div>
     </Layout>

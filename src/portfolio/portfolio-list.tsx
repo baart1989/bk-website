@@ -25,7 +25,6 @@ export default function portfolioList({
       seo={{
         title: 'Portfolio',
       }}
-      location={location}
     >
       <div className="py-12 px-4 lg:px-0">
         <div className="title py-8 text-center">

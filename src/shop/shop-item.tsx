@@ -10,7 +10,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
 import { ShopItemQuery } from './__generated__/ShopItemQuery';
 
-const ShopItem: React.FC<PageProps<ShopItemQuery, {}>> = ({ location, data }) => {
+const ShopItem: React.FC<PageProps<ShopItemQuery, {}>> = ({ data }) => {
   return (
     <Layout
       seo={{
@@ -18,7 +18,6 @@ const ShopItem: React.FC<PageProps<ShopItemQuery, {}>> = ({ location, data }) =>
         description: data.mdx.frontmatter.description,
         image: data.mdx.frontmatter.image.publicURL,
       }}
-      location={location}
     >
       <div className="md:px-4 mt-12 py-6 md:w-11/12 mx-auto">
         <div className="mx-auto relative">
@@ -42,7 +41,7 @@ const ShopItem: React.FC<PageProps<ShopItemQuery, {}>> = ({ location, data }) =>
           </MDXProvider>
         </div>
         <div className="comments mt-8">
-          <Comments title={data.mdx.frontmatter.title} location={location} />
+          <Comments title={data.mdx.frontmatter.title} />
         </div>
       </div>
     </Layout>

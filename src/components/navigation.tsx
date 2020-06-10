@@ -7,12 +7,11 @@ import { Menu } from 'react-feather';
 import { NavigationQuery } from './__generated__/NavigationQuery';
 import { Sidebar } from 'react-tailwind-component';
 import { Theme } from './layout';
-import { WindowLocation } from '@reach/router';
 import cns from 'classnames';
+import { useLocation } from '@reach/router';
 
 type NavbarProps = {
   navPlaceholder: boolean;
-  location: WindowLocation;
   currentTheme: number;
   switchTheme: () => void;
   themes: Theme[];
@@ -20,13 +19,13 @@ type NavbarProps = {
 };
 const Navbar: React.FC<NavbarProps> = ({
   navPlaceholder,
-  location,
   currentTheme,
   switchTheme,
   themes,
   allowThemeSwitch = true,
 }) => {
-  const [, currentLocation] = location.pathname.split('/');
+  const { pathname } = useLocation();
+  const [, currentLocation] = pathname.split('/');
 
   const data = useStaticQuery<NavigationQuery>(graphql`
     query NavigationQuery {

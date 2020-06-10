@@ -1,13 +1,12 @@
-import React from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 
-import { useStaticQuery, graphql } from 'gatsby';
-
-import { Disqus } from 'gatsby-plugin-disqus';
 import { CommentsQuery } from './__generated__/CommentsQuery';
-import { WindowLocation } from '@reach/router';
+import { Disqus } from 'gatsby-plugin-disqus';
+import React from 'react';
+import { useLocation } from '@reach/router';
 
-type CommentsProps = { title: string; location: WindowLocation<{}> };
-const Comments: React.FC<CommentsProps> = ({ title, location }) => {
+type CommentsProps = { title: string };
+const Comments: React.FC<CommentsProps> = ({ title }) => {
   const data = useStaticQuery<CommentsQuery>(graphql`
     query CommentsQuery {
       site {
@@ -19,6 +18,7 @@ const Comments: React.FC<CommentsProps> = ({ title, location }) => {
     }
   `);
 
+  const location = useLocation();
   const url = data.site.siteMetadata.siteUrl + location;
   const noDisqusShortName = data.site.siteMetadata.disqus === null;
 

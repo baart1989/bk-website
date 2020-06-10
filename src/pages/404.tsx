@@ -8,7 +8,6 @@ export default function errorPage({ location }: PageProps<{}, {}>) {
       seo={{
         title: '404',
       }}
-      location={location}
     >
       <div className="container mx-auto py-12">
         <div className="title py-12 text-center">

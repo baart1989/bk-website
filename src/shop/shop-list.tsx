@@ -6,7 +6,7 @@ import React from 'react';
 import ShopCard from './components/shop-card';
 import { ShopListQuery } from './__generated__/ShopListQuery';
 
-export const ShopList: React.FC<PageProps<ShopListQuery, {}>> = ({ location, data }) => {
+export const ShopList: React.FC<PageProps<ShopListQuery, {}>> = ({ data }) => {
   const ebookList = data.shop.edges
     .filter(item => item.node.frontmatter.type === 'ebook')
     .map(item => <ShopCard key={item.node.id} data={item.node} />);
@@ -20,7 +20,6 @@ export const ShopList: React.FC<PageProps<ShopListQuery, {}>> = ({ location, dat
       seo={{
         title: 'Sklep',
       }}
-      location={location}
     >
       <div className="container mx-auto py-12">
         <Heading title="Sklep" />

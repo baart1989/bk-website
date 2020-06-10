@@ -12,7 +12,7 @@ import { useSiteContext } from './provider';
 
 const mandatoryText = 'Pole jest obowiązkowe';
 
-export const Checkout = ({ location }) => {
+export const Checkout = () => {
   const [isSubmitting, setSubmitting] = React.useState(false);
   const { total } = useSiteContext();
 
@@ -59,7 +59,6 @@ export const Checkout = ({ location }) => {
       seo={{
         title: 'Contact',
       }}
-      location={location}
     >
       <div className="container mx-auto py-12">
         <Heading title="Twoje zamówienie" />

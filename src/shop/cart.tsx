@@ -3,11 +3,10 @@ import { ActionButton, SectionHeading } from './components/shop-ui';
 import { CartItems } from '../shop/components/cart-items';
 import { Heading } from '../components/ui';
 import Layout from '../components/layout';
-import { PageProps } from 'gatsby';
 import React from 'react';
 import { useSiteContext } from '../shop/provider';
 
-const Cart: React.FC<PageProps<{}, {}>> = ({ location }) => {
+const Cart: React.FC<{}> = () => {
   const { cart } = useSiteContext();
   const cartEmpty = cart.length === 0;
 
@@ -37,7 +36,6 @@ const Cart: React.FC<PageProps<{}, {}>> = ({ location }) => {
       seo={{
         title: 'Contact',
       }}
-      location={location}
     >
       <div className="container mx-auto py-12">
         <Heading title="Koszyk" />
