@@ -1,3 +1,4 @@
+import { BodyClass, RootClass } from 'react-frontend-common';
 import { Moon, Sun } from 'react-feather';
 import React, { useEffect, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
@@ -7,13 +8,17 @@ import Helmet from 'react-helmet';
 import Navbar from './navigation';
 import SEO from './seo';
 import { ThemeQuery } from './__generated__/ThemeQuery';
+import { ToastContainer } from 'react-toastify';
 
-export type Theme = { name: string; label: string; icon: JSX.Element };
+export type Theme = { name: ThemeType; label: string; icon: JSX.Element };
+export type ThemeType = 'theme-light' | 'theme-dark';
 type LayoutProps = {
   children: any;
 };
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const query = useStaticQuery<ThemeQuery>(graphql`
+  const {
+    site: { siteMetadata },
+  } = useStaticQuery<ThemeQuery>(graphql`
     query ThemeQuery {
       site {
         siteMetadata {
@@ -25,60 +30,66 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     }
   `);
 
-  const themes: Theme[] = [
-    {
+  const themes: { [id: string]: Theme } = {
+    'theme-light': {
       name: 'theme-light',
       label: 'Light Theme',
       icon: <Sun />,
     },
-    {
+    'theme-dark': {
       name: 'theme-dark',
       label: 'Dark Theme',
       icon: <Moon />,
     },
-  ];
+  };
 
-  const isDarkTheme = query.site.siteMetadata.darkmode;
-
-  const [theme, changeTheme] = useState(isDarkTheme ? 1 : 0);
+  const [currentTheme, changeTheme] = useState<ThemeType>(
+    siteMetadata.darkmode ? 'theme-dark' : 'theme-light',
+  );
 
   useEffect(() => {
     if (localStorage.getItem('theme')) {
-      const t = Number(localStorage.getItem('theme'));
+      const t = localStorage.getItem('theme') as ThemeType;
       changeTheme(t);
     }
   }, []);
 
   const switchTheme = () => {
-    const next = theme !== themes.length - 1 ? theme + 1 : 0;
+    const next = currentTheme === 'theme-light' ? 'theme-dark' : 'theme-light';
     changeTheme(next);
-    localStorage.setItem('theme', `${next}`);
+    localStorage.setItem('theme', next);
   };
 
   return (
-    <React.Fragment>
-      <Head data={query} />
+    <>
+      <RootClass add="antialiased" />
+      <BodyClass add="bg-bgalt text-color-default" />
+      {currentTheme === 'theme-dark' && <RootClass add="theme-dark" remove="theme-light" />}
+      {currentTheme !== 'theme-dark' && <RootClass remove="theme-dark" add="theme-light" />}
+      <Head siteIcon={siteMetadata.icon} />
       <SEO />
-      <div className={`wrapper ${themes[theme].name}`}>
-        <div className="text-color-default bg-bg">
-          <Navbar
-            currentTheme={theme}
-            switchTheme={switchTheme}
-            themes={themes}
-            allowThemeSwitch={query.site.siteMetadata.switchTheme}
-          />
-          {children}
-          <Footer />
-        </div>
-      </div>
-    </React.Fragment>
+      <ToastContainer
+        className="max-w-md w-full"
+        bodyClassName="flex"
+        toastClassName="bg-bg"
+        closeButton={null}
+      />
+      <Navbar
+        currentTheme={currentTheme}
+        switchTheme={switchTheme}
+        themes={themes}
+        allowThemeSwitch={siteMetadata.switchTheme}
+      />
+      <div className="bg-bg">{children}</div>
+      <Footer />
+    </>
   );
 };
 
-const Head = ({ data }) => {
+const Head = ({ siteIcon }) => {
   return (
     <Helmet>
-      <link rel="icon" href={data.site.siteMetadata.icon} type="image/png" />
+      <link rel="icon" href={siteIcon} type="image/png" />
       <link
         href="https://fonts.googleapis.com/css?family=Raleway:500,800&display=swap"
         rel="stylesheet"

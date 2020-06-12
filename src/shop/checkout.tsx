@@ -61,7 +61,7 @@ export const Checkout = () => {
         <Heading title="Twoje zamówienie" />
         <SectionHeading
           title="Podsumowanie zamówienia"
-          button={<ActionButton to="/cart/" title="Edytuj koszyk" />}
+          button={<ActionButton to="/cart/" title="Edytuj zamówienie" />}
         />
         <CartItems readonly={true} />
         {form}

@@ -25,13 +25,26 @@ const ContextProviderComponent = ({ children }) => {
 
   const removeFromCart = (item: CartActions.CartItem) => {
     dispatch(CartActions.remove(item));
-    toast(<Undo text="Usunięto z koszyka" onUndo={() => dispatch(CartActions.add(item))} />);
+    toast(
+      <Undo
+        message={item.title}
+        title="Usunięto z koszyka"
+        onUndo={() => dispatch(CartActions.add(item))}
+      />,
+    );
   };
+
   const clearCart = () => dispatch(CartActions.clear());
 
   const addToCart = (item: CartActions.CartItem) => {
     dispatch(CartActions.add(item));
-    toast(<Undo text="Produkt dodano do koszyka" onUndo={() => removeFromCart(item)} />);
+    toast(
+      <Undo
+        message={item.title}
+        title="Dodano do koszyka"
+        onUndo={() => dispatch(CartActions.remove(item))}
+      />,
+    );
   };
 
   const increaseQty = (item: CartActions.CartItem) => {

@@ -1,72 +1,92 @@
-import { Check, Edit2 } from 'react-feather';
+import { Minus, Plus } from 'react-feather';
 
+import { CartItem } from '../provider/cartActions';
 import Img from 'gatsby-image';
 import React from 'react';
 import cns from 'classnames';
+import { roundNumber } from 'react-frontend-common';
+import { useAlert } from '../../hooks/useAlert';
 import { useSiteContext } from '../provider';
 
-const CartItem = ({ item, readonly }) => {
-  const [editable, setEditable] = React.useState(false);
+const Icon = ({ children, onClick, className = '' }) => (
+  <button
+    onClick={onClick}
+    className={cns(
+      'm-2 md:m-4 p-1 md:p-2 rounded-lg hover:bg-gray-50 focus:bg-color-3 hover:outline-none focus:outline-none',
+      className,
+    )}
+  >
+    {children}
+  </button>
+);
 
+const Item: React.FC<{ item: CartItem; readonly: boolean }> = ({ item, readonly }) => {
+  const { increaseQty, decreaseQty: descrease, removeFromCart } = useSiteContext();
+  const alert = useAlert();
+
+  const decreaseQty = (item: CartItem) => {
+    const newQty = item.quantity - 1;
+    if (newQty > 0) {
+      return descrease(item);
+    }
+    alert.showAlert('Usunąć z koszyka?', { onOk: () => removeFromCart(item) });
+  };
   const actionButtons = (
     <React.Fragment>
-      <button
-        onClick={() => setEditable(!editable)}
-        className="text-left w-full flex justify-between items-start text-gray-400 focus:outline-none focus:text-gray-900"
-      >
-        <span className="font-medium text-color-default">{editable ? 'Zapisz' : 'Edytuj'}</span>
-        <span className="ml-6 h-7 flex items-center">
-          {editable && <Check />}
-          {!editable && <Edit2 />}
-        </span>
-      </button>
+      <div className="flex items-center">
+        {!readonly && (
+          <Icon onClick={() => decreaseQty(item)}>
+            <Minus size="24" />
+          </Icon>
+        )}
+        <div className="p-2 text-xl md:text-3xl">{item.quantity}</div>
+        {!readonly && (
+          <Icon onClick={() => increaseQty(item)}>
+            <Plus size="24" />
+          </Icon>
+        )}
+      </div>
     </React.Fragment>
   );
 
   return (
-    <div className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
-      <div className="flex items-center px-4 py-4 sm:px-6">
-        <div className="min-w-0 flex-1 flex items-center">
-          <div className="flex-shrink-0">
-            {item.image ? (
-              <Img className="h-16 w-16 rounded-full" fluid={item.image.childImageSharp.fluid} />
-            ) : null}
-          </div>
-          <div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-            <div>
-              <div className="text-sm leading-5 font-medium text-color-1 truncate">
-                {item.title}
-              </div>
-              <div className="mt-2 flex items-center text-sm leading-5">
-                <span className="truncate">{item.description}</span>
-              </div>
-            </div>
-            <div className="hidden md:block">
-              <div>
-                <div className="text-sm leading-5">Cena całkowita</div>
-                <div className="mt-2 flex items-center text-sm leading-5 text-color-3">
-                  {item.quantity} x {item.price} {item.currency}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>{!readonly && actionButtons}</div>
+    <div className="flex items-center justify-between py-4 px-4">
+      <div className="hidden md:block flex-shrink-0">
+        {item.image ? (
+          <Img className="h-16 w-16 rounded-full" fluid={item.image.childImageSharp.fluid} />
+        ) : null}
+      </div>
+      <div className="w-1/2">
+        <div className="text-sm leading-5 font-medium text-color-1">{item.title}</div>
+      </div>
+      <div>{!readonly && actionButtons}</div>
+      <div>
+        {roundNumber(item.quantity * item.price, 2)}
+        {` ${item.currency}`}
       </div>
     </div>
   );
 };
 
 export function CartItems({ readonly = false }) {
-  const { cart } = useSiteContext();
+  const { cart, total } = useSiteContext();
   return (
-    <div className="shadow overflow-hidden sm:rounded-md mt-8">
+    <div className="shadow overflow-hidden sm:rounded-md my-8">
       <ul>
         {cart.map((item, index) => (
           <li key={item.id} className={cns({ 'border-t border-gray-200': index !== 0 })}>
-            <CartItem readonly={readonly} item={item} />
+            <Item readonly={readonly} item={item} />
           </li>
         ))}
+        <li className="border-t border-gray-200">
+          <div className="flex justify-end px-4 py-4 sm:px-6">
+            <div>
+              Łącznie
+              <span className="text-2xl">{` ${total} `}</span>
+              pln
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
   );

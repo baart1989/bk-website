@@ -1,9 +1,9 @@
 import { Link, graphql, useStaticQuery } from 'gatsby';
+import { Theme, ThemeType } from './layout';
 
 import { CartIcon } from '../shop/components/cart-icon';
 import { NavigationListQuery } from './__generated__/NavigationListQuery';
 import React from 'react';
-import { Theme } from './layout';
 import cns from 'classnames';
 
 type NavigationListProps = {
@@ -12,9 +12,9 @@ type NavigationListProps = {
   liClassName?: string;
   current?: string;
   withThemeSwitch?: boolean;
-  currentTheme?: number;
-  switchTheme?: () => void;
-  themes?: Theme[];
+  switchTheme: () => void;
+  currentTheme: ThemeType;
+  themes: { [id: string]: Theme };
 };
 const List: React.FC<NavigationListProps> = ({
   name,
@@ -51,24 +51,23 @@ const List: React.FC<NavigationListProps> = ({
   ));
 
   if (withThemeSwitch) {
-    const themeButtons = themes.map((item, i) => {
-      const next = i !== themes.length - 1 ? i + 1 : 0;
+    const themeButtons = Object.keys(themes).map(key => {
+      const theme = themes[key];
       return (
         <button
           className={cns(
             'text-color-2 transition-transform duration-200 transform top-0 left-0',
             {
-              'scale-100': i === currentTheme,
+              'scale-100': key === currentTheme,
             },
             {
-              'scale-0 absolute': i !== currentTheme,
+              'scale-0 absolute': key !== currentTheme,
             },
           )}
-          title={`Switch to ${themes[next].label}`}
-          key={`${name}-theme-switch-btn-${item.name}`}
+          key={theme.name}
           onClick={switchTheme}
         >
-          {item.icon}
+          {theme.icon}
         </button>
       );
     });

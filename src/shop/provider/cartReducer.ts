@@ -1,15 +1,11 @@
 import * as CartActions from './cartActions';
 
+import { roundNumber } from 'react-frontend-common';
+
 export const INITIAL_STATE = {
   cart: [] as CartActions.CartItem[],
   numberOfItemsInCart: 0,
   total: 0,
-};
-
-const roundNumber = (number: number, numDecPlaces: number) => {
-  const e: any = 'e';
-  // http://stackoverflow.com/questions/15762768/javascript-math-round-to-two-decimal-places
-  return Number(Math.round(number + e + numDecPlaces) + 'e-' + numDecPlaces);
 };
 
 export type CartState = typeof INITIAL_STATE;
@@ -39,7 +35,7 @@ const pushOrReplace = (
   if (isReplace) {
     const oldValue = newCart[index];
     const qty = oldValue.quantity + newQty;
-    newCart[index] = { ...oldValue, quantity: qty > 0 ? qty : 0 };
+    newCart[index] = { ...oldValue, quantity: qty > 1 ? qty : 1 };
     return newCart;
   }
   newValue = { ...newValue, quantity: newQty };
