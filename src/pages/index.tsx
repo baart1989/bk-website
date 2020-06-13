@@ -84,8 +84,8 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
       </div>
       <p className="text-lg lg:text-xl text-color-2 pt-4 lg:pt-0">{data.introTag}</p>
       <p className="text-base lg:text-lg mt-4">{data.description}</p>
-      <ScrollIntoView selector="#portfolio">
-        <Button to="/offer/" title="ZOBACZ OFERTĘ" />
+      <ScrollIntoView selector="#offer">
+        <Button title="ZOBACZ OFERTĘ" />
       </ScrollIntoView>
       <div>
         <Button to="/shop/" title="SKLEP" />
@@ -137,11 +137,11 @@ const About: React.FC<{ data: string }> = ({ data }) => {
 
 const Offer = ({ children }) => {
   return (
-    <div className="container mx-auto px-0">
+    <div id="offer" className="container mx-auto px-0">
       <div className="pt-20 pb-10 text-center lg:pt-40 lg:pb-20">
         <h2 className="text-color-1 font-black text-5xl lg:text-6xl">Współpraca</h2>
       </div>
-      {children}
+      <div>{children}</div>
     </div>
   );
 };
