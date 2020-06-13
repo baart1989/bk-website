@@ -53,17 +53,15 @@ export const Layout = ({ children }) => {
   }, []);
 
   const switchTheme = () => {
+    document.documentElement.classList.remove(...Object.keys(themes));
     const next = currentTheme === 'theme-light' ? 'theme-dark' : 'theme-light';
+    document.documentElement.classList.add(next);
     changeTheme(next);
     localStorage.setItem('theme', next);
   };
 
   return (
     <>
-      <RootClass add="antialiased" />
-      <BodyClass add="bg-bgalt text-color-default" />
-      {currentTheme === 'theme-dark' && <RootClass add="theme-dark" remove="theme-light" />}
-      {currentTheme !== 'theme-dark' && <RootClass remove="theme-dark" add="theme-light" />}
       <Head siteIcon={siteMetadata.icon} />
       <SEO />
       <ToastContainer
