@@ -48,7 +48,6 @@ export const AlertProviderComponent = ({ children }) => {
   }, []);
 
   const show = useCallback((message = '', alertOptions: Partial<AlertOptions> = {}) => {
-    console.log('show');
     const id = Math.random()
       .toString(36)
       .substr(2, 9);
@@ -101,8 +100,6 @@ export const AlertProviderComponent = ({ children }) => {
     }),
     [state],
   );
-
-  console.log('');
 
   return (
     <Context.Provider value={value}>

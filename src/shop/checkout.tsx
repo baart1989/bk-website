@@ -46,9 +46,7 @@ export const Checkout = () => {
           .required(mandatoryText)
           .email('Wprowadź prawidłowy adres email'),
       })}
-      onSubmit={async (values, { setSubmitting }) => {
-        console.log({ values });
-      }}
+      onSubmit={async (values, { setSubmitting }) => { }}
     >
       <CartForm />
     </Formik>

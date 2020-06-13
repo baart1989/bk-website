@@ -17,13 +17,13 @@ const ShopItem: React.FC<PageProps<ShopItemQuery, {}>> = ({ data }) => {
   // }}
   return (
     <>
-      <div className="md:px-4 mt-12 py-6 md:w-11/12 mx-auto">
+      <div className="md:px-4 py-32 md:w-11/12 mx-auto">
         <div className="mx-auto relative">
           <Img
             className="w-full object-cover"
             fluid={data.mdx.frontmatter.image.childImageSharp.fluid}
           />
-          <div className="relative w-full lg:w-3/4 md:w-11/12 sm:w-full p-6 box-border lg:box-content mx-auto blog-wall-content shadow-xl md:-mt-16 ">
+          <div className="relative bg-bg w-full lg:w-3/4 md:w-11/12 sm:w-full p-6 box-border lg:box-content mx-auto blog-wall-content shadow-xl md:-mt-16 ">
             <div className="p-3">
               <h1 className="text-5xl font-bold text-primary">{data.mdx.frontmatter.title}</h1>
               <p className="mt-1 flex">

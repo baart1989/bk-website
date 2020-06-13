@@ -12,10 +12,8 @@ import { ToastContainer } from 'react-toastify';
 
 export type Theme = { name: ThemeType; label: string; icon: JSX.Element };
 export type ThemeType = 'theme-light' | 'theme-dark';
-type LayoutProps = {
-  children: any;
-};
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+
+export const Layout = ({ children }) => {
   const {
     site: { siteMetadata },
   } = useStaticQuery<ThemeQuery>(graphql`
@@ -72,7 +70,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         className="max-w-md w-full"
         bodyClassName="flex"
         toastClassName="bg-bg"
-        closeButton={null}
+        closeButton={false}
       />
       <Navbar
         currentTheme={currentTheme}
