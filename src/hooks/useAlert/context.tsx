@@ -41,7 +41,7 @@ export const AlertProviderComponent = ({ children }) => {
       document.body.appendChild(root.current);
     }
     return () => {
-      if (canUseDOM() && root.current) {
+      if (root.current) {
         document.body.removeChild(root.current);
       }
     };

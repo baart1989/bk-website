@@ -13,7 +13,7 @@ export const ErrorPage = () => {
         </div>
         <div className="pb-20 text-center">
           <p>
-            Oops! That page does not exist.{' '}
+            Oops! Ta strona nie istnieje.{' '}
             <span role="img" aria-label="Sad face">
               😞
             </span>
@@ -25,7 +25,7 @@ export const ErrorPage = () => {
               }}
               className="text-link"
             >
-              Go Back?
+              Wróć do strony głównej?
             </button>
           </p>
         </div>
