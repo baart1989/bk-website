@@ -59,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = ({
     <React.Fragment>
       <div
         className={cns(
-          'duration-300 transition-all flex justify-center lg:justify-between items-center z-20 fixed w-full nav',
+          'duration-300 transition-all flex justify-center lg:justify-between items-center z-30 fixed w-full nav',
           {
             'scrolled bg-bg p-4': scrolled,
           },
