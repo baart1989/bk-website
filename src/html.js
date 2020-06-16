@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function HTML(props) {
   return (
-    <html className="antialiased" {...props.htmlAttributes}>
+    <html className="antialiased bg-bgalt" {...props.htmlAttributes}>
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
@@ -28,7 +28,7 @@ export default function HTML(props) {
         />
         {props.preBodyComponents}
         <div
-          className="bg-bgalt text-color-default"
+          className="text-color-default"
           key={`body`}
           id="___gatsby"
           dangerouslySetInnerHTML={{ __html: props.body }}

@@ -265,6 +265,10 @@ p {
   max-width: 100%;
 }
 
+.theme-dark.bg-bgalt {
+  background: theme("themes.dark.bgalt");
+}
+
 .theme-dark .input.focused {
   background: theme("themes.dark.medium");
 }
