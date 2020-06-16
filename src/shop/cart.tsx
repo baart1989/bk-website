@@ -1,9 +1,9 @@
-import { ActionButton, SectionHeading } from './components/shop-ui';
-
+import { ActionButton } from './components/shop-ui';
 import { CartItems } from '../shop/components/cart-items';
 import { Heading } from '../components/ui';
 import Helmet from 'react-helmet';
 import React from 'react';
+import { SectionHeading } from '../components/ui';
 import { useSiteContext } from '../shop/provider';
 
 const Cart: React.FC<{}> = () => {

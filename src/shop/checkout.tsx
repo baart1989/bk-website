@@ -1,13 +1,14 @@
 import * as Yup from 'yup';
 
-import { ActionButton, SectionHeading } from './components/shop-ui';
 import { Heading, SpinIcon } from '../components/ui';
 
+import { ActionButton } from './components/shop-ui';
 import { CartForm } from '../shop/components/cart-form';
 import { CartItems } from '../shop/components/cart-items';
 import { Formik } from 'formik';
 import Helmet from 'react-helmet';
 import React from 'react';
+import { SectionHeading } from '../components/ui';
 import { useSiteContext } from './provider';
 
 const mandatoryText = 'Pole jest obowiązkowe';

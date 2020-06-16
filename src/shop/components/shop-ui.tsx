@@ -12,16 +12,3 @@ export const ActionButton: React.FC<ButtonProps> = props => (
     {...props}
   />
 );
-
-export const SectionHeading = ({ title, button }) => (
-  <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
-    <div className="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-no-wrap">
-      <div className="ml-4 mt-4">
-        <h5 className="leading-6 text-color-default font-medium">{title}</h5>
-      </div>
-      <div className="ml-4 mt-4 flex-shrink-0">
-        <span className="inline-flex rounded-md">{button}</span>
-      </div>
-    </div>
-  </div>
-);
