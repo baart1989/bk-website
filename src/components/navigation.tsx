@@ -86,7 +86,7 @@ const Navbar: React.FC<NavbarProps> = ({
           <div className="bg-bg h-full flex flex-col justify-center relative">
             <div className="absolute top-0 my-4 text-center w-full">
               <Link to="/" title={data.site.siteMetadata.title} className="inline-block">
-                <Logo className={`duration-300 transition-all ${scrolled ? 'w-6' : 'w-8'}`} />
+                <Logo className={`duration-300 transition-all ${scrolled ? 'w-10' : 'w-12'}`} />
               </Link>
             </div>
             <div className="text-center">

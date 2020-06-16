@@ -4,22 +4,45 @@ import { addMonths, addWeeks, subMonths, subWeeks } from 'date-fns';
 
 export type ViewType = 'monthly' | 'weekly';
 
+const config = {
+  excludeHoursAfterMidnight: 8,
+  excludeHoursBeforeMidnight: 4,
+  slotLengthInMinutes: 60,
+};
+export type CalendarConfig = typeof config;
+
 export const INITIAL_STATE = {
+  status: 'idle' as const,
+  config,
   calendar: {
     currentDate: new Date().toISOString(),
     selectedDay: new Date().toISOString(),
     view: 'monthly' as ViewType,
   },
-  bookedEvents: {},
+  bookedEvents: {
+    '2020-06-16T10:00:00.000Z': 30,
+    '2020-06-16T11:00:00.000Z': 60,
+    '2020-06-16T13:00:00.000Z': 45,
+    '2020-06-16T15:00:00.000Z': 60,
+  },
+  unavailable: {
+    '2020-06-16T08:00:00.000Z': true,
+    '2020-06-16T09:00:00.000Z': true,
+    '2020-06-16T18:00:00.000Z': true,
+    '2020-06-16T19:00:00.000Z': true,
+  },
 };
 
 export type CalendarState<T = any> = {
+  status: 'idle' | 'pending' | 'resolved' | 'rejected';
+  config: CalendarConfig;
   calendar: {
     currentDate: T;
     selectedDay: T;
     view: ViewType;
   };
-  bookedEvents: any;
+  bookedEvents: { [id: string]: boolean };
+  unavailable: { [id: string]: boolean };
 };
 
 export function calendarReducer(

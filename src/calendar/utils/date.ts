@@ -1,5 +1,6 @@
 import {
   addHours,
+  addMinutes,
   eachDayOfInterval,
   eachHourOfInterval,
   eachWeekOfInterval,
@@ -15,6 +16,7 @@ import {
   subHours,
 } from 'date-fns';
 
+import { CalendarConfig } from '../provider';
 import { pl } from 'date-fns/locale';
 
 const commonOptions = { locale: pl };
@@ -22,11 +24,19 @@ const commonOptions = { locale: pl };
 export const getDayNumber = (date: Date) => formatFn(date, 'd');
 export const getHourSlot = (date: Date) => formatFn(date, 'HH:mm');
 
-export const getHours = (date: Date) =>
-  eachHourOfInterval({
-    start: addHours(startOfDay(date), 8),
-    end: subHours(endOfDay(date), 4),
+export const getWorkingHours = (date: Date, config: CalendarConfig) => {
+  const hoursSlots = eachHourOfInterval({
+    start: addHours(startOfDay(date), config.excludeHoursAfterMidnight),
+    end: subHours(endOfDay(date), config.excludeHoursBeforeMidnight),
   });
+  if (config.slotLengthInMinutes !== 60) {
+    return hoursSlots.reduce(
+      (acc, next) => [...acc, next, addMinutes(next, config.slotLengthInMinutes)],
+      [] as Date[],
+    );
+  }
+  return hoursSlots;
+};
 
 export const getDays = (date: Date) =>
   eachDayOfInterval({
@@ -54,5 +64,5 @@ export const getPrettyDayOfWeek = (date: Date) =>
   isToday(date)
     ? `${formatFn(date, 'do MMM', commonOptions)},dziś`
     : isTomorrow(date)
-    ? `${formatFn(date, 'do MMM', commonOptions)},jutro`
-    : `${formatFn(date, 'do MMM', commonOptions)},${formatFn(date, 'EEE', commonOptions)}`;
+      ? `${formatFn(date, 'do MMM', commonOptions)},jutro`
+      : `${formatFn(date, 'do MMM', commonOptions)},${formatFn(date, 'EEE', commonOptions)}`;

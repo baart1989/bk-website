@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
-import { getHours, getPrettyDayOfWeek } from '../utils';
+import { getPrettyDayOfWeek, getWorkingHours } from '../utils';
 
 import { Slot } from './slot';
+import { useCalendar } from '../provider';
 
 const Slots: React.FC<{ day: Date }> = ({ day }) => {
-  const slots = useMemo(() => getHours(day), [day]);
+  const { config } = useCalendar();
+  const slots = useMemo(() => getWorkingHours(day, config), [day, config]);
   const [dayOfMonth, dayName] = getPrettyDayOfWeek(day).split(',');
   return (
     <div className="flex flex-1 flex-col items-center">

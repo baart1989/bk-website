@@ -10,7 +10,7 @@ const ListItem = ({ data }) => {
         title={data.name}
         className="rounded-full inline-block transition-shadow duration-300 hover:shadow-2xl"
       >
-        <img src={data.icon} alt={data.name} className="block w-16" />
+        <img src={data.icon} alt={data.name} className="block w-20" />
       </a>
     </li>
   );

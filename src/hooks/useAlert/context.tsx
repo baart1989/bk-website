@@ -20,7 +20,7 @@ type AlertContextState = AlertState & {
 };
 
 type AlertOptions = {
-  type: 'info' | 'warning' | 'success';
+  type: 'info' | 'warning' | 'success' | 'custom';
   onOpen?: () => void;
   onOk?: () => void;
   onClose?: () => void;

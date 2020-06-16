@@ -23,15 +23,14 @@ const CalendarProviderComponent = ({ children }) => {
   const nextWeek = () => dispatchAction(dispatch, Actions.nextWeek());
   const previousWeek = () => dispatchAction(dispatch, Actions.previousWeek());
   const selectDay = (date: Date) => dispatchAction(dispatch, Actions.selectDay(date));
-
   const value = React.useMemo(
     () => ({
+      ...state,
       calendar: {
         ...state.calendar,
         currentDate: new Date(state.calendar.currentDate),
         selectedDay: new Date(state.calendar.selectedDay),
       },
-      bookedEvents: state.bookedEvents,
       nextMonth,
       previousMonth,
       selectDay,
