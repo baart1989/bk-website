@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { getDays, now } from '../utils';
 import { isPast, isSameDay, isSameMonth, isWeekend } from 'date-fns';
 
 import Day from '../components/day';
+import { getDays } from '../utils';
 import { useCalendar } from '../provider';
 
 export const Days: React.FC<{ date: Date; week: Date }> = ({ date, week }) => {
@@ -21,7 +21,7 @@ export const Days: React.FC<{ date: Date; week: Date }> = ({ date, week }) => {
             isWeekend={isWeekend(day)}
             isSelected={isSameDay(day, selectedDay)}
             isPast={isPast(day)}
-            isToday={isSameDay(day, now)}
+            isToday={isSameDay(day, new Date())}
             isCurrentMonth={isSameMonth(day, date)}
           />
         ))}

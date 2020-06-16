@@ -1,5 +1,3 @@
-import { enGB, pl } from 'date-fns/locale';
-
 import CalendarMonthly from '../calendar/monthly';
 import { CalendarProviderComponent } from '../calendar/provider';
 import CalendarWeekly from '../calendar/weekly';
