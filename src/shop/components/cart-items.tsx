@@ -29,7 +29,14 @@ const Item: React.FC<{ item: CartItem; readonly: boolean }> = ({ item, readonly 
     if (newQty > 0) {
       return descrease(item);
     }
-    alert.showAlert('Usunąć z koszyka?', { onOk: () => removeFromCart(item) });
+    alert.showAlert({
+      type: 'warning',
+      header: 'Usunąć z koszyka?',
+      buttons: [
+        { role: 'destroy', text: 'Usuń', handler: () => removeFromCart(item) },
+        { role: 'cancel', text: 'Anuluj' },
+      ],
+    });
   };
   const actionButtons = (
     <React.Fragment>

@@ -71,7 +71,7 @@ const SEO: React.FC<SEOProps> = ({ title, image, description = '', lang = 'en', 
           content: metaDescription,
         },
         {
-          name: `og:image`,
+          property: `og:image`,
           content: ogImage,
         },
       ].concat(meta)}

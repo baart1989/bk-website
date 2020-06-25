@@ -12,7 +12,7 @@ export const Input: React.FC<TextInputProps & { required?: boolean; applyBorder?
   ...props
 }) => {
   return (
-    <div className="mt-6 sm:mt-5">
+    <div className={cns({ 'mt-6 sm:mt-5': !!applyBorder })}>
       <div
         className={cns('sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:pt-5', {
           'sm:border-t sm:border-gray-200': applyBorder,

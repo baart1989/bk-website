@@ -1,7 +1,6 @@
 import React from 'react';
 import cns from 'classnames';
 import { getDayNumber } from '../utils';
-import { useCalendar } from '../provider';
 
 type DayProps = {
   day: Date;
@@ -13,7 +12,6 @@ type DayProps = {
 };
 
 const Day: React.FC<DayProps> = ({ day, isSelected, isToday, isCurrentMonth, isWeekend }) => {
-  const { selectDay } = useCalendar();
   return (
     <>
       <div
@@ -31,7 +29,7 @@ const Day: React.FC<DayProps> = ({ day, isSelected, isToday, isCurrentMonth, isW
           cursor: 'pointer',
           transition: 'all .2s',
         }}
-        onClick={() => selectDay(day)}
+        onClick={() => undefined}
       >
         <div className="columns">
           <div className="column is-2">

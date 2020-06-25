@@ -1,7 +1,7 @@
 import * as Actions from './actions';
 
 export const INITIAL_STATE = {
-  alerts: [] as Actions.AlertTemplate[],
+  alerts: [] as Actions.AlertOptions[],
 };
 
 export type AlertState = typeof INITIAL_STATE;
@@ -9,7 +9,6 @@ export type AlertState = typeof INITIAL_STATE;
 export function alertReducer(state = INITIAL_STATE, action: Actions.ActionTypes): AlertState {
   switch (action.type) {
     case Actions.SHOW_ALERT: {
-      console.log({ action });
       return { ...state, alerts: [...state.alerts, action.payload] };
     }
     case Actions.HIDE_ALERT: {

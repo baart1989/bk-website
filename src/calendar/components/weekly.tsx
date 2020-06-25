@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 
-import { SectionHeading } from '../components/ui';
-import Slots from './components/slots';
-import { SwitchDate } from './components/switch';
-import { getWeekDays } from './utils';
-import { useCalendar } from './provider';
+import { SectionHeading } from '../../components/ui';
+import Slots from '../components/slots';
+import { SwitchDate } from '../components/switch';
+import { getWeekDays } from '../utils';
+import { useCalendar } from '../provider';
 
 export const WeeklyCalendar = () => {
   const {

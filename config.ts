@@ -18,8 +18,18 @@ const siteMetadata = {
   switchTheme: true,
   sourcePages: {
     shop: ['cart', 'checkout'],
+    calendar: ['book-event', 'calendar'],
   },
   navLinks: [
+    {
+      name: 'START',
+      url: '/app/home',
+      authRequired: true,
+    },
+    {
+      name: 'KALENDARZ',
+      url: '/calendar',
+    },
     {
       name: 'BLOG',
       url: '/blog',

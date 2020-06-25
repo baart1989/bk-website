@@ -1,6 +1,9 @@
-import { Link, graphql, useStaticQuery } from 'gatsby';
+import { Link, graphql, navigate, useStaticQuery } from 'gatsby';
+import { LogIn, LogOut } from 'react-feather';
 import { Theme, ThemeType } from './layout';
+import { isLoggedIn, logout } from '../utils/auth';
 
+import Auth from '@aws-amplify/auth';
 import { CartIcon } from '../shop/components/cart-icon';
 import { NavigationListQuery } from './__generated__/NavigationListQuery';
 import React from 'react';
@@ -33,6 +36,7 @@ const List: React.FC<NavigationListProps> = ({
           navLinks {
             name
             url
+            authRequired
           }
           darkmode
           switchTheme
@@ -81,6 +85,30 @@ const List: React.FC<NavigationListProps> = ({
         {themeButtons}
       </li>,
     );
+    if (isLoggedIn()) {
+      list.push(
+        <li className="theme-switcher" key="log-out">
+          <a
+            className="cursor-pointer"
+            onClick={async () => {
+              navigate('/');
+              await Auth.signOut();
+              logout();
+            }}
+          >
+            <LogOut className="text-color-2 transition-transform duration-200 transform top-0 left-0" />
+          </a>
+        </li>,
+      );
+    } else {
+      list.push(
+        <li className="theme-switcher" key="log-in">
+          <Link to="/app/login/" className="cursor-pointer">
+            <LogIn className="text-color-2 transition-transform duration-200 transform top-0 left-0" />
+          </Link>
+        </li>,
+      );
+    }
   }
 
   return <ul className={className}>{list}</ul>;

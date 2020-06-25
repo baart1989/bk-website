@@ -12,6 +12,14 @@ import ScrollIntoView from 'react-scroll-into-view';
 import ShopCard from '../shop/components/shop-card';
 import cns from 'classnames';
 
+//https://github.com/aws-amplify/amplify-js/wiki/Amplify-modularization
+import Auth from '@aws-amplify/auth';
+import Api from '@aws-amplify/api';
+import { awsConfig } from '../../aws-exports';
+
+Auth.configure(awsConfig);
+Api.configure(awsConfig);
+
 export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
   const siteData = data.site.siteMetadata;
   // const portfolioList = data.portfolio.edges.map(({ node }, index) => (

@@ -7,7 +7,7 @@ import { useCalendar } from '../provider';
 
 export const Days: React.FC<{ date: Date; week: Date }> = ({ date, week }) => {
   const {
-    calendar: { selectedDay },
+    calendar: { currentDate },
   } = useCalendar();
 
   const days = useMemo(() => getDays(week), [week]);
@@ -19,7 +19,7 @@ export const Days: React.FC<{ date: Date; week: Date }> = ({ date, week }) => {
             key={index}
             day={day}
             isWeekend={isWeekend(day)}
-            isSelected={isSameDay(day, selectedDay)}
+            isSelected={isSameDay(day, currentDate)}
             isPast={isPast(day)}
             isToday={isSameDay(day, new Date())}
             isCurrentMonth={isSameMonth(day, date)}

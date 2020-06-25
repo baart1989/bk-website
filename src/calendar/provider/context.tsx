@@ -1,6 +1,7 @@
 import { CalendarState, INITIAL_STATE, calendarReducer } from './reducer';
 
 import { Actions } from './actions';
+import { GraphQLResult } from '@aws-amplify/api';
 import React from 'react';
 import { createPersistedReducer } from 'react-frontend-common';
 
@@ -22,20 +23,23 @@ const CalendarProviderComponent = ({ children }) => {
   const previousMonth = () => dispatchAction(dispatch, Actions.previousMonth());
   const nextWeek = () => dispatchAction(dispatch, Actions.nextWeek());
   const previousWeek = () => dispatchAction(dispatch, Actions.previousWeek());
-  const selectDay = (date: Date) => dispatchAction(dispatch, Actions.selectDay(date));
+  const bookEvent = (date: Date) => dispatchAction(dispatch, Actions.bookEvent(date));
+  const setEvents = (result: GraphQLResult<object>) =>
+    dispatchAction(dispatch, Actions.setEvents(result));
+
   const value = React.useMemo(
     () => ({
       ...state,
       calendar: {
         ...state.calendar,
         currentDate: new Date(state.calendar.currentDate),
-        selectedDay: new Date(state.calendar.selectedDay),
       },
       nextMonth,
       previousMonth,
-      selectDay,
+      bookEvent,
       previousWeek,
       nextWeek,
+      setEvents,
     }),
     [state],
   );

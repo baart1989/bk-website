@@ -13,7 +13,8 @@ export type ButtonProps = {
   iconRight?: JSX.Element;
   full?: boolean;
   className?: string;
-  onClick?: () => void;
+  onClick?: (event?: any) => void;
+  state?: any;
 };
 export const Button: React.FC<ButtonProps> = ({
   title,
@@ -24,6 +25,7 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   iconLeft,
   iconRight,
+  state = {},
   ...rest
 }) => {
   if (full) {
@@ -56,13 +58,19 @@ export const Button: React.FC<ButtonProps> = ({
     }
   }
   return (
-    <Link to={to} className={cns(className, `btn btn-primary`)} title={title}>
+    <Link to={to} className={cns(className, `btn btn-primary`)} title={title} state={state}>
       {innerComponents}
     </Link>
   );
 };
 
-export const TextInput = ({ label, type = 'text', name, onChange, footer }) => {
+export const TextInput = ({
+  label = '',
+  type = 'text',
+  name = '',
+  onChange,
+  footer = undefined,
+}) => {
   const [focused, changeFocused] = useState(false);
 
   let elem = (
@@ -135,7 +143,7 @@ export const SpinIcon = ({ spin = false }) => {
 };
 
 export const SectionHeading: React.FC<{
-  title: string;
+  title?: string;
   subtitle?: string;
   button?: JSX.Element;
 }> = ({ title, subtitle, button }) => (

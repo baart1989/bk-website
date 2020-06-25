@@ -38,6 +38,17 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, getNode, 
   }
 };
 
+export const onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions;
+  // page.matchPath is a special key that's used for matching pages
+  // only on the client.
+  if (page.path.match(/^\/app/)) {
+    page.matchPath = `/app/*`;
+    // Update the page.
+    createPage(page);
+  }
+};
+
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 
@@ -65,15 +76,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
         edges {
           node {
             id
-          }
-        }
-      }
-      limitPost: site {
-        siteMetadata {
-          blogItemsPerPage
-          portfolioItemsPerPage
-          sourcePages {
-            shop
           }
         }
       }
@@ -124,12 +126,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     }
 
     const edges = sources[sourceName];
-    const edgesPerPage = result.data.limitPost.siteMetadata[`${sourceName}ItemsPerPage`] || 10;
+    const edgesPerPage = siteMetadata[`${sourceName}ItemsPerPage`] || 10;
     const pageCount = Math.ceil(edges.length / edgesPerPage);
 
     Array.from({ length: pageCount }).forEach((_, i) => {
       const slug = i === 0 ? `/${sourceName}` : `/${sourceName}/${i + 1}`;
-      console.log({ slug });
       createPage({
         path: slug,
         component: path.resolve(listPagePath),

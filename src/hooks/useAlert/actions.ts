@@ -1,21 +1,36 @@
 export type Action<T, K> = { type: T; payload: K };
-
-export type AlertTemplate = {
-  id: string;
-  title?: string;
+export type AlertOptions = {
+  id?: string;
+  header?: string;
+  subHeader?: string;
   message?: string;
-  options: any;
-  close: () => void;
-  confirm: () => void;
+  inputs?: AlertInput[];
+  buttons?: AlertButton[];
+  backdropDismiss?: boolean;
+  type: 'info' | 'warning' | 'success' | 'custom';
+  onOpen?: () => void;
+  onOk?: () => void;
+  onClose?: () => void;
 };
+export interface AlertInput {
+  type?: string;
+  name?: string;
+  label?: string;
+}
+export interface AlertButton {
+  text: string;
+  role?: 'cancel' | 'confirm' | 'destroy';
+  cssClass?: string | string[];
+  handler?: Function;
+}
 
 export const SHOW_ALERT = 'AT_SHOW_ALERT';
 export const HIDE_ALERT = 'AT_HIDE_ALERT';
-export type Show = Action<typeof SHOW_ALERT, AlertTemplate>;
-export type Hide = Action<typeof HIDE_ALERT, Partial<AlertTemplate>>;
+export type Show = Action<typeof SHOW_ALERT, Partial<AlertOptions>>;
+export type Hide = Action<typeof HIDE_ALERT, Partial<AlertOptions>>;
 
-export const show = (payload: AlertTemplate): Show => ({ type: SHOW_ALERT, payload });
-export const hide = (payload?: Partial<AlertTemplate>): Hide => ({ type: HIDE_ALERT, payload });
+export const show = (payload: Partial<AlertOptions>): Show => ({ type: SHOW_ALERT, payload });
+export const hide = (payload: Partial<AlertOptions>): Hide => ({ type: HIDE_ALERT, payload });
 
 export const Actions = {
   show,

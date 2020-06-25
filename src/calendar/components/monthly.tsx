@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import { getPrettyMonthTitle, getWeeks } from './utils';
+import { getPrettyMonthTitle, getWeeks } from '../utils';
 
-import { Days } from './components/days';
-import { SectionHeading } from '../components/ui';
-import { SwitchDate } from './components/switch';
-import { useCalendar } from './provider';
+import { Days } from '../components/days';
+import { SectionHeading } from '../../components/ui';
+import { SwitchDate } from '../components/switch';
+import { useCalendar } from '../provider';
 
 const MonthylCalendar = () => {
   const {

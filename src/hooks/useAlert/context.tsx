@@ -1,4 +1,4 @@
-import { Actions, AlertTemplate } from './actions';
+import { Actions, AlertButton, AlertOptions } from './actions';
 import { AlertComponent, AlertTransition } from '../../components/alert';
 import { AlertState, INITIAL_STATE, alertReducer } from './reducer';
 import React, {
@@ -15,15 +15,8 @@ import { canUseDOM } from 'react-frontend-common';
 import { createPortal } from 'react-dom';
 
 type AlertContextState = AlertState & {
-  showAlert: (message: string, alertOptions?: Partial<AlertOptions>) => AlertTemplate;
-  hideAlert: (alert?: AlertTemplate) => void;
-};
-
-type AlertOptions = {
-  type: 'info' | 'warning' | 'success' | 'custom';
-  onOpen?: () => void;
-  onOk?: () => void;
-  onClose?: () => void;
+  showAlert: (alertOptions?: Partial<AlertOptions>) => AlertOptions;
+  hideAlert: (alertOptions?: Partial<AlertOptions>) => void;
 };
 
 const ALERT_ID = '__at-alert__';
@@ -47,49 +40,43 @@ export const AlertProviderComponent = ({ children }) => {
     };
   }, []);
 
-  const show = useCallback((message = '', alertOptions: Partial<AlertOptions> = {}) => {
+  const show = useCallback((alert: Partial<AlertOptions> = {}) => {
     const id = Math.random()
       .toString(36)
       .substr(2, 9);
 
-    const alert = {
-      id,
-      message,
-      options: alertOptions,
-      close: undefined,
-      confirm: undefined,
-    };
+    const openCallback = alert.onOpen;
+    const defaultButtons: AlertButton[] = [{ role: 'confirm', text: 'OK' }];
 
-    alert.close = () => {
-      dispatch(Actions.hide(alert));
-      alertOptions.onClose ? alertOptions.onClose() : null;
-      return alert;
-    };
+    alert.id = id;
+    alert.buttons = alert.buttons ? alert.buttons : defaultButtons;
 
-    alert.confirm = () => {
-      dispatch(Actions.hide(alert));
-      alertOptions.onOk ? alertOptions.onOk() : null;
-      return alert;
-    };
+    alert.buttons = alert.buttons.map(button => {
+      const callback = button.handler || undefined;
+      button.handler = (data: any) => {
+        dispatch(Actions.hide(alert));
+        callback ? callback(data) : undefined;
+      };
+      return button;
+    });
 
     dispatch(Actions.show(alert));
-    if (alert.options.onOpen) alert.options.onOpen();
+    openCallback ? openCallback() : null;
+
     return alert;
   }, []);
 
   const showAlert = useCallback(
-    (message = '', options: Partial<AlertOptions> = {}) => {
+    (options: Partial<AlertOptions> = {}) => {
       options.type = 'info';
-      return show(message, options);
+      return show(options);
     },
     [show],
   );
 
-  const hideAlert = useCallback((alert?: AlertTemplate) => {
-    dispatch(Actions.hide(alert));
-    if (alert.options.onClose) {
-      alert.options.onClose();
-    }
+  const hideAlert = useCallback((options?: AlertOptions) => {
+    dispatch(Actions.hide(options));
+    options.onClose ? options.onClose() : null;
   }, []);
 
   const value = useMemo(

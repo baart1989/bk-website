@@ -1,6 +1,6 @@
 import * as Actions from './actions';
 
-import { addMonths, addWeeks, subMonths, subWeeks } from 'date-fns';
+import { addMonths, addWeeks, format, subMonths, subWeeks } from 'date-fns';
 
 export type ViewType = 'monthly' | 'weekly';
 
@@ -16,15 +16,10 @@ export const INITIAL_STATE = {
   config,
   calendar: {
     currentDate: new Date().toISOString(),
-    selectedDay: new Date().toISOString(),
+    selectedEvent: null,
     view: 'monthly' as ViewType,
   },
-  bookedEvents: {
-    '2020-06-16T10:00:00.000Z': 30,
-    '2020-06-16T11:00:00.000Z': 60,
-    '2020-06-16T13:00:00.000Z': 45,
-    '2020-06-16T15:00:00.000Z': 60,
-  },
+  bookedEvents: {},
   unavailable: {
     '2020-06-16T08:00:00.000Z': true,
     '2020-06-16T09:00:00.000Z': true,
@@ -38,10 +33,17 @@ export type CalendarState<T = any> = {
   config: CalendarConfig;
   calendar: {
     currentDate: T;
-    selectedDay: T;
+    selectedEvent: {
+      // ensure all values are string
+      startDate: string;
+      clientName: 'Anna Podsiadło';
+      eventType: 'Rozmowa telefoniczna';
+      duration: '60';
+      paymentType: 'Płatność przelewem';
+    };
     view: ViewType;
   };
-  bookedEvents: { [id: string]: boolean };
+  bookedEvents: { [id: string]: number };
   unavailable: { [id: string]: boolean };
 };
 
@@ -51,6 +53,43 @@ export function calendarReducer(
 ): CalendarState {
   switch (action.type) {
     case Actions.ADD: {
+      return state;
+    }
+
+    case Actions.SET_EVENTS: {
+      if (action.payload.errors) {
+        // TODO - handle errors gracefully
+        return state;
+      }
+
+      const { data } = action.payload;
+
+      if (data && data.getClientEvents) {
+        const normalizedData = action.payload.data.getClientEvents.reduce(
+          (acc, next) => {
+            if (next.type === 'unavailable') {
+              acc['unavailable'] = {
+                ...acc['unavailable'],
+                [new Date(next.startDate).toISOString()]: true,
+              };
+              return acc;
+            }
+            acc['bookedEvents'] = {
+              ...acc['bookedEvents'],
+              [new Date(next.startDate).toISOString()]: 60,
+            };
+            return acc;
+          },
+          {
+            bookedEvents: {},
+            unavailable: {},
+          },
+        );
+        return {
+          ...state,
+          ...normalizedData,
+        };
+      }
       return state;
     }
 
@@ -64,13 +103,18 @@ export function calendarReducer(
       };
     }
 
-    case Actions.SELECT_DAY: {
+    case Actions.BOOK_EVENT: {
       return {
         ...state,
         calendar: {
           ...state.calendar,
-          currentDate: action.payload.toISOString(),
-          selectedDay: action.payload.toISOString(),
+          selectedEvent: {
+            startDate: action.payload,
+            clientName: 'Anna Podsiadło',
+            eventType: 'Rozmowa telefoniczna',
+            duration: '60',
+            paymentType: 'Płatność przelewem',
+          },
         },
       };
     }

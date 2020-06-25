@@ -1,3 +1,5 @@
+import { formatISO, isSameMinute } from 'date-fns';
+
 import React from 'react';
 import cns from 'classnames';
 import { getHourSlot } from '../utils';
@@ -8,7 +10,8 @@ import { useCalendar } from '../provider';
 type SlotProps = { data: Date };
 
 export const Slot: React.FC<SlotProps> = ({ data }) => {
-  const { bookedEvents, unavailable } = useCalendar();
+  const { bookedEvents, unavailable, bookEvent } = useCalendar();
+
   const dateAsString = data.toISOString();
   const slotStart = getHourSlot(data);
 
@@ -28,11 +31,24 @@ export const Slot: React.FC<SlotProps> = ({ data }) => {
         { 'line-through': isTaken },
         { 'opacity-75': !isAvailable },
       )}
-      onClick={() =>
-        alert.showAlert('Umówić wizytę?', {
-          onOk: () => navigate('/appointment/', { state: {} }),
-        })
-      }
+      onClick={() => {
+        if (isAvailable) {
+          alert.showAlert({
+            header: 'Umówić wizytę?',
+            buttons: [
+              {
+                text: 'Zarezerwuj',
+                role: 'confirm',
+                handler: () => {
+                  bookEvent(dateAsString);
+                  navigate('/book-event/');
+                },
+              },
+              { text: 'Anuluj', role: 'cancel' },
+            ],
+          });
+        }
+      }}
     >
       <span className="w-full">{isUnavailable ? '-' : slotStart}</span>
     </div>

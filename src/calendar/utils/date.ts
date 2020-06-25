@@ -66,3 +66,6 @@ export const getPrettyDayOfWeek = (date: Date) =>
     : isTomorrow(date)
       ? `${formatFn(date, 'do MMM', commonOptions)},jutro`
       : `${formatFn(date, 'do MMM', commonOptions)},${formatFn(date, 'EEE', commonOptions)}`;
+
+export const getPrettyDate = (date: Date) =>
+  `${formatFn(date, 'do MMMM yyyy - HH:mm', commonOptions)}`;
