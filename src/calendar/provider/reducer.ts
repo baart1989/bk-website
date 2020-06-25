@@ -1,6 +1,6 @@
 import * as Actions from './actions';
 
-import { addMonths, addWeeks, format, subMonths, subWeeks } from 'date-fns';
+import { addMonths, addWeeks, subMonths, subWeeks } from 'date-fns';
 
 export type ViewType = 'monthly' | 'weekly';
 
@@ -20,12 +20,7 @@ export const INITIAL_STATE = {
     view: 'monthly' as ViewType,
   },
   bookedEvents: {},
-  unavailable: {
-    '2020-06-16T08:00:00.000Z': true,
-    '2020-06-16T09:00:00.000Z': true,
-    '2020-06-16T18:00:00.000Z': true,
-    '2020-06-16T19:00:00.000Z': true,
-  },
+  unavailable: {},
 };
 
 export type CalendarState<T = any> = {

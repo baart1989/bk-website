@@ -1,3 +1,4 @@
+// TODO - config in repo is BAAAAAD!
 export const awsConfig = {
   aws_project_region: 'eu-central-1',
   aws_cognito_identity_pool_id: '',
@@ -12,6 +13,4 @@ export const awsConfig = {
   aws_appsync_region: 'eu-central-1',
   aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
   aws_appsync_apiKey: 'da2-snsn5mvb2bcttpw3rpb2t4qjeu',
-  // custom-auth
-  authenticationFlowType: 'CUSTOM_AUTH',
 };

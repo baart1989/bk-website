@@ -23,7 +23,7 @@ const CalendarProviderComponent = ({ children }) => {
   const previousMonth = () => dispatchAction(dispatch, Actions.previousMonth());
   const nextWeek = () => dispatchAction(dispatch, Actions.nextWeek());
   const previousWeek = () => dispatchAction(dispatch, Actions.previousWeek());
-  const bookEvent = (date: Date) => dispatchAction(dispatch, Actions.bookEvent(date));
+  const bookEvent = (date: string) => dispatchAction(dispatch, Actions.bookEvent(date));
   const setEvents = (result: GraphQLResult<object>) =>
     dispatchAction(dispatch, Actions.setEvents(result));
 

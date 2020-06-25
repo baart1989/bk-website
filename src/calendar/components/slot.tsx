@@ -1,5 +1,3 @@
-import { formatISO, isSameMinute } from 'date-fns';
-
 import React from 'react';
 import cns from 'classnames';
 import { getHourSlot } from '../utils';
@@ -24,7 +22,7 @@ export const Slot: React.FC<SlotProps> = ({ data }) => {
     <div
       className={cns(
         'my-1 py-1 px-4',
-        'border border-2',
+        'border-2',
         { 'border-transparent': !isAvailable },
         { 'bg-teal-500 text-white cursor-pointer': isAvailable },
         { 'hover:bg-teal-700': isAvailable },
