@@ -3,9 +3,6 @@ import { IndexPageQuery, IndexPageQuery_site_siteMetadata } from './__generated_
 import { PageProps, graphql } from 'gatsby';
 import React, { useEffect, useRef, useState } from 'react';
 
-import Api from '@aws-amplify/api';
-//https://github.com/aws-amplify/amplify-js/wiki/Amplify-modularization
-import Auth from '@aws-amplify/auth';
 import BlogCard from '../blog/components/blog-card';
 import { Button } from '../components/ui';
 import Helmet from 'react-helmet';
@@ -13,15 +10,7 @@ import Img from 'gatsby-image';
 import OfferDetails from '../offer/components/offer';
 import ScrollIntoView from 'react-scroll-into-view';
 import ShopCard from '../shop/components/shop-card';
-import { awsConfig } from '../../aws-exports';
 import cns from 'classnames';
-
-Auth.configure({
-  region: awsConfig.aws_cognito_region,
-  userPoolId: awsConfig.aws_user_pools_id,
-  userPoolWebClientId: awsConfig.aws_user_pools_web_client_id,
-});
-Api.configure(awsConfig);
 
 export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
   const siteData = data.site.siteMetadata;
