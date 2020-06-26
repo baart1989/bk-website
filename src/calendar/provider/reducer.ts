@@ -104,11 +104,11 @@ export function calendarReducer(
         calendar: {
           ...state.calendar,
           selectedEvent: {
-            startDate: action.payload,
-            clientName: 'Anna Podsiadło',
             eventType: 'Rozmowa telefoniczna',
-            duration: '60',
             paymentType: 'Płatność przelewem',
+            duration: '60',
+            clientName: 'Anna Podsiadło',
+            startDate: action.payload,
           },
         },
       };
