@@ -29,26 +29,14 @@ export const Page = () => {
       // TODO - add end range
       const startFromToday = new Date().toISOString().slice(0, 10);
       const queryParams = { startDate: '2020' };
-      const result = await API.graphql(graphqlOperation(bookedEvents, queryParams));
+      const result = await API.graphql(graphqlOperation(bookedEvents, queryParams), {
+        'x-api-key': awsConfig.aws_appsync_apiKey,
+      });
       setEvents(result as GraphQLResult<object>);
     } catch (err) {
       console.error(err);
     }
   }, [currentDate]);
-
-  useEffect(() => {
-    API.configure({
-      ...awsConfig,
-      aws_appsync_authenticationType: 'API_KEY',
-    });
-
-    return () => {
-      API.configure({
-        ...awsConfig,
-        aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
-      });
-    };
-  }, []);
 
   useEffect(() => {
     fetchData();
