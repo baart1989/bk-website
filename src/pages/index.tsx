@@ -84,14 +84,12 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
       </div>
       <p className="text-lg lg:text-xl text-color-2 pt-4 lg:pt-0">{data.introTag}</p>
       <p className="text-base lg:text-lg mt-4">{data.description}</p>
-      <ScrollIntoView selector="#offer">
-        <Button title="ZOBACZ OFERTĘ" />
-      </ScrollIntoView>
-      <div>
-        <Button to="/shop/" title="SKLEP" />
-        <Button to="/blog/" title="BLOG" className="ml-2" />
+      <div className="flex">
+        <ScrollIntoView selector="#offer">
+          <Button title="ZOBACZ OFERTĘ" />
+        </ScrollIntoView>
+        <Button className="ml-2" title="ZALOGUJ" type="button" />
       </div>
-      <Button title="ZALOGUJ" type="button" />
     </React.Fragment>
   );
 
@@ -246,7 +244,7 @@ export const query = graphql`
         }
       }
     }
-    blog: allMdx(filter: { fields: { sourceName: { eq: "blog" } } }, limit: 6) {
+    blog: allMdx(filter: { fields: { sourceName: { eq: "blog" } } }, limit: 3) {
       edges {
         node {
           id

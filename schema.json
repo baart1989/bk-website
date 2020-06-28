@@ -17242,16 +17242,6 @@
                 "ofType": null
               },
               "defaultValue": null
-            },
-            {
-              "name": "authRequired",
-              "description": "",
-              "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "BooleanQueryOperatorInput",
-                "ofType": null
-              },
-              "defaultValue": null
             }
           ],
           "interfaces": null,
@@ -18042,18 +18032,6 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
-            },
-            {
-              "name": "authRequired",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "Boolean",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -18506,12 +18484,6 @@
             },
             {
               "name": "siteMetadata___navLinks___url",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "siteMetadata___navLinks___authRequired",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null

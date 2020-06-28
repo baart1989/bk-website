@@ -10,10 +10,10 @@ export const WeeklyCalendar = () => {
   const {
     nextWeek,
     previousWeek,
-    calendar: { currentDate: date },
+    calendar: { currentDate },
   } = useCalendar();
 
-  const weekDays = useMemo(() => getWeekDays(date), [date]);
+  const weekDays = useMemo(() => getWeekDays(currentDate), [currentDate]);
   return (
     <>
       <div className="container">

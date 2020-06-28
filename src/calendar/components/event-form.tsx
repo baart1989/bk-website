@@ -1,3 +1,4 @@
+import * as ApiModel from '../../API';
 import * as Yup from 'yup';
 
 import Auth, { CognitoUser } from '@aws-amplify/auth';
@@ -126,12 +127,12 @@ export const WithEventForm = ({ children }) => {
 export async function answerCustomChallenge(
   answer: string,
   cognitoUser: CognitoUser,
-  eventData: any,
+  eventData: ApiModel.EventInput,
 ) {
   try {
     // Send the answer to the User Pool
     // This will throw an error if it’s the 3rd wrong answer
-    await Auth.sendCustomChallengeAnswer(cognitoUser, answer, eventData);
+    await Auth.sendCustomChallengeAnswer(cognitoUser, answer, eventData as any);
     // It we get here, the answer was sent successfully,
     // but it might have been wrong (1st or 2nd time)
     // So we should test if the user is authenticated now

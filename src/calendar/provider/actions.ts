@@ -1,13 +1,9 @@
-export interface GraphQLResult<T = object> {
-  data?: T;
-  errors?: [object];
-  extensions?: {
-    [key: string]: any;
-  };
-}
+import * as ApiModel from '../../API';
+
+import { GraphQLResult } from '@aws-amplify/api';
 
 export type Action<T, K> = { type: T; payload: K };
-export type CalendarEvent = any;
+export type CalendarEvent = ApiModel.EventInput;
 export type EventType = 'bookedEvents' | 'unavailable';
 
 export const ADD = 'AT_CALENDAR_ADD_TO';
@@ -42,7 +38,7 @@ export const previousWeek = (): PreviousWeek => ({ type: PREVIOUS_WEEK, payload:
 export const clear = (): Clear => ({ type: CLEAR, payload: undefined });
 export const bookEvent = (payload: string): BookEvent => ({ type: BOOK_EVENT, payload });
 export const toggleView = (): ToggleView => ({ type: TOGGLE_VIEW, payload: undefined });
-export const setEvents = (payload: GraphQLResult<any>): SetEvents => ({
+export const setEvents = (payload: GraphQLResult<ApiModel.GetClientEventsQuery>): SetEvents => ({
   type: SET_EVENTS,
   payload,
 });

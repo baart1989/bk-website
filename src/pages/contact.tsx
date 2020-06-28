@@ -13,7 +13,7 @@ export const Contact: React.FC<PageProps<ContactQuery>> = ({ data }) => {
       <Helmet title="Kontakt" />
       <div className="container mx-auto py-12">
         <div className="title py-12 text-center">
-          <h2 className="font-black text-5xl text-color-1">Contact</h2>
+          <h2 className="font-black text-5xl text-color-1">Kontakt</h2>
         </div>
         <div className="flex flex-wrap pb-40">
           {hasContactForm && (

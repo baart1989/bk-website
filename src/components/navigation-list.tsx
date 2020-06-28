@@ -15,9 +15,9 @@ type NavigationListProps = {
   liClassName?: string;
   current?: string;
   withThemeSwitch?: boolean;
-  switchTheme: () => void;
-  currentTheme: ThemeType;
-  themes: { [id: string]: Theme };
+  switchTheme?: () => void;
+  currentTheme?: ThemeType;
+  themes?: { [id: string]: Theme };
 };
 const List: React.FC<NavigationListProps> = ({
   name,
@@ -36,7 +36,6 @@ const List: React.FC<NavigationListProps> = ({
           navLinks {
             name
             url
-            authRequired
           }
           darkmode
           switchTheme

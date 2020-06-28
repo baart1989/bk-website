@@ -1,4 +1,5 @@
 import * as Actions from './actions';
+import * as ApiModel from '../../API';
 
 import { addMonths, addWeeks, subMonths, subWeeks } from 'date-fns';
 
@@ -28,14 +29,7 @@ export type CalendarState<T = any> = {
   config: CalendarConfig;
   calendar: {
     currentDate: T;
-    selectedEvent: {
-      // ensure all values are string
-      startDate: string;
-      clientName: 'Anna Podsiadło';
-      eventType: 'Rozmowa telefoniczna';
-      duration: '60';
-      paymentType: 'Płatność przelewem';
-    };
+    selectedEvent: ApiModel.EventInput;
     view: ViewType;
   };
   bookedEvents: { [id: string]: number };
@@ -104,12 +98,14 @@ export function calendarReducer(
         calendar: {
           ...state.calendar,
           selectedEvent: {
-            eventType: 'Rozmowa telefoniczna',
-            paymentType: 'Płatność przelewem',
+            eventType: ApiModel.EventType.consultation,
+            paymentType: ApiModel.PaymentType.bank_transfer,
             duration: '60',
-            clientName: 'Anna Podsiadło',
+            clientId: 'annapodsiadlo',
             startDate: action.payload,
-          },
+            userId: undefined,
+            id: undefined,
+          } as ApiModel.EventInput,
         },
       };
     }

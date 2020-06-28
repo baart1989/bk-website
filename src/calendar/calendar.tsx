@@ -1,3 +1,5 @@
+import * as ApiModel from '../API';
+
 import API, { GraphQLResult, graphqlOperation } from '@aws-amplify/api';
 import { CalendarProviderComponent, useCalendar } from '../calendar/provider';
 import React, { useCallback, useEffect } from 'react';
@@ -5,17 +7,7 @@ import React, { useCallback, useEffect } from 'react';
 import CalendarWeekly from './components/weekly';
 import Helmet from 'react-helmet';
 import { awsConfig } from '../../aws-exports';
-
-export const bookedEvents = /* GraphQL */ `
-  query BookedEventsQuery($startDate: String!) {
-    getClientEvents(startDate: $startDate) {
-      id
-      userId
-      clientId
-      startDate
-    }
-  }
-`;
+import { queries } from '../graphql';
 
 export const Page = () => {
   const {
@@ -27,10 +19,11 @@ export const Page = () => {
     console.log('SELECTED_DATE: ', currentDate.toISOString());
     try {
       // TODO - add end range
-      const startFromToday = new Date().toISOString().slice(0, 10);
-      const queryParams = { startDate: '2020' };
-      const result = await API.graphql(graphqlOperation(bookedEvents, queryParams));
-      setEvents(result as GraphQLResult<object>);
+      const variables: ApiModel.GetClientEventsQueryVariables = { startDate: '2020' };
+      const result = (await API.graphql(
+        graphqlOperation(queries.getClientEvents, variables),
+      )) as GraphQLResult<ApiModel.GetClientEventsQuery>;
+      setEvents(result);
     } catch (err) {
       console.error(err);
     }
@@ -59,7 +52,7 @@ export const Page = () => {
       <Helmet title="Kalendarz" />
       <div className="container mx-auto py-12">
         <div className="title py-12 text-center">
-          <h2 className="font-black text-5xl text-color-1">Kalendarz</h2>
+          <h2 className="font-black text-5xl text-color-1">Zarezerwuj wizytę</h2>
         </div>
         <div>
           <CalendarWeekly />

@@ -1,0 +1,59 @@
+type User  {
+  id: ID!
+  clientId: String!
+  email: String!
+  name: String!
+}
+
+type Client {
+  id: ID!
+  name: String!
+}
+
+enum EventType {
+  consultation
+}
+
+enum PaymentType {
+  bank_transfer
+}
+
+type Event @aws_api_key @aws_cognito_user_pools {
+  id: ID!
+  userId: String!
+  startDate: String!
+  # String as we pass it as metadata on AWS.Auth
+  # which allows only string values
+  duration: String!
+  clientId: String!
+  eventType: EventType!
+  paymentType: PaymentType!
+}
+
+input UserInput {
+  clientId: String!
+  email: String!
+  name: String!
+}
+
+input EventInput {
+  id: ID
+  startDate: String!
+  clientId: String!
+  userId: String
+  duration: String!
+  eventType: EventType!
+  paymentType: PaymentType!
+}
+
+type Mutation {
+  addUser(input: UserInput!): User
+  addEvent(input: EventInput!): Event
+}
+
+type Query {
+  getClientUsers(clientId: String): [User]
+  getClientEvents(startDate: String!, clientId: String): [Event] @aws_api_key @aws_cognito_user_pools
+  getUserEvents(startDate: String!, userId: String!): [Event]
+  getUser(id: String): User
+}

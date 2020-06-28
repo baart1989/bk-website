@@ -1,6 +1,10 @@
 import React from 'react';
 
-type ToastProps = { title?: string; message?: string; closeToast?: Function };
+type ToastProps = {
+  title?: string;
+  message?: string;
+  closeToast?: Function;
+};
 
 export const Toast: React.FC<ToastProps> = ({ title, message, closeToast }) => {
   return (
@@ -15,7 +19,7 @@ export const Toast: React.FC<ToastProps> = ({ title, message, closeToast }) => {
         <div className="-ml-px flex flex-col">
           <div className="-mt-px h-0 flex-1 flex">
             <button
-              onClick={closeToast}
+              onClick={closeToast as any}
               className="flex items-center justify-center w-full rounded-br-lg border border-transparent px-4 py-3 text-sm leading-5 font-medium text-color-default hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
             >
               Zamknij

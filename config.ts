@@ -12,8 +12,8 @@ const siteMetadata = {
   description: `Plan odżywiania indywidualnie dopasowane do Twojego celu, stanu zdrowia, aktywności i preferencji`,
   about: `Cras accumsan a lectus at tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus elementum dapibus dictum. Mauris auctor quam nec est tincidunt hendrerit. Donec pulvinar lobortis mauris. Cras vulputate ullamcorper ligula a rhoncus. Nunc venenatis elementum ligula in semper. Mauris malesuada purus nunc, et ultricies leo aliquam ac. Ut sit amet nunc id magna accumsan hendrerit in eget metus.`,
   author: `baart1989`,
-  blogItemsPerPage: 3,
-  portfolioItemsPerPage: 10,
+  blogItemsPerPage: 20,
+  portfolioItemsPerPage: 20,
   darkmode: true,
   switchTheme: true,
   sourcePages: {
@@ -23,12 +23,7 @@ const siteMetadata = {
   navLinks: [
     {
       name: 'START',
-      url: '/app/home',
-      authRequired: true,
-    },
-    {
-      name: 'KALENDARZ',
-      url: '/calendar',
+      url: '/',
     },
     {
       name: 'BLOG',
@@ -36,7 +31,7 @@ const siteMetadata = {
     },
     {
       name: 'WSPÓŁPRACA',
-      url: '/offer',
+      url: '/cooperation',
     },
     {
       name: 'SKLEP',
@@ -105,21 +100,21 @@ const beforeContactFormSubmit = data => {
   if (data.name.trim().length < 2) {
     errors.push({
       code: 1,
-      message: 'Enter a name',
+      message: 'Wprowadź imię i nazwisko',
     });
   }
 
   if (!data.email.match(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/)) {
     errors.push({
       code: 2,
-      message: 'Enter a valid email address',
+      message: 'Wprowadź poprawny adres email',
     });
   }
 
   if (data.message.trim().length < 15) {
     errors.push({
       code: 3,
-      message: 'Enter a message with atleast 15 characters',
+      message: 'Wiadomość powinna zawierać minimum 15 znaków',
     });
   }
 

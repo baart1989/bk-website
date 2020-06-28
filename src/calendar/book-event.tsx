@@ -1,3 +1,5 @@
+import * as ApiModel from '../API';
+
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { CalendarProviderComponent, useCalendar } from '../calendar/provider';
 import { EventForm, WithEventForm } from '../calendar/components/event-form';
@@ -10,20 +12,10 @@ import { EventDetails } from '../calendar/components/event-details';
 import Helmet from 'react-helmet';
 import { PageProps } from 'gatsby';
 import { Toast } from '../components/toast';
+import { mutations } from '../graphql';
 import { toast } from 'react-toastify';
 import { useAlert } from '../hooks/useAlert';
 import { useFormikContext } from 'formik';
-
-export const createEvent = /* GraphQL */ `
-  mutation CreateEvent($input: EventInput) {
-    addEvent(input: $input) {
-      id
-      clientId
-      userId
-      startDate
-    }
-  }
-`;
 
 export const Appointment: React.FC<PageProps> = ({ navigate }) => {
   const { isSubmitting, handleSubmit, setSubmitting } = useFormikContext();
@@ -35,15 +27,14 @@ export const Appointment: React.FC<PageProps> = ({ navigate }) => {
   const loggedInUserBookEvent = useCallback(async () => {
     setSubmitting(true);
     const { sub } = getCurrentUser();
-    const variables = {
+    const variables: ApiModel.AddEventMutationVariables = {
       input: {
-        clientId: 'annapodsiadlo',
-        startDate: selectedEvent ? selectedEvent.startDate : '',
+        ...selectedEvent,
         userId: sub,
       },
     };
     try {
-      await API.graphql(graphqlOperation(createEvent, variables));
+      await API.graphql(graphqlOperation(mutations.addEvent, variables));
       setSubmitting(false);
       toast(
         <Toast
@@ -71,15 +62,9 @@ export const Appointment: React.FC<PageProps> = ({ navigate }) => {
         </div>
         <SectionHeading
           title="Szczegóły wizyty"
-          button={
-            <ActionButton
-              to="/calendar/"
-              state={{ modal: true, closeTo: 'book-event' }}
-              title="Zmień termin"
-            />
-          }
-        ></SectionHeading>
-        <EventDetails />
+          button={<ActionButton to="/calendar/" title="Zmień termin" />}
+        />
+        <EventDetails item={selectedEvent} />
         {!isLoggedIn() && <EventForm />}
         <SectionHeading
           button={
