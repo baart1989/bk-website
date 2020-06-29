@@ -2,19 +2,11 @@ import { Button } from '../../components/ui';
 import { OfferCheckmark } from './offer-checkmark';
 import { OfferListQuery_allMdx_edges_node } from '../__generated__/OfferListQuery';
 import React from 'react';
-import { useSiteContext } from '../../shop/provider';
 
 export const OfferItemMain: React.FC<OfferListQuery_allMdx_edges_node> = ({
-  id,
-  frontmatter: { title, price, currency, details, image: localFile },
+  frontmatter: { title, price, currency, details },
 }) => {
-  const { addToCart } = useSiteContext();
   const offerDetails = details.map((text, index) => <OfferCheckmark key={index} text={text} />);
-
-  const addItemToCart = () => () => {
-    addToCart({ id, title, price, currency, image: localFile });
-  };
-
   return (
     <div className="mt-10 max-w-lg mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-start-3 lg:col-end-6 lg:row-start-1 lg:row-end-4">
       <div className="relative z-10 rounded-lg shadow-xl">
@@ -43,11 +35,10 @@ export const OfferItemMain: React.FC<OfferListQuery_allMdx_edges_node> = ({
           <ul className="m-8">{offerDetails}</ul>
           <div className="mt-10">
             <Button
-              type="button"
               className="text-xl py-8"
               full={true}
-              title="Dodaj do koszyka"
-              onClick={addItemToCart}
+              title="Zarezerwuj wizytę"
+              to="/calendar/"
             />
           </div>
         </div>

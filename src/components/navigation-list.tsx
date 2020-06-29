@@ -1,12 +1,11 @@
 import { Link, graphql, navigate, useStaticQuery } from 'gatsby';
-import { LogIn, LogOut } from 'react-feather';
 import { Theme, ThemeType } from './layout';
 import { isLoggedIn, logout } from '../utils/auth';
 
 import Auth from '@aws-amplify/auth';
-import { CartIcon } from '../shop/components/cart-icon';
 import { NavigationListQuery } from './__generated__/NavigationListQuery';
 import React from 'react';
+import { ShoppingCart } from 'react-feather';
 import cns from 'classnames';
 
 type NavigationListProps = {
@@ -37,6 +36,9 @@ const List: React.FC<NavigationListProps> = ({
             name
             url
           }
+          sourcePages {
+            shop
+          }
           darkmode
           switchTheme
         }
@@ -52,8 +54,48 @@ const List: React.FC<NavigationListProps> = ({
       liClassName={liClassName}
     />
   ));
+  if (isLoggedIn()) {
+    list.push(
+      <li key="log-out" className={liClassName}>
+        <a
+          title="WYLOGUJ"
+          className="link cursor-pointer text-color-2 focus:text-primary"
+          onClick={async () => {
+            navigate('/');
+            await Auth.signOut();
+            logout();
+          }}
+        >
+          <span>WYLOGUJ</span>
+        </a>
+      </li>,
+    );
+  } else {
+    list.push(
+      <li className={liClassName} key="log-in">
+        <Link
+          to="/app/login/"
+          title="ZALOGUJ"
+          className="link cursor-pointer text-color-2 focus:text-primary"
+        >
+          <span>ZALOGUJ</span>
+        </Link>
+      </li>,
+    );
+  }
+  const shopLinks = [...data.site.siteMetadata.sourcePages.shop, 'shop'];
+  const displayCartIcon = shopLinks.indexOf(current) !== -1;
+  if (displayCartIcon) {
+    list.push(
+      <li className="theme-switcher" key="cart">
+        <Link className="cursor-pointer text-color-2 focus:text-primary" to="/cart/">
+          <ShoppingCart />
+        </Link>
+      </li>,
+    );
+  }
 
-  if (withThemeSwitch) {
+  if (withThemeSwitch && !displayCartIcon) {
     const themeButtons = Object.keys(themes).map(key => {
       const theme = themes[key];
       return (
@@ -74,40 +116,12 @@ const List: React.FC<NavigationListProps> = ({
         </button>
       );
     });
-    list.push(
-      <li className="theme-switcher" key="cart">
-        <CartIcon className="text-color-2 transition-transform duration-200 transform top-0 left-0" />
-      </li>,
-    );
+
     list.push(
       <li className="theme-switcher" key={name}>
         {themeButtons}
       </li>,
     );
-    if (isLoggedIn()) {
-      list.push(
-        <li className="theme-switcher" key="log-out">
-          <a
-            className="cursor-pointer"
-            onClick={async () => {
-              navigate('/');
-              await Auth.signOut();
-              logout();
-            }}
-          >
-            <LogOut className="text-color-2 transition-transform duration-200 transform top-0 left-0" />
-          </a>
-        </li>,
-      );
-    } else {
-      list.push(
-        <li className="theme-switcher" key="log-in">
-          <Link to="/app/login/" className="cursor-pointer">
-            <LogIn className="text-color-2 transition-transform duration-200 transform top-0 left-0" />
-          </Link>
-        </li>,
-      );
-    }
   }
 
   return <ul className={className}>{list}</ul>;

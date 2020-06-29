@@ -1,3 +1,4 @@
+import { Link } from 'gatsby';
 import { OfferCheckmark } from './offer-checkmark';
 import { OfferListQuery_allMdx_edges_node } from '../__generated__/OfferListQuery';
 import React from 'react';
@@ -7,16 +8,9 @@ import { useSiteContext } from '../../shop/provider';
 type OfferDetails = OfferListQuery_allMdx_edges_node & { position: 'left' | 'right' };
 
 export const OfferStandard: React.FC<OfferDetails> = ({
-  id,
-  frontmatter: { title, price, currency, details, image: localFile },
+  frontmatter: { title, price, currency, details },
   position,
 }) => {
-  const { addToCart } = useSiteContext();
-
-  const addItemToCart = () => () => {
-    addToCart({ id, title, price, currency, image: localFile });
-  };
-
   const containerClassNames =
     'mt-10 mx-auto max-w-lg lg:m-0 lg:max-w-none lg:row-start-2 lg:row-end-3';
   const innerContainerClassNames =
@@ -57,12 +51,12 @@ export const OfferStandard: React.FC<OfferDetails> = ({
             </ul>
             <div className="mt-4">
               <div className="rounded-lg shadow-md">
-                <button
-                  onClick={addItemToCart}
+                <Link
+                  to="/calendar/"
                   className="block w-full text-center border border-transparent bg-white px-6 py-3 text-base leading-6 font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150"
                 >
-                  Dodaj do koszyka
-                </button>
+                  Zarezerwuj wizytę
+                </Link>
               </div>
             </div>
           </div>
