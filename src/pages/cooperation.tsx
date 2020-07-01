@@ -12,7 +12,7 @@ export const Cooperation = () => {
           <h2 className="font-black text-5xl text-color-1">Współpraca</h2>
         </div>
         <SectionHeading
-          title="Kalendarz"
+          title="Zarezerwuj wizytę"
           button={<ActionButton to="/calendar/" title="Wybierz termin" />}
         />
         <SectionHeading

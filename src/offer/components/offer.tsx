@@ -1,3 +1,5 @@
+import * as ApiModel from '../../API';
+
 import { OfferListQuery_allMdx_edges } from '../__generated__/OfferListQuery';
 import OfferMain from './offer-main';
 import OfferStandard from './offer-standard';
@@ -18,9 +20,23 @@ export const Offer: React.FC<{ data: OfferListQuery_allMdx_edges[] }> = ({ data 
       <div className="mt-16 pb-12 lg:mt-20 lg:pb-20">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-7">
-            <OfferStandard key={data[0].node.id} {...data[0].node} position="left" />
-            <OfferMain key={data[1].node.id} {...data[1].node} />
-            <OfferStandard key={data[2].node.id} {...data[2].node} position="right" />
+            <OfferStandard
+              key={data[0].node.id}
+              eventType={ApiModel.EventType.research_analysis}
+              position="left"
+              {...data[0].node}
+            />
+            <OfferMain
+              key={data[1].node.id}
+              eventType={ApiModel.EventType.research_analysis_with_diet}
+              {...data[1].node}
+            />
+            <OfferStandard
+              key={data[2].node.id}
+              eventType={ApiModel.EventType.consultation}
+              position="right"
+              {...data[2].node}
+            />
           </div>
         </div>
       </div>

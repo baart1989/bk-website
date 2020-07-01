@@ -12,6 +12,8 @@ type Client {
 
 enum EventType {
   consultation
+  research_analysis
+  research_analysis_with_diet
 }
 
 enum PaymentType {

@@ -17,7 +17,15 @@ export const INITIAL_STATE = {
   config,
   calendar: {
     currentDate: new Date().toISOString(),
-    selectedEvent: null,
+    selectedEvent: {
+      eventType: ApiModel.EventType.consultation,
+      paymentType: ApiModel.PaymentType.bank_transfer,
+      duration: '60',
+      clientId: 'annapodsiadlo',
+      startDate: new Date().toISOString(),
+      userId: undefined,
+      id: undefined,
+    } as ApiModel.EventInput,
     view: 'monthly' as ViewType,
   },
   bookedEvents: {},
@@ -93,6 +101,7 @@ export function calendarReducer(
     }
 
     case Actions.BOOK_EVENT: {
+      console.log({ action });
       return {
         ...state,
         calendar: {
@@ -102,9 +111,9 @@ export function calendarReducer(
             paymentType: ApiModel.PaymentType.bank_transfer,
             duration: '60',
             clientId: 'annapodsiadlo',
-            startDate: action.payload,
             userId: undefined,
             id: undefined,
+            ...action.payload,
           } as ApiModel.EventInput,
         },
       };

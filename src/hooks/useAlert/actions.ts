@@ -1,4 +1,7 @@
 export type Action<T, K> = { type: T; payload: K };
+export type AlertSelectOptions = AlertOptions & {
+  options: AlertSelectOption[];
+};
 export type AlertOptions = {
   id?: string;
   header?: string;
@@ -7,11 +10,15 @@ export type AlertOptions = {
   inputs?: AlertInput[];
   buttons?: AlertButton[];
   backdropDismiss?: boolean;
-  type: 'info' | 'warning' | 'success' | 'custom';
+  type: 'alert' | 'select' | 'input';
   onOpen?: () => void;
   onOk?: () => void;
   onClose?: () => void;
 };
+export interface AlertSelectOption {
+  id: string;
+  label: string;
+}
 export interface AlertInput {
   type?: string;
   name?: string;

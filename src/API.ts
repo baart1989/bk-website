@@ -20,6 +20,8 @@ export type EventInput = {
 
 export enum EventType {
   consultation = "consultation",
+  research_analysis = "research_analysis",
+  research_analysis_with_diet = "research_analysis_with_diet",
 }
 
 

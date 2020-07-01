@@ -1,12 +1,18 @@
+import * as ApiModel from '../../API';
+
+import { CalendarProviderComponent, useCalendar } from '../../calendar/provider';
+
 import { Button } from '../../components/ui';
 import { OfferCheckmark } from './offer-checkmark';
 import { OfferListQuery_allMdx_edges_node } from '../__generated__/OfferListQuery';
 import React from 'react';
+import { navigate } from 'gatsby';
 
-export const OfferItemMain: React.FC<OfferListQuery_allMdx_edges_node> = ({
-  frontmatter: { title, price, currency, details },
-}) => {
+export const OfferItemMain: React.FC<OfferListQuery_allMdx_edges_node & {
+  eventType: ApiModel.EventType;
+}> = ({ frontmatter: { title, price, currency, details }, eventType }) => {
   const offerDetails = details.map((text, index) => <OfferCheckmark key={index} text={text} />);
+  const { bookEvent } = useCalendar();
   return (
     <div className="mt-10 max-w-lg mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-start-3 lg:col-end-6 lg:row-start-1 lg:row-end-4">
       <div className="relative z-10 rounded-lg shadow-xl">
@@ -35,10 +41,17 @@ export const OfferItemMain: React.FC<OfferListQuery_allMdx_edges_node> = ({
           <ul className="m-8">{offerDetails}</ul>
           <div className="mt-10">
             <Button
+              type="button"
               className="text-xl py-8"
               full={true}
               title="Zarezerwuj wizytę"
-              to="/calendar/"
+              onClick={() => {
+                bookEvent({
+                  startDate: new Date().toISOString(),
+                  eventType: eventType,
+                });
+                navigate('/calendar/');
+              }}
             />
           </div>
         </div>
@@ -47,4 +60,10 @@ export const OfferItemMain: React.FC<OfferListQuery_allMdx_edges_node> = ({
   );
 };
 
-export default OfferItemMain;
+export default function OfferMainWithContext(props) {
+  return (
+    <CalendarProviderComponent>
+      <OfferItemMain {...props} />
+    </CalendarProviderComponent>
+  );
+}

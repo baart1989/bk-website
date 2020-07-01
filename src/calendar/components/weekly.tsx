@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
+import { getWeekDays, isCurrentWeek } from '../utils';
 
 import { SectionHeading } from '../../components/ui';
 import Slots from '../components/slots';
 import { SwitchDate } from '../components/switch';
-import { getWeekDays } from '../utils';
 import { useCalendar } from '../provider';
 
 export const WeeklyCalendar = () => {
@@ -21,7 +21,11 @@ export const WeeklyCalendar = () => {
           <SectionHeading
             title="Wybierz termin"
             button={
-              <SwitchDate previousCallback={() => previousWeek()} nextCallback={() => nextWeek()} />
+              <SwitchDate
+                previousDisabled={isCurrentWeek(currentDate)}
+                previousCallback={previousWeek}
+                nextCallback={nextWeek}
+              />
             }
           />
           <div className="flex">

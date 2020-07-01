@@ -8,6 +8,7 @@ import {
   endOfMonth,
   endOfWeek,
   format as formatFn,
+  isPast,
   isToday,
   isTomorrow,
   startOfDay,
@@ -20,9 +21,11 @@ import { CalendarConfig } from '../provider';
 import { pl } from 'date-fns/locale';
 
 const commonOptions = { locale: pl };
+const weekOptions = { weekStartsOn: 1 } as const;
 
 export const getDayNumber = (date: Date) => formatFn(date, 'd');
 export const getHourSlot = (date: Date) => formatFn(date, 'HH:mm');
+export const isCurrentWeek = (date: Date) => isPast(startOfWeek(date, weekOptions));
 
 export const getWorkingHours = (date: Date, config: CalendarConfig) => {
   const hoursSlots = eachHourOfInterval({
@@ -52,8 +55,8 @@ export const getWeeks = (date: Date) =>
 
 export const getWeekDays = (date: Date) => {
   return eachDayOfInterval({
-    start: startOfWeek(date, { weekStartsOn: 1 }),
-    end: endOfWeek(date, { weekStartsOn: 1 }),
+    start: startOfWeek(date, weekOptions),
+    end: endOfWeek(date, weekOptions),
   });
 };
 

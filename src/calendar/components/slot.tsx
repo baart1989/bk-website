@@ -1,3 +1,5 @@
+import { isFuture, isPast } from 'date-fns';
+
 import React from 'react';
 import cns from 'classnames';
 import { getHourSlot } from '../utils';
@@ -8,15 +10,19 @@ import { useCalendar } from '../provider';
 type SlotProps = { data: Date };
 
 export const Slot: React.FC<SlotProps> = ({ data }) => {
-  const { bookedEvents, unavailable, bookEvent } = useCalendar();
+  const {
+    bookedEvents,
+    unavailable,
+    bookEvent,
+    calendar: { selectedEvent },
+  } = useCalendar();
 
   const dateAsString = data.toISOString();
   const slotStart = getHourSlot(data);
 
   const isTaken = !!bookedEvents[dateAsString];
-  const isAvailable = !bookedEvents[dateAsString] && !unavailable[dateAsString];
+  const isAvailable = !bookedEvents[dateAsString] && !unavailable[dateAsString] && isFuture(data);
   const isUnavailable = !!unavailable[dateAsString];
-  const alert = useAlert();
 
   return (
     <div
@@ -31,20 +37,8 @@ export const Slot: React.FC<SlotProps> = ({ data }) => {
       )}
       onClick={() => {
         if (isAvailable) {
-          alert.showAlert({
-            header: 'Umówić wizytę?',
-            buttons: [
-              {
-                text: 'Zarezerwuj',
-                role: 'confirm',
-                handler: () => {
-                  bookEvent(dateAsString);
-                  navigate('/book-event/');
-                },
-              },
-              { text: 'Anuluj', role: 'cancel' },
-            ],
-          });
+          bookEvent({ ...selectedEvent, startDate: dateAsString });
+          navigate('/book-event/');
         }
       }}
     >

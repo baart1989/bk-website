@@ -68,7 +68,7 @@ export const AlertProviderComponent = ({ children }) => {
 
   const showAlert = useCallback(
     (options: Partial<AlertOptions> = {}) => {
-      options.type = 'info';
+      options.type = 'alert';
       return show(options);
     },
     [show],
@@ -79,9 +79,18 @@ export const AlertProviderComponent = ({ children }) => {
     options.onClose ? options.onClose() : null;
   }, []);
 
+  const showSelect = useCallback(
+    (options: Partial<AlertOptions> = {}) => {
+      options.type = 'select';
+      return show(options);
+    },
+    [show],
+  );
+
   const value = useMemo(
     () => ({
       ...state,
+      showSelect,
       showAlert,
       hideAlert,
     }),

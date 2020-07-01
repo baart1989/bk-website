@@ -2,21 +2,24 @@ import * as ApiModel from '../API';
 
 import API, { GraphQLResult, graphqlOperation } from '@aws-amplify/api';
 import { CalendarProviderComponent, useCalendar } from '../calendar/provider';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
+import { ActionButton } from '../shop/components/shop-ui';
 import CalendarWeekly from './components/weekly';
+import { EventSelect } from './components/event-select';
 import Helmet from 'react-helmet';
+import { SectionHeading } from '../components/ui';
 import { awsConfig } from '../../aws-exports';
+import { eventTypeName } from './utils';
 import { queries } from '../graphql';
 
 export const Page = () => {
   const {
     setEvents,
-    calendar: { currentDate },
+    calendar: { currentDate, selectedEvent },
   } = useCalendar();
 
   const fetchData = useCallback(async () => {
-    console.log('SELECTED_DATE: ', currentDate.toISOString());
     try {
       // TODO - add end range
       const variables: ApiModel.GetClientEventsQueryVariables = { startDate: '2020' };
@@ -47,16 +50,27 @@ export const Page = () => {
     fetchData();
   }, []);
 
+  const [isSelectVisible, setSelectVisible] = useState(false);
+
   return (
     <>
-      <Helmet title="Kalendarz" />
+      <Helmet title="Zarezerwuj wizytę" />
       <div className="container mx-auto py-12">
         <div className="title py-12 text-center">
           <h2 className="font-black text-5xl text-color-1">Zarezerwuj wizytę</h2>
         </div>
-        <div>
-          <CalendarWeekly />
-        </div>
+        <SectionHeading
+          title={`Rodzaj wizyty: ${eventTypeName(selectedEvent.eventType)}`}
+          button={
+            <ActionButton
+              type="button"
+              onClick={() => setSelectVisible(!isSelectVisible)}
+              title="Zmień"
+            />
+          }
+        />
+        <EventSelect isVisible={isSelectVisible} setVisible={setSelectVisible} />
+        <CalendarWeekly />
       </div>
     </>
   );

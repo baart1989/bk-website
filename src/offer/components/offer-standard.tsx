@@ -1,20 +1,28 @@
-import { Link } from 'gatsby';
+import * as ApiModel from '../../API';
+
+import { CalendarProviderComponent, useCalendar } from '../../calendar/provider';
+
 import { OfferCheckmark } from './offer-checkmark';
 import { OfferListQuery_allMdx_edges_node } from '../__generated__/OfferListQuery';
 import React from 'react';
 import cns from 'classnames';
-import { useSiteContext } from '../../shop/provider';
+import { navigate } from 'gatsby';
 
-type OfferDetails = OfferListQuery_allMdx_edges_node & { position: 'left' | 'right' };
+type OfferDetails = OfferListQuery_allMdx_edges_node & { position: 'left' | 'right' } & {
+  eventType: ApiModel.EventType;
+};
 
-export const OfferStandard: React.FC<OfferDetails> = ({
+const OfferStandard: React.FC<OfferDetails> = ({
   frontmatter: { title, price, currency, details },
   position,
+  eventType,
 }) => {
   const containerClassNames =
     'mt-10 mx-auto max-w-lg lg:m-0 lg:max-w-none lg:row-start-2 lg:row-end-3';
   const innerContainerClassNames =
     'h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none';
+
+  const { bookEvent } = useCalendar();
 
   return (
     <div
@@ -51,12 +59,18 @@ export const OfferStandard: React.FC<OfferDetails> = ({
             </ul>
             <div className="mt-4">
               <div className="rounded-lg shadow-md">
-                <Link
-                  to="/calendar/"
+                <button
+                  onClick={() => {
+                    bookEvent({
+                      startDate: new Date().toISOString(),
+                      eventType: eventType,
+                    });
+                    navigate('/calendar/');
+                  }}
                   className="block w-full text-center border border-transparent bg-white px-6 py-3 text-base leading-6 font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150"
                 >
                   Zarezerwuj wizytę
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -66,4 +80,10 @@ export const OfferStandard: React.FC<OfferDetails> = ({
   );
 };
 
-export default OfferStandard;
+export default function OfferStandardWithContext(props) {
+  return (
+    <CalendarProviderComponent>
+      <OfferStandard {...props} />
+    </CalendarProviderComponent>
+  );
+}
