@@ -77,7 +77,7 @@ export const TextInput = ({
     <input
       type={type}
       name={name}
-      className="block w-full outline-none px-4 py-2 focus:outline-none bg-bg text-color-default"
+      className="block w-full outline-none px-4 py-2 focus:outline-none bg-bg"
       onFocus={() => changeFocused(true)}
       onBlur={() => changeFocused(false)}
       onChange={onChange}
@@ -88,7 +88,7 @@ export const TextInput = ({
   if (type === 'textarea') {
     elem = (
       <textarea
-        className="block w-full outline-none resize-none px-4 py-2 focus:outline-none bg-bg text-color-default"
+        className="block w-full outline-none resize-none px-4 py-2 focus:outline-none bg-bg"
         name={name}
         onChange={event => {
           event.target.style.height = 'auto';
@@ -105,11 +105,11 @@ export const TextInput = ({
 
   return (
     <div
-      className={`${
-        focused ? 'input focused shadow-2xl' : ''
-        } transition - all duration - 300 py - 3 lg: p - 4 pb - 6`}
+      className={cns('transition-all duration-300 py-3 lg:p-4 pb-6', {
+        'input focused shadow-2xl': focused,
+      })}
     >
-      <p className="text-color-3">{label}</p>
+      <p className="text-color-secondary">{label}</p>
       <div className="bg-gradient-primary p-2px">{elem}</div>
       {footer && <>{footer}</>}
     </div>
@@ -150,7 +150,7 @@ export const SectionHeading: React.FC<{
   <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
     <div className="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-no-wrap">
       <div className="ml-4 mt-4">
-        <h5 className="leading-6 text-color-default font-medium">{title}</h5>
+        <h5 className="leading-6 font-medium">{title}</h5>
         {subtitle && <span className="text-lg">{subtitle}</span>}
       </div>
       <div className="ml-4 mt-4 flex-shrink-0">

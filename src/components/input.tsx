@@ -30,7 +30,7 @@ export const Input: React.FC<TextInputProps & { required?: boolean; applyBorder?
           <div className="w-full md:max-w-sm rounded-md">
             <TextInput
               aria-label={placeholder}
-              className="bg-bg mt-1 form-input block w-full py-2 px-3 border border-color-4 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-400 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+              className="bg-bg mt-1 form-input block w-full py-2 px-3 border border-color-3 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-400 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
               type={type}
               placeholder={placeholder}
               aria-describedby={`${props.name}-optional}`}

@@ -8,3 +8,29 @@
 @tailwind utilities;
 /* purgecss start ignore */
 /* purgecss end ignore */
+.theme-dark {
+  --primary-text: #f8f8f8;
+  --primary-background: #1a202c;
+  --secondary-text: #edf2f7;
+  --secondary-background: #000;
+  --primary: #f55555;
+  --secondary: #6888df;
+  --medium: #4a5568;
+  --color-1: #c35fde;
+  --color-2: #adbfef;
+  --color-3: #4a5568;
+  --color-4: #e2e8f0;
+}
+.theme-light {
+  --primary-text: #1a202c;
+  --primary-background: #fff;
+  --secondary-text: #718096;
+  --secondary-background: #f5f5f5;
+  --primary: #f55555;
+  --secondary: #6888df;
+  --medium: #cfd8dc;
+  --color-1: #8e24aa;
+  --color-2: #673ab7;
+  --color-3: #e2e8f0;
+  --color-4: #e2e8f0;
+}

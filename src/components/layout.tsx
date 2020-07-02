@@ -1,4 +1,3 @@
-import { BodyClass, RootClass } from 'react-frontend-common';
 import { Moon, Sun } from 'react-feather';
 import React, { useEffect, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';

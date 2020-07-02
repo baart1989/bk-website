@@ -1,12 +1,10 @@
+import { Button, TextInput } from './ui';
+import { Loader, Mail, MapPin, Phone, Send } from 'react-feather';
 import React, { useState } from 'react';
-import { Send, Mail, Phone, MapPin, Loader } from 'react-feather';
-
-import { TextInput, Button } from './ui';
-
 import { beforeContactFormSubmit, contactFormSubmit } from '../../config';
 
-import SocialLinks from '../utils/sociallinks';
 import { ContactQuery_site_siteMetadata_contact } from '../pages/__generated__/ContactQuery';
+import SocialLinks from '../utils/sociallinks';
 
 type FeedbackState = { [id: number]: { message?: string; type?: string } };
 
@@ -142,7 +140,7 @@ const Form: React.FC<{ api: string }> = ({ api }) => {
 const Description: React.FC<{ data: ContactQuery_site_siteMetadata_contact }> = ({ data }) => {
   return (
     <div>
-      {data.description && <p className="text-color-default">{data.description}</p>}
+      {data.description && <p>{data.description}</p>}
       <ul className="my-4">
         {data.mail && (
           <li className="flex items-center">

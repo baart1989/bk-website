@@ -2,85 +2,19 @@
 const plugin = require('tailwindcss/plugin');
 const _ = require('lodash');
 
-const themeSwitcher = plugin(({ addUtilities, e, theme, variants }) => {
-  console.log('themeSwitcher');
-  const themes = theme('themes');
-
-  if (!themes) {
-    console.warn('\x1b[33m', 'Warning: No themes property in your tailwind config file');
-    return;
-  }
-
-  const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default;
-
-  let utilities = {};
-
-  const properties = [
-    {
-      property: 'background-color',
-      name: 'bg',
-    },
-    {
-      property: 'border-color',
-      name: 'border',
-    },
-    {
-      property: 'color',
-      name: 'placeholder',
-      pseudo: '::placeholder',
-    },
-    {
-      property: 'color',
-      name: 'text',
-    },
-  ];
-
-  Object.keys(themes).forEach(theme => {
-    const parent = e(`theme-${theme}`);
-
-    properties.forEach(prop => {
-      const res = makeColorVariant(prop, parent, theme);
-      utilities = { ...utilities, ...res };
-    });
-  });
-
-  addUtilities(utilities, ['responsive', 'hover', 'focus']);
-
-  function makeColorVariant(property, parent, th) {
-    const colors = flattenColorPalette(themes[th]);
-
-    const createPair = (p, m, v, par) => {
-      let selector;
-      if (p.pseudo) {
-        selector = `${e(`${p.name}-${m}`)}${p.pseudo}`;
-      } else {
-        selector = e(`${p.name}-${m}`);
-      }
-
-      selector = `.${par} .${selector}`;
-
-      const value = {};
-      value[p.property] = v;
-      return [selector, value];
-    };
-
-    return _.fromPairs(
-      _.map(_.omit(colors, 'default'), (value, modifier) => {
-        return createPair(property, modifier, value, parent);
-      }),
-    );
-  }
-});
-
 const gradient = plugin(({ addUtilities, e, theme, variants }) => {
   const gradients = theme('gradients', {});
   const gradientVariants = variants('gradients', []);
+
+  console.log({ gradients });
+  console.log({ gradientVariants });
 
   const utilities = _.map(gradients, ([start, end], name) => ({
     [`.bg-gradient-${e(name)}`]: {
       backgroundImage: `linear-gradient(to right, ${start}, ${end})`,
     },
   }));
+  console.log({ utilities });
 
   addUtilities(utilities, gradientVariants);
 });
@@ -130,27 +64,13 @@ module.exports = {
   purge: ['./src/**/*.js', './src/**/*.jsx', './src/**/*.ts', './src/**/*.tsx'],
   theme: {
     gradients: theme => ({
-      primary: [theme('colors.primary'), theme('colors.secondary')],
+      primary: [theme('colors.primary-gradient-color'), theme('colors.secondary-gradient-color')],
     }),
     screens: {
       sm: '480px',
       md: '640px',
       lg: '768px',
       xl: '1024px',
-    },
-    themes: {
-      dark: {
-        bg: '#111',
-        bgalt: '#000',
-        'color-default': '#eee',
-        'color-1': '#c35fde',
-        'color-2': '#adbfef',
-        'color-3': '#aeb4c5',
-        'color-4': '#d8d8d8',
-        border: '#718096',
-        primary: '#f55555',
-        medium: '#222',
-      },
     },
     extend: {
       fontSize: {
@@ -161,25 +81,22 @@ module.exports = {
         '2px': '2px',
       },
       colors: {
-        bg: '#fff',
-        bgalt: '#f5f5f5',
-        'color-default': '#333',
-        'color-1': '#8e24aa',
-        'color-2': '#673ab7',
-        'color-3': '#aeb4c5',
-        'color-4': '#d8d8d8',
-        primary: '#f55555',
-        secondary: '#6888df',
-        link: '#0a71c5',
-        medium: '#cfd8dc',
-        white: '#fff',
-        black: '#000',
-        transparent: 'rgba(0,0,0,0)',
-        error: '#ef5350',
-        success: '#8bc34a',
+        bg: 'var(--primary-background)',
+        bgalt: 'var(--secondary-background)',
+        'color-default': 'var(--primary-text)',
+        'color-secondary': 'var(--secondary-text)',
+        'color-1': 'var(--color-1)',
+        'color-2': 'var(--color-2)',
+        'color-3': 'var(--color-3)',
+        'color-4': 'var(--color-4)',
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)',
+        medium: 'var(--medium)',
+        'primary-gradient-color': '#f55555',
+        'secondary-gradient-color': '#6888df',
       },
     },
   },
   variants: {},
-  plugins: [themeSwitcher, gradient, headingSizes],
+  plugins: [gradient, headingSizes],
 };

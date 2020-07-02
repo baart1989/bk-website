@@ -57,7 +57,7 @@ p {
   @apply w-full;
 }
 
-.title h1{
+.title h1 {
   @apply text-color-1 font-black;
 }
 
@@ -123,12 +123,12 @@ p {
 }
 
 .btn-primary {
-  @apply bg-primary my-4;
+  @apply bg-primary-gradient-color my-4;
   color: #fff;
 }
 
 .btn-primary:before {
-  @apply bg-secondary;
+  @apply bg-secondary-gradient-color;
 }
 
 .btn-primary:hover:before,.btn-primary:focus:before {
@@ -188,34 +188,6 @@ p {
   @apply my-3;
 }
 
-.post-content h1, h2, h3, h4, h5, h6 {
-  @apply font-black text-color-2 my-4;
-}
-
-.post-content h1 {
-  @apply text-5xl;
-}
-
-.post-content h2 {
-  @apply text-4xl;
-}
-
-.post-content h3 {
-  @apply text-3xl;
-}
-
-.post-content h4 {
-  @apply text-2xl;
-}
-
-.post-content h5 {
-  @apply text-xl;
-}
-
-.post-content h5 {
-  @apply text-lg;
-}
-
 .post-content hr {
   @apply my-4 border-medium;
 }
@@ -266,15 +238,15 @@ p {
 }
 
 .theme-dark.bg-bgalt {
-  background: theme("themes.dark.bgalt");
+  background: theme("colors.bgalt");
 }
 
 .theme-dark .input.focused {
-  background: theme("themes.dark.medium");
+  background: theme("colors.medium");
 }
 
 .theme-dark .blog-item .focused{
-  background: theme("themes.dark.medium");
+  background: theme("colors.medium");
 }
 
 .spin {

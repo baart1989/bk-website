@@ -42,7 +42,7 @@ const OfferStandard: React.FC<OfferDetails> = ({
         <div className="flex-1 flex flex-col">
           <div className="px-6 py-10">
             <div>
-              <h5 className="text-center leading-8 font-thin text-color-default">{title}</h5>
+              <h5 className="text-center leading-8 font-thin">{title}</h5>
               <div className="mt-4 flex items-center justify-center">
                 <span className="px-3 flex items-start text-5xl leading-none tracking-tight">
                   <span className="font-extrabold">{price}</span>
@@ -67,7 +67,7 @@ const OfferStandard: React.FC<OfferDetails> = ({
                     });
                     navigate('/calendar/');
                   }}
-                  className="block w-full text-center border border-transparent bg-white px-6 py-3 text-base leading-6 font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150"
+                  className="block w-full text-center border border-color-2 bg-bg px-6 py-3 text-base leading-6 font-medium hover:text-indigo-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150"
                 >
                   Zarezerwuj wizytę
                 </button>

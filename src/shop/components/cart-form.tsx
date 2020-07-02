@@ -8,7 +8,7 @@ export const CartForm = () => {
     <div className="mt-6 shadow px-4 py-5 sm:rounded-lg sm:p-6">
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="md:col-span-1">
-          <h3 className="text-lg font-medium leading-6 text-color-default">Dane odbiorcy</h3>
+          <h3 className="text-lg font-medium leading-6">Dane odbiorcy</h3>
           <p className="mt-1 text-sm leading-5 text-color-3">
             Potrzbujemy Twoich danych żeby móc potwierdzić zamówienie.
           </p>

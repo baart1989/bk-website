@@ -44,7 +44,7 @@ export default function footer() {
         <div className="text-color-2 my-3">
           <ul>{footerLinks}</ul>
         </div>
-        <p className="text-color-default text-lg">
+        <p className="text-lg">
           Copyright &copy; {query.site.siteMetadata.title} {new Date().getFullYear()}
         </p>
       </div>

@@ -26,7 +26,7 @@ export const OfferItemMain: React.FC<OfferListQuery_allMdx_edges_node & {
         </div>
         <div className="rounded-t-lg px-6 pt-12 pb-10">
           <div>
-            <h4 className="text-center text-color-default leading-9 font-semibold sm:-mx-6">
+            <h4 className="text-center leading-9 font-semibold sm:-mx-6">
               {title}
             </h4>
             <div className="mt-4 flex items-center justify-center">

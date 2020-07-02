@@ -6,23 +6,22 @@ import { isLoggedIn, setUser } from '../utils/auth';
 
 import Auth from '@aws-amplify/auth';
 import { Button } from '../components/ui';
-import { Checkbox } from 'react-tailwind-component';
 import Input from './components/input';
 import React from 'react';
 import { SpinIcon } from '../components/ui';
 
 const WelcomeSection = () => (
   <div>
-    <h2 className="mt-12 md:mt-24 text-center text-3xl leading-9 font-extrabold text-gray-900">
+    <h2 className="mt-12 md:mt-24 text-center text-3xl leading-9 font-extrabold">
       Zaloguj się na swoje konto
     </h2>
-    <p className="mt-2 text-center text-sm leading-5 text-gray-600">
-      albo {` `}
+    <p className="mt-2 text-center text-sm leading-5">
+      Nie posiadasz konta? {` `}
       <a
         href="#"
         className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
       >
-        rozpocznij 14-dniowy okres próbny
+        Zarejestruj się
       </a>
     </p>
   </div>
