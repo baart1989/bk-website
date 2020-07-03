@@ -67,7 +67,7 @@ export const AlertComponent: React.FC<{ data: AlertOptions }> = ({
                     button.role === 'destroy',
                 },
                 {
-                  'border-indigo-400 bg-bg text-secondary-dark hover:text-secondary-light focus:border-secondary-light focus:shadow-outline-secondary':
+                  'bg-bg text-secondary border-secondary-light hover:text-secondary-light focus:shadow-outline-secondary':
                     button.role === 'confirm',
                 },
               )}

@@ -30,8 +30,8 @@ export const Slot: React.FC<SlotProps> = ({ data }) => {
         'my-1 py-1 px-4',
         'border-2',
         { 'border-transparent': !isAvailable },
-        { 'bg-teal-500 text-white cursor-pointer': isAvailable },
-        { 'hover:bg-teal-700': isAvailable },
+        { 'bg-secondary text-white cursor-pointer': isAvailable },
+        { 'hover:bg-secondary-dark': isAvailable },
         { 'line-through': isTaken },
         { 'opacity-75': !isAvailable },
       )}

@@ -5,8 +5,10 @@ import { Formik, useFormikContext } from 'formik';
 
 import Input from '../../components/input';
 import React from 'react';
+import { Toast } from '../../components/toast';
 import { answerCustomChallenge } from '../../utils/auth';
 import { navigate } from 'gatsby';
+import { toast } from 'react-toastify';
 import { useAlert } from '../../hooks/useAlert';
 import { useCalendar } from '../provider';
 
@@ -82,6 +84,13 @@ export const WithEventForm = ({ children }) => {
               const isSuccess = await answerCustomChallenge(code, cognitoUser, selectedEvent);
               if (isSuccess) {
                 setSubmitting(false);
+                toast(<Toast title="Zostałeś zalogowany!" />);
+                toast(
+                  <Toast
+                    title="Twoja wizyta została potwierdzona"
+                    message="Potwierdzenie oraz dalsze instrukcje otrzymasz drogą mailową"
+                  />,
+                );
                 navigate('/app/home');
                 return;
               }
