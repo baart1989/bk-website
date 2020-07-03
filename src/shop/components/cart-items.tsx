@@ -2,6 +2,7 @@ import { Minus, Plus } from 'react-feather';
 
 import { CartItem } from '../provider/cartActions';
 import Img from 'gatsby-image';
+import { Link } from 'gatsby';
 import React from 'react';
 import cns from 'classnames';
 import { roundNumber } from 'react-frontend-common';
@@ -30,7 +31,7 @@ const Item: React.FC<{ item: CartItem; readonly: boolean }> = ({ item, readonly 
       return descrease(item);
     }
     alert.showAlert({
-      type: 'warning',
+      type: 'alert',
       header: 'Usunąć z koszyka?',
       buttons: [
         { role: 'destroy', text: 'Usuń', handler: () => removeFromCart(item) },
@@ -59,12 +60,19 @@ const Item: React.FC<{ item: CartItem; readonly: boolean }> = ({ item, readonly 
   return (
     <div className="flex items-center justify-between py-4 px-4">
       <div className="hidden md:block flex-shrink-0">
-        {item.image ? (
-          <Img className="h-16 w-16 rounded-full" fluid={item.image.childImageSharp.fluid} />
-        ) : null}
+        {item.image && (
+          <Link to={item.path} className="cursor-pointer">
+            <Img className="h-16 w-16 rounded-full" fluid={item.image.childImageSharp.fluid} />
+          </Link>
+        )}
       </div>
       <div className="w-1/2">
-        <div className="text-sm leading-5 font-medium color-secondary-text">{item.title}</div>
+        <Link
+          to={item.path}
+          className="text-sm leading-5 font-medium cursor-pointer hover:text-secondary"
+        >
+          {item.title}
+        </Link>
       </div>
       <div>{!readonly && actionButtons}</div>
       <div>
