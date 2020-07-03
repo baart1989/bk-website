@@ -3,15 +3,17 @@ import * as ApiModel from '../API';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { CalendarProviderComponent, useCalendar } from '../calendar/provider';
 import { EventForm, WithEventForm } from '../calendar/components/event-form';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { SectionHeading, SpinIcon } from '../components/ui';
 import { getCurrentUser, isLoggedIn } from '../utils/auth';
 
 import { ActionButton } from '../shop/components/shop-ui';
 import { EventDetails } from '../calendar/components/event-details';
+import { EventSelect } from './components/event-select';
 import Helmet from 'react-helmet';
 import { PageProps } from 'gatsby';
 import { Toast } from '../components/toast';
+import { eventTypeName } from './utils';
 import { mutations } from '../graphql';
 import { toast } from 'react-toastify';
 import { useAlert } from '../hooks/useAlert';
@@ -19,6 +21,7 @@ import { useFormikContext } from 'formik';
 
 export const Appointment: React.FC<PageProps> = ({ navigate }) => {
   const { isSubmitting, handleSubmit, setSubmitting } = useFormikContext();
+  const [isSelectVisible, setSelectVisible] = useState(false);
   const alert = useAlert();
   const {
     calendar: { selectedEvent },
@@ -61,9 +64,17 @@ export const Appointment: React.FC<PageProps> = ({ navigate }) => {
           <h2 className="font-black text-5xl text-color-1">Umawianie wizyty</h2>
         </div>
         <SectionHeading
-          title="Szczegóły wizyty"
-          button={<ActionButton to="/calendar/" title="Zmień termin" />}
+          title={`Rodzaj wizyty: ${eventTypeName(selectedEvent.eventType)}`}
+          button={
+            <ActionButton
+              type="button"
+              onClick={() => setSelectVisible(!isSelectVisible)}
+              title="Zmień rodzaj"
+            />
+          }
         />
+        <SectionHeading button={<ActionButton to="/calendar/" title="Zmień termin" />} />
+        <EventSelect isVisible={isSelectVisible} setVisible={setSelectVisible} />
         <EventDetails item={selectedEvent} />
         {!isLoggedIn() && <EventForm />}
         <SectionHeading

@@ -1,45 +1,68 @@
-import { TextInput, TextInputProps } from 'react-tailwind-component';
+import React, { useState } from 'react';
+import { useField, useFormikContext } from 'formik';
 
-import React from 'react';
 import cns from 'classnames';
 
-export const Input: React.FC<TextInputProps & { required?: boolean; applyBorder?: boolean }> = ({
-  applyBorder = true,
+type AdditionalProps = {
+  label: string;
+  applyBorder?: boolean;
+  required?: boolean;
+};
+
+type TextInputProps = React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+> &
+  AdditionalProps;
+
+export const Input: React.FC<TextInputProps> = ({
   label,
   placeholder,
   type = 'text',
-  required = true,
   ...props
 }) => {
+  const { handleChange, setFieldValue, handleBlur } = useFormikContext();
+
+  const onChange = event => {
+    if (type === 'file') {
+      const [file] = event.target.files;
+      setFieldValue('file', file);
+    }
+    handleChange(event);
+  };
+  const [focused, changeFocused] = useState(false);
+  const [field, meta] = useField(props.id || props.name);
+  const hasError = meta.touched && meta.error;
   return (
-    <div className={cns({ 'mt-6 sm:mt-5': !!applyBorder })}>
+    <>
       <div
-        className={cns('sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:pt-5', {
-          'sm:border-t sm:border-gray-200': applyBorder,
+        className={cns('transition-all duration-300 py-3 lg:p-4 pb-6', {
+          'input focused shadow-2xl': focused,
         })}
       >
-        {label ? (
-          <label
-            htmlFor={props.name || props.id}
-            className="block text-sm font-medium leading-5 sm:mt-px sm:pt-2"
-          >
-            {label} {required ? '' : '(Opcjonalnie)'}
-          </label>
-        ) : null}
-        <div className="mt-1 sm:mt-0 sm:col-span-2">
-          <div className="w-full md:max-w-sm rounded-md">
-            <TextInput
-              aria-label={placeholder}
-              className="bg-bg mt-1 form-input block w-full py-2 px-3 border border-color-3 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-400 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-              type={type}
-              placeholder={placeholder}
-              aria-describedby={`${props.name}-optional}`}
-              {...props}
-            />
-          </div>
+        <label htmlFor={props.id || props.name} className="text-color-secondary">
+          {label}
+        </label>
+        <div className="bg-gradient-primary p-2px">
+          <input
+            aria-label={placeholder}
+            placeholder={placeholder}
+            aria-describedby={props.name}
+            className="block w-full outline-none px-4 py-2 focus:outline-none bg-bg"
+            type={type}
+            onChange={onChange}
+            {...field}
+            {...props}
+            onFocus={() => changeFocused(true)}
+            onBlur={event => {
+              handleBlur(event as any);
+              changeFocused(false);
+            }}
+          />
         </div>
+        {hasError && <div className="text-sm py-2">{meta.error}</div>}
       </div>
-    </div>
+    </>
   );
 };
 

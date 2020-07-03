@@ -67,7 +67,7 @@ const OfferStandard: React.FC<OfferDetails> = ({
                     });
                     navigate('/calendar/');
                   }}
-                  className="block w-full text-center border border-color-2 bg-bg px-6 py-3 text-base leading-6 font-medium hover:text-indigo-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150"
+                  className="btn-secondary block w-full text-base font-medium border border-transparent"
                 >
                   Zarezerwuj wizytę
                 </button>

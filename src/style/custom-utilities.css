@@ -61,7 +61,6 @@ p {
   @apply text-color-1 font-black;
 }
 
-
 .supports-blend .title h1 {
   color: #000;
   background: #fff;
@@ -275,4 +274,25 @@ p {
   margin-bottom: 0;
   margin-bottom: 1rem;
   border-radius: 0.375rem;
+}
+/* CUSTOM CSS */
+.btn-secondary {
+  @apply bg-secondary transition duration-150 ease-in-out px-6 py-3 leading-6;
+  color: #fff;
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+  @apply bg-secondary-dark outline-none;
+}
+
+.link-secondary {
+  @apply text-secondary transition ease-in-out duration-150
+}
+
+.link-secondary:hover, .link-secondary:focus {
+  @apply text-secondary-dark outline-none underline
+}
+
+div[data-testid='text-error'] {
+  @apply bg-bg pl-4 py-2
 }

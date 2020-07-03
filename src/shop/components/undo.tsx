@@ -13,7 +13,7 @@ export const Undo: React.FC<UndoProps> = ({ title, message, onUndo, closeToast }
       <div className="w-0 flex-1 flex items-center p-4 rounded-md">
         <div className="w-full">
           <p className="text-sm leading-5 font-medium text-color-1">{title}</p>
-          <p className="mt-1 text-sm leading-5">{message}</p>
+          <p className="mt-1 text-sm leading-5 text-color-secondary">{message}</p>
         </div>
       </div>
       <div className="flex border-l border-gray-200">

@@ -3641,16 +3641,6 @@
               "defaultValue": null
             },
             {
-              "name": "details",
-              "description": "",
-              "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "StringQueryOperatorInput",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
               "name": "price",
               "description": "",
               "type": {
@@ -3682,6 +3672,16 @@
             },
             {
               "name": "template",
+              "description": "",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "StringQueryOperatorInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "details",
               "description": "",
               "type": {
                 "kind": "INPUT_OBJECT",
@@ -8227,22 +8227,6 @@
               "deprecationReason": null
             },
             {
-              "name": "details",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "price",
               "description": null,
               "args": [],
@@ -8286,6 +8270,22 @@
                 "kind": "SCALAR",
                 "name": "String",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "details",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -10464,12 +10464,6 @@
               "deprecationReason": null
             },
             {
-              "name": "childMdx___frontmatter___details",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "childMdx___frontmatter___price",
               "description": null,
               "isDeprecated": false,
@@ -10489,6 +10483,12 @@
             },
             {
               "name": "childMdx___frontmatter___template",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "childMdx___frontmatter___details",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -21899,12 +21899,6 @@
               "deprecationReason": null
             },
             {
-              "name": "frontmatter___details",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "frontmatter___price",
               "description": null,
               "isDeprecated": false,
@@ -21924,6 +21918,12 @@
             },
             {
               "name": "frontmatter___template",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "frontmatter___details",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null

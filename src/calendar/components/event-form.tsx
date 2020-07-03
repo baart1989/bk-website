@@ -1,4 +1,3 @@
-import * as ApiModel from '../../API';
 import * as Yup from 'yup';
 
 import Auth, { CognitoUser } from '@aws-amplify/auth';
@@ -6,8 +5,8 @@ import { Formik, useFormikContext } from 'formik';
 
 import Input from '../../components/input';
 import React from 'react';
+import { answerCustomChallenge } from '../../utils/auth';
 import { navigate } from 'gatsby';
-import { setUser } from '../../utils/auth';
 import { useAlert } from '../../hooks/useAlert';
 import { useCalendar } from '../provider';
 
@@ -20,7 +19,7 @@ export const EventForm = () => {
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="mt-10 md:mt-5 md:col-span-1">
           <h3 className="text-lg font-medium leading-6">Dane odbiorcy</h3>
-          <p className="mt-1 text-sm leading-5 text-color-3">
+          <p className="mt-1 text-sm leading-5 text-color-secondary">
             Potrzbujemy Twoich danych żeby móc potwierdzić rezerwację.
           </p>
         </div>
@@ -123,29 +122,3 @@ export const WithEventForm = ({ children }) => {
     </>
   );
 };
-
-export async function answerCustomChallenge(
-  answer: string,
-  cognitoUser: CognitoUser,
-  eventData: ApiModel.EventInput,
-) {
-  try {
-    // Send the answer to the User Pool
-    // This will throw an error if it’s the 3rd wrong answer
-    await Auth.sendCustomChallengeAnswer(cognitoUser, answer, eventData as any);
-    // It we get here, the answer was sent successfully,
-    // but it might have been wrong (1st or 2nd time)
-    // So we should test if the user is authenticated now
-    // This will throw an error if the user is not yet authenticated:
-    const user = await Auth.currentAuthenticatedUser();
-    const userInfo = {
-      ...user.attributes,
-      username: user.username,
-    };
-    setUser(userInfo);
-    return true;
-  } catch (err) {
-    console.error('Apparently the user did not enter the right code: ', err);
-    return false;
-  }
-}

@@ -23,7 +23,7 @@ const List: React.FC<NavigationListProps> = ({
   className = '',
   liClassName = '',
   current,
-  withThemeSwitch = true,
+  withThemeSwitch: isTopNavigation = true,
   currentTheme,
   switchTheme,
   themes,
@@ -54,38 +54,38 @@ const List: React.FC<NavigationListProps> = ({
       liClassName={liClassName}
     />
   ));
-  if (isLoggedIn()) {
-    list.push(
-      <li key="log-out" className={liClassName}>
-        <a
-          title="WYLOGUJ"
-          className="link cursor-pointer text-color-2 focus:text-primary"
-          onClick={async () => {
-            navigate('/');
-            await Auth.signOut();
-            logout();
-          }}
-        >
-          <span>WYLOGUJ</span>
-        </a>
-      </li>,
-    );
-  } else {
-    list.push(
-      <li className={liClassName} key="log-in">
-        <Link
-          to="/app/login/"
-          title="ZALOGUJ"
-          className="link cursor-pointer text-color-2 focus:text-primary"
-        >
-          <span>ZALOGUJ</span>
-        </Link>
-      </li>,
-    );
-  }
-  const shopLinks = [...data.site.siteMetadata.sourcePages.shop, 'shop'];
-  const displayCartIcon = shopLinks.indexOf(current) !== -1;
-  if (displayCartIcon) {
+
+  if (isTopNavigation) {
+    if (isLoggedIn()) {
+      list.push(
+        <li key="log-out" className={liClassName}>
+          <a
+            title="WYLOGUJ"
+            className="link cursor-pointer text-color-2 focus:text-primary"
+            onClick={async () => {
+              navigate('/');
+              await Auth.signOut();
+              logout();
+            }}
+          >
+            <span>WYLOGUJ</span>
+          </a>
+        </li>,
+      );
+    } else {
+      list.push(
+        <li className={liClassName} key="log-in">
+          <Link
+            to="/app/login/"
+            title="ZALOGUJ"
+            className="link cursor-pointer text-color-2 focus:text-primary"
+          >
+            <span>ZALOGUJ</span>
+          </Link>
+        </li>,
+      );
+    }
+
     list.push(
       <li className="theme-switcher" key="cart">
         <Link className="cursor-pointer text-color-2 focus:text-primary" to="/cart/">
@@ -93,9 +93,7 @@ const List: React.FC<NavigationListProps> = ({
         </Link>
       </li>,
     );
-  }
 
-  if (withThemeSwitch && !displayCartIcon) {
     const themeButtons = Object.keys(themes).map(key => {
       const theme = themes[key];
       return (

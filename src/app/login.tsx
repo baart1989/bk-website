@@ -1,107 +1,101 @@
 import * as Yup from 'yup';
 
-import { Formik, useFormikContext } from 'formik';
-import { Link, navigate } from 'gatsby';
-import { isLoggedIn, setUser } from '../utils/auth';
+import Auth, { CognitoUser } from '@aws-amplify/auth';
+import { answerCustomChallenge, isLoggedIn, setUser } from '../utils/auth';
 
-import Auth from '@aws-amplify/auth';
-import { Button } from '../components/ui';
-import Input from './components/input';
+import { Formik } from 'formik';
+import LoginForm from './components/login-form';
 import React from 'react';
-import { SpinIcon } from '../components/ui';
-
-const WelcomeSection = () => (
-  <div>
-    <h2 className="mt-12 md:mt-24 text-center text-3xl leading-9 font-extrabold">
-      Zaloguj się na swoje konto
-    </h2>
-    <p className="mt-2 text-center text-sm leading-5">
-      Nie posiadasz konta? {` `}
-      <a
-        href="#"
-        className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-      >
-        Zarejestruj się
-      </a>
-    </p>
-  </div>
-);
-
-const Form = () => {
-  const { handleSubmit, isSubmitting } = useFormikContext();
-  return (
-    <form
-      onSubmit={event => {
-        event.preventDefault();
-        handleSubmit(event as any);
-      }}
-    >
-      <div className="mt-6 flex flex-col">
-        <Input name="email" placeholder="Adres email" autoComplete="username" />
-        <Input
-          name="password"
-          type="password"
-          autoComplete="current-password"
-          placeholder="Hasło"
-        />
-      </div>
-      <div className="mt-6 flex justify-end">
-        <div className="text-sm leading-5">
-          <Link
-            to="/reset-password/"
-            className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-          >
-            Zapomniałeś hasła?
-          </Link>
-        </div>
-      </div>
-
-      <div className="mt-6">
-        <Button
-          type="button"
-          title="Zaloguj się"
-          iconRight={<SpinIcon spin={isSubmitting} />}
-          onClick={event => handleSubmit(event)}
-          className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
-        />
-      </div>
-    </form>
-  );
-};
+import { navigate } from 'gatsby';
+import { useAlert } from '../hooks/useAlert';
 
 export const Login: React.FC<{ path: string }> = () => {
   if (isLoggedIn()) navigate('/app/home');
+  // const onSubmit = async (values, { setSubmitting }) => {
+  //   const { email: username, password } = values;
+  //   try {
+  //     setSubmitting(true);
+  //     const { attributes } = await Auth.signIn(username, password);
+  //     setSubmitting(false);
+  //     const userInfo = { ...attributes, username };
+  //     setUser(userInfo);
+  //     navigate('/app/home');
+  //   } catch (err) {
+  //     setSubmitting(false);
+  //     console.log('error...: ', err);
+  //   }
+  // };
+
+  let cognitoUser: CognitoUser;
+  const alert = useAlert();
+
+  const onSubmit = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      cognitoUser = await Auth.signIn(values.email);
+      alert.showAlert({
+        header: 'Wprowadź kod jednorazowy',
+        message: 'Wpisz ponizej kod jednorazowy który wysłaliśmy na Twojego maila',
+        inputs: [
+          {
+            label: 'Kod weryfikacyjny',
+            name: 'code',
+            type: 'number',
+          },
+        ],
+        buttons: [
+          {
+            text: 'Dalej',
+            role: 'confirm',
+            handler: async ({ code }) => {
+              setSubmitting(true);
+              const isSuccess = await answerCustomChallenge(code, cognitoUser);
+              if (isSuccess) {
+                setSubmitting(false);
+                navigate('/app/home');
+                return;
+              }
+              setSubmitting(false);
+              alert.showAlert({
+                header: 'Coś poszło nie tak',
+                message: 'Upewnij się, że wprowadzony kod jest prawidłowy i spróbuj ponownie',
+              });
+            },
+          },
+          { role: 'cancel', text: 'Anuluj' },
+        ],
+      });
+    } catch (err) {
+      setSubmitting(false);
+      alert.showAlert({
+        header: 'Coś poszło nie tak',
+        message: 'Spróbuj ponownie później',
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-start justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
-        <WelcomeSection />
+        <div>
+          <h2 className="mt-12 md:mt-24 text-center text-3xl leading-9 font-extrabold">
+            Zaloguj się na swoje konto
+          </h2>
+          <p className="mt-2 text-center text-sm leading-5">
+            Nie posiadasz konta? {` `}
+            <span className="link-secondary">Wprowadź swój adres email</span>
+          </p>
+        </div>
         <Formik
-          initialValues={{
-            email: '',
-            password: '',
-            remember: false,
-          }}
+          initialValues={{ email: '' }}
           validationSchema={Yup.object({
             email: Yup.string()
-              .required('Pole jest obowiązkowe')
+              .required('Wprowadź prawidłowy adres email')
               .email('Wprowadź prawidłowy adres email'),
           })}
-          onSubmit={async (values, { setSubmitting }) => {
-            const { email: username, password } = values;
-            try {
-              setSubmitting(true);
-              const { attributes } = await Auth.signIn(username, password);
-              setSubmitting(false);
-              const userInfo = { ...attributes, username };
-              setUser(userInfo);
-              navigate('/app/home');
-            } catch (err) {
-              setSubmitting(false);
-              console.log('error...: ', err);
-            }
-          }}
+          onSubmit={onSubmit}
         >
-          <Form />
+          <LoginForm />
         </Formik>
       </div>
     </div>

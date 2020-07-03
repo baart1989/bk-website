@@ -88,7 +88,7 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
         <ScrollIntoView selector="#offer">
           <Button title="ZOBACZ OFERTĘ" />
         </ScrollIntoView>
-        <Button className="ml-2" title="ZALOGUJ" type="button" />
+        <Button className="ml-2" title="ZALOGUJ" to="/app/login" />
       </div>
     </React.Fragment>
   );

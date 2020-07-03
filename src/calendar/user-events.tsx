@@ -4,7 +4,6 @@ import React, { useMemo } from 'react';
 import { SectionHeading, SpinIcon } from '../components/ui';
 import { isFuture, isPast } from 'date-fns';
 
-import { ActionButton } from '../shop/components/shop-ui';
 import { ErrorPanel } from '../components/error';
 import { EventDetails } from './components/event-details';
 import Helmet from 'react-helmet';
@@ -38,12 +37,12 @@ export const UserEvents = () => {
   );
 
   const inFuture = useMemo(
-    () => result.getUserEvents.filter(event => isFuture(new Date(event.startDate))),
+    () => result.getUserEvents || [].filter(event => isFuture(new Date(event.startDate))),
     [result],
   );
 
   const inPast = useMemo(
-    () => result.getUserEvents.filter(event => isPast(new Date(event.startDate))),
+    () => result.getUserEvents || [].filter(event => isPast(new Date(event.startDate))),
     [result],
   );
 

@@ -40,6 +40,12 @@ export const Button: React.FC<ButtonProps> = ({
     </React.Fragment>
   );
 
+  let baseClass = `btn btn-primary`;
+
+  if (className.indexOf('btn-secondary') !== -1) {
+    baseClass = 'btn btn-secondary';
+  }
+
   if (type) {
     const b = type.split(',');
     const t = b[1] ? b[1] : 'button';
@@ -49,7 +55,7 @@ export const Button: React.FC<ButtonProps> = ({
         <button
           type={t}
           disabled={dis}
-          className={cns(className, `btn btn-primary`, { disabled: dis })}
+          className={cns(className, baseClass, { disabled: dis })}
           {...rest}
         >
           {innerComponents}
@@ -58,7 +64,7 @@ export const Button: React.FC<ButtonProps> = ({
     }
   }
   return (
-    <Link to={to} className={cns(className, `btn btn-primary`)} title={title} state={state}>
+    <Link to={to} className={cns(className, baseClass)} title={title} state={state}>
       {innerComponents}
     </Link>
   );
