@@ -3,8 +3,8 @@ import * as ApiModel from '../API';
 import API, { graphqlOperation } from '@aws-amplify/api';
 import { CalendarProviderComponent, useCalendar } from '../calendar/provider';
 import { EventForm, WithEventForm } from '../calendar/components/event-form';
+import { Heading, SectionHeading, SpinIcon } from '../components/ui';
 import React, { useCallback, useState } from 'react';
-import { SectionHeading, SpinIcon } from '../components/ui';
 import { getCurrentUser, isLoggedIn } from '../utils/auth';
 
 import { ActionButton } from '../shop/components/shop-ui';
@@ -60,9 +60,7 @@ export const Appointment: React.FC<PageProps> = ({ navigate }) => {
     <>
       <Helmet title="Umów wizytę" />
       <div className="container mx-auto py-12">
-        <div className="title py-12 text-center">
-          <h2 className="font-black text-5xl text-color-1">Umawianie wizyty</h2>
-        </div>
+        <Heading title="Umawianie wizyty" />
         <SectionHeading
           title={`Rodzaj wizyty: ${eventTypeName(selectedEvent.eventType)}`}
           button={
@@ -78,6 +76,7 @@ export const Appointment: React.FC<PageProps> = ({ navigate }) => {
         <EventDetails item={selectedEvent} />
         {!isLoggedIn() && <EventForm />}
         <SectionHeading
+          title=" "
           button={
             <ActionButton
               type="button"

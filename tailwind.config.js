@@ -87,11 +87,9 @@ module.exports = {
         'color-secondary': 'var(--secondary-text)',
         'color-1': 'var(--color-1)',
         'color-2': 'var(--color-2)',
-        'color-3': 'var(--color-3)',
-        'color-4': 'var(--color-4)',
         primary: 'var(--primary)',
-        'primary-gradient-color': '#f55555',
-        'secondary-gradient-color': '#6888df',
+        'primary-gradient-color': '#298c92',
+        'secondary-gradient-color': '#364f6b',
         medium: {
           light: 'var(--medium-light)',
           default: 'var(--medium)',

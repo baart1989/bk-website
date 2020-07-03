@@ -12,13 +12,13 @@ export const Undo: React.FC<UndoProps> = ({ title, message, onUndo, closeToast }
     <>
       <div className="w-0 flex-1 flex items-center p-4 rounded-md">
         <div className="w-full">
-          <p className="text-sm leading-5 font-medium text-color-1">{title}</p>
+          <p className="text-sm leading-5 font-medium">{title}</p>
           <p className="mt-1 text-sm leading-5 text-color-secondary">{message}</p>
         </div>
       </div>
-      <div className="flex border-l border-gray-200">
+      <div className="flex border-l border-medium">
         <div className="-ml-px flex flex-col">
-          <div className="h-0 flex-1 flex border-b border-color-3">
+          <div className="h-0 flex-1 flex border-b border-medium-light">
             <button
               onClick={handleClick}
               className="-mb-px flex items-center justify-center w-full rounded-tr-lg border border-transparent px-4 py-3 text-sm leading-5 font-medium hover:text-indigo-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-indigo-700 active:bg-gray-50 transition ease-in-out duration-150"

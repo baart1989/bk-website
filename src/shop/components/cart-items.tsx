@@ -12,7 +12,7 @@ const Icon = ({ children, onClick, className = '' }) => (
   <button
     onClick={onClick}
     className={cns(
-      'm-2 md:m-4 p-1 md:p-2 rounded-lg hover:bg-gray-50 focus:bg-color-3 hover:outline-none focus:outline-none',
+      'm-2 md:m-4 p-1 md:p-2 rounded-lg hover:bg-medium-light focus:bg-medium-light hover:outline-none focus:outline-none',
       className,
     )}
   >
@@ -64,7 +64,7 @@ const Item: React.FC<{ item: CartItem; readonly: boolean }> = ({ item, readonly 
         ) : null}
       </div>
       <div className="w-1/2">
-        <div className="text-sm leading-5 font-medium text-color-1">{item.title}</div>
+        <div className="text-sm leading-5 font-medium color-secondary-text">{item.title}</div>
       </div>
       <div>{!readonly && actionButtons}</div>
       <div>

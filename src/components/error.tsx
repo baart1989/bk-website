@@ -1,11 +1,10 @@
+import { Heading } from './ui';
 import React from 'react';
 
 export const ErrorPanel = ({ text, retryCallback }) => {
   return (
     <div className="container mx-auto py-12">
-      <div className="title py-12 text-center">
-        <h2 className="font-black text-5xl text-color-1">{text}</h2>
-      </div>
+      <Heading title={text} />
       <div className="pb-20 text-center">
         <p>
           Oops! Coś poszło nie tak.{' '}

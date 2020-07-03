@@ -59,7 +59,7 @@ export const AlertComponent: React.FC<{ data: AlertOptions }> = ({
                 'focus:outline-none sm:text-sm sm:leading-5 shadow-sm',
                 'transition ease-in-out duration-150',
                 {
-                  'border-gray-300 bg-bg text-gray-500 hover:text-gray-500 focus:border-blue-300 focus:shadow-outline-blue':
+                  'bg-bg text-color-secondary border-medium hover:text-medium-light focus:text-medium-light':
                     button.role === 'cancel',
                 },
                 {
@@ -67,7 +67,7 @@ export const AlertComponent: React.FC<{ data: AlertOptions }> = ({
                     button.role === 'destroy',
                 },
                 {
-                  'border-indigo-400 bg-bg text-indigo-600 hover:text-indigo-400 focus:border-blue-300 focus:shadow-outline-blue':
+                  'border-indigo-400 bg-bg text-secondary-dark hover:text-secondary-light focus:border-secondary-light focus:shadow-outline-secondary':
                     button.role === 'confirm',
                 },
               )}

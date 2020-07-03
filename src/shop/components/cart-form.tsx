@@ -44,7 +44,7 @@ export const CartForm = () => {
             />
             <Input
               aria-label="Adres"
-              label={` `}
+              label="(Opcjonalnie)"
               name="address2"
               required={false}
               placeholder="Nr mieszkania, budynek, piętro, itp."

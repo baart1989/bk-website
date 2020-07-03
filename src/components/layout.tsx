@@ -66,7 +66,7 @@ export const Layout = ({ children }) => {
       <ToastContainer
         className="max-w-md w-full"
         bodyClassName="flex"
-        toastClassName="bg-bg"
+        toastClassName="bg-bg text-color-default"
         closeButton={false}
       />
       <Navbar

@@ -11,8 +11,8 @@ export const Toast: React.FC<ToastProps> = ({ title, message, closeToast }) => {
     <>
       <div className="w-0 flex-1 flex items-center p-4 rounded-md">
         <div className="w-full">
-          {!!title && <p className="text-sm leading-5 font-medium text-color-1">{title}</p>}
-          {!!message && <p className="mt-1 text-sm leading-5">{message}</p>}
+          {!!title && <p className="text-sm leading-5 font-medium">{title}</p>}
+          {!!message && <p className="mt-1 text-sm leading-5 text-color-secondary">{message}</p>}
         </div>
       </div>
       <div className="flex border-l border-gray-200">

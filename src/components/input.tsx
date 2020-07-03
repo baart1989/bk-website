@@ -60,7 +60,7 @@ export const Input: React.FC<TextInputProps> = ({
             }}
           />
         </div>
-        {hasError && <div className="text-sm py-2">{meta.error}</div>}
+        {hasError && <div className="text-sm pt-2">{meta.error}</div>}
       </div>
     </>
   );

@@ -31,6 +31,7 @@ export const AlertProviderComponent = ({ children }) => {
     root.current = canUseDOM ? document.createElement('div') : null;
     if (canUseDOM) {
       root.current.id = ALERT_ID;
+      root.current.className = 'text-color-default';
       document.body.appendChild(root.current);
     }
     return () => {

@@ -36,7 +36,7 @@ export const EventSelect = ({ setVisible, isVisible = false }) => {
               setVisible(false);
               bookEvent({ ...selectedEvent, eventType: eventType.id });
             }}
-            className="flex items-center cursor-pointer  py-4 hover:bg-color-3"
+            className="flex items-center cursor-pointer py-4 hover:bg-medium"
           >
             <div className="w-1/12 text-center">
               {selectedEvent.eventType === eventType.id && (

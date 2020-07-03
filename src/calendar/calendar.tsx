@@ -2,13 +2,13 @@ import * as ApiModel from '../API';
 
 import API, { GraphQLResult, graphqlOperation } from '@aws-amplify/api';
 import { CalendarProviderComponent, useCalendar } from '../calendar/provider';
+import { Heading, SectionHeading } from '../components/ui';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { ActionButton } from '../shop/components/shop-ui';
 import CalendarWeekly from './components/weekly';
 import { EventSelect } from './components/event-select';
 import Helmet from 'react-helmet';
-import { SectionHeading } from '../components/ui';
 import { awsConfig } from '../../aws-exports';
 import { eventTypeName } from './utils';
 import { queries } from '../graphql';
@@ -56,9 +56,7 @@ export const Page = () => {
     <>
       <Helmet title="Zarezerwuj wizytę" />
       <div className="container mx-auto py-12">
-        <div className="title py-12 text-center">
-          <h2 className="font-black text-5xl text-color-1">Zarezerwuj wizytę</h2>
-        </div>
+        <Heading title="Zarezerwuj wizytę" />
         <SectionHeading
           title={`Rodzaj wizyty: ${eventTypeName(selectedEvent.eventType)}`}
           button={

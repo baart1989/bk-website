@@ -2,6 +2,7 @@ import { Description, Form } from '../components/contact';
 import { PageProps, graphql } from 'gatsby';
 
 import { ContactQuery } from './__generated__/ContactQuery';
+import { Heading } from '../components/ui';
 import Helmet from 'react-helmet';
 import React from 'react';
 
@@ -12,9 +13,7 @@ export const Contact: React.FC<PageProps<ContactQuery>> = ({ data }) => {
     <>
       <Helmet title="Kontakt" />
       <div className="container mx-auto py-12">
-        <div className="title py-12 text-center">
-          <h2 className="font-black text-5xl text-color-1">Kontakt</h2>
-        </div>
+        <Heading title="Kontakt" />
         <div className="flex flex-wrap pb-40">
           {hasContactForm && (
             <div className="w-full lg:w-1/2 px-6">

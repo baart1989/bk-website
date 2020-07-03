@@ -1,16 +1,15 @@
+import { Heading, SectionHeading } from '../components/ui';
+
 import { ActionButton } from '../shop/components/shop-ui';
 import Helmet from 'react-helmet';
 import React from 'react';
-import { SectionHeading } from '../components/ui';
 
 export const Cooperation = () => {
   return (
     <>
       <Helmet title="Współpraca" />
       <div className="container mx-auto py-12">
-        <div className="title py-12 text-center">
-          <h2 className="font-black text-5xl text-color-1">Współpraca</h2>
-        </div>
+        <Heading title="Współpraca" />
         <SectionHeading
           title="Oferta"
           button={<ActionButton to="/offer/" title="Zobacz ofertę" />}

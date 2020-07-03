@@ -240,12 +240,12 @@ p {
   background: theme("colors.bgalt");
 }
 
-.theme-dark .input.focused {
-  background: theme("colors.medium");
+.input.focused {
+  background: theme("colors.medium.light");
 }
 
-.theme-dark .blog-item .focused{
-  background: theme("colors.medium");
+.blog-item .focused{
+  background: theme("colors.medium.light");
 }
 
 .spin {

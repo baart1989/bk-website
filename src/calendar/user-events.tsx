@@ -1,7 +1,7 @@
 import * as ApiModel from '../API';
 
+import { Heading, SectionHeading, SpinIcon } from '../components/ui';
 import React, { useMemo } from 'react';
-import { SectionHeading, SpinIcon } from '../components/ui';
 import { isFuture, isPast } from 'date-fns';
 
 import { ErrorPanel } from '../components/error';
@@ -19,7 +19,7 @@ const EventsSection: React.FC<{
   return (
     <section className="px-4 md:px-0">
       <SectionHeading title={title} button={<SpinIcon spin={loading} />} />
-      <div className="flex flex-col divide-y divide-gray-200">
+      <div className="flex flex-col">
         {items.map(item => (
           <EventDetails key={item.id} item={item} inPast={inPast} />
         ))}
@@ -56,13 +56,12 @@ export const UserEvents = () => {
     <>
       <Helmet title="Panel użytkownika" />
       <div className="container mx-auto py-12">
-        <div className="title py-12 text-center">
-          <h2 className="font-black text-5xl text-color-1">Panel użytkownika</h2>
-        </div>
+        <Heading title="Panel użytkownika" />
         {noPlannedEvents && <SectionHeading title="Brak zaplanowanych wizyt" />}
         {!!inFuture.length && (
           <EventsSection title="Zaplanowane wizyty" items={inFuture} loading={loading} />
         )}
+        <div className="py-4"></div>
         {!!inPast.length && (
           <EventsSection title="Odbyte wizyty" items={inPast} loading={loading} inPast={true} />
         )}
