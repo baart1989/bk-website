@@ -30,12 +30,12 @@ export const Layout = ({ children }) => {
   const themes: { [id: string]: Theme } = {
     'theme-light': {
       name: 'theme-light',
-      label: 'Light Theme',
+      label: 'JASNY MOTYW',
       icon: <Sun />,
     },
     'theme-dark': {
       name: 'theme-dark',
-      label: 'Dark Theme',
+      label: 'CIEMNY MOTYW',
       icon: <Moon />,
     },
   };
@@ -66,7 +66,7 @@ export const Layout = ({ children }) => {
       <ToastContainer
         className="max-w-md w-full"
         bodyClassName="flex"
-        toastClassName="bg-bg text-color-default"
+        toastClassName="bg-medium-light text-color-default"
         closeButton={false}
       />
       <Navbar

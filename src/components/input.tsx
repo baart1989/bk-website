@@ -5,7 +5,6 @@ import cns from 'classnames';
 
 type AdditionalProps = {
   label: string;
-  applyBorder?: boolean;
   required?: boolean;
 };
 

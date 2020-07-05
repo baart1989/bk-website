@@ -30,19 +30,22 @@ const EventsSection: React.FC<{
 
 export const UserEvents = () => {
   const { sub } = getCurrentUser();
+
   const variables: ApiModel.GetUserEventsQueryVariables = { userId: sub, startDate: '2020' };
   const [loading, error, result, refetch] = useQuery<ApiModel.GetUserEventsQuery>(
     'getUserEvents',
     variables,
   );
 
+  console.log({ result });
+
   const inFuture = useMemo(
-    () => result.getUserEvents || [].filter(event => isFuture(new Date(event.startDate))),
+    () => (result.getUserEvents || []).filter(event => isFuture(new Date(event.startDate))),
     [result],
   );
 
   const inPast = useMemo(
-    () => result.getUserEvents || [].filter(event => isPast(new Date(event.startDate))),
+    () => (result.getUserEvents || []).filter(event => isPast(new Date(event.startDate))),
     [result],
   );
 

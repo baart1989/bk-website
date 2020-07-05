@@ -15,12 +15,12 @@ export const Toast: React.FC<ToastProps> = ({ title, message, closeToast }) => {
           {!!message && <p className="mt-1 text-sm leading-5 text-color-secondary">{message}</p>}
         </div>
       </div>
-      <div className="flex border-l border-gray-200">
+      <div className="flex border-l border-medium">
         <div className="-ml-px flex flex-col">
           <div className="-mt-px h-0 flex-1 flex">
             <button
               onClick={closeToast as any}
-              className="flex items-center justify-center w-full rounded-br-lg border border-transparent px-4 py-3 text-sm leading-5 font-medium hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
+              className="flex items-center justify-center w-full rounded-br-lg border border-transparent px-4 py-3 text-sm leading-5 font-medium hover:text-gray-500 focus:outline-none focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
             >
               Zamknij
             </button>

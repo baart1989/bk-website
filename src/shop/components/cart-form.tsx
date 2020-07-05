@@ -20,13 +20,7 @@ export const CartForm = () => {
               handleSubmit(event as any);
             }}
           >
-            <Input
-              aria-label="Imię"
-              label="Imię"
-              name="forename"
-              placeholder="Imię"
-              applyBorder={false}
-            />
+            <Input aria-label="Imię" label="Imię" name="forename" placeholder="Imię" />
             <Input aria-label="Nazwisko" label="Nazwisko" name="surname" placeholder="Nazwisko" />
             <Input
               aria-label="Kraj"
