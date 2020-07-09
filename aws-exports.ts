@@ -13,4 +13,5 @@ export const awsConfig = {
   aws_appsync_region: 'eu-central-1',
   aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
   aws_appsync_apiKey: 'da2-snsn5mvb2bcttpw3rpb2t4qjeu',
+  authenticationFlowType: 'CUSTOM_AUTH',
 };

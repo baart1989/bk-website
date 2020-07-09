@@ -54,3 +54,34 @@ export async function answerCustomChallenge(
     return false;
   }
 }
+
+export async function singInOrSignUp({ email, forename, surname }): Promise<CognitoUser> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await Auth.signUp({
+        username: email,
+        password: getRandomString(30),
+        attributes: {
+          name: `${forename} ${surname}`,
+          email: email,
+        },
+      });
+    } catch (error) {
+      console.log({ error });
+      if (error.code !== 'UsernameExistsException') {
+        reject(error);
+      }
+    }
+    const cognitoUser = await Auth.signIn(email);
+    return resolve(cognitoUser);
+  });
+}
+
+const getRandomString = (bytes: number) => {
+  const intToHex = (nr: number) => nr.toString(16).padStart(2, '0');
+  const randomValues = new Uint8Array(bytes);
+  window.crypto.getRandomValues(randomValues);
+  return Array.from(randomValues)
+    .map(intToHex)
+    .join('');
+};

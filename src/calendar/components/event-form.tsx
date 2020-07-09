@@ -2,11 +2,11 @@ import * as Yup from 'yup';
 
 import Auth, { CognitoUser } from '@aws-amplify/auth';
 import { Formik, useFormikContext } from 'formik';
+import { answerCustomChallenge, singInOrSignUp } from '../../utils/auth';
 
 import Input from '../../components/input';
 import React from 'react';
 import { Toast } from '../../components/toast';
-import { answerCustomChallenge } from '../../utils/auth';
 import { navigate } from 'gatsby';
 import { toast } from 'react-toastify';
 import { useAlert } from '../../hooks/useAlert';
@@ -58,7 +58,7 @@ export const WithEventForm = ({ children }) => {
   const onSubmit = async (values, { setSubmitting }) => {
     try {
       setSubmitting(true);
-      cognitoUser = await Auth.signIn(values.email);
+      cognitoUser = await singInOrSignUp(values);
       alert.showAlert({
         header: 'Wprowadź kod jednorazowy',
         message: 'Potwierdź wizytę kodem jednorazowym który wysłaliśmy na Twojego maila',
@@ -99,6 +99,7 @@ export const WithEventForm = ({ children }) => {
         ],
       });
     } catch (err) {
+      console.error(err);
       setSubmitting(false);
       alert.showAlert({
         header: 'Coś poszło nie tak',

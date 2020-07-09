@@ -5,7 +5,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import { useFormikContext } from 'formik';
 
-export const Form = () => {
+export const Form = ({ isLogin }) => {
   const { handleSubmit, isSubmitting } = useFormikContext();
   return (
     <form
@@ -15,6 +15,8 @@ export const Form = () => {
       }}
     >
       <div className="mt-6 flex flex-col">
+        {!isLogin && <Input aria-label="Imię" name="forename" placeholder="Imię" />}
+        {!isLogin && <Input aria-label="Nazwisko" name="surname" placeholder="Nazwisko" />}
         <Input name="email" placeholder="Adres email" autoComplete="username" />
       </div>
       <div className="mt-6">

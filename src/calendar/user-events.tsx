@@ -37,8 +37,6 @@ export const UserEvents = () => {
     variables,
   );
 
-  console.log({ result });
-
   const inFuture = useMemo(
     () => (result.getUserEvents || []).filter(event => isFuture(new Date(event.startDate))),
     [result],
