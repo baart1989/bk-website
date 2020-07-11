@@ -11,6 +11,7 @@ import OfferDetails from '../offer/components/offer';
 import ScrollIntoView from 'react-scroll-into-view';
 import ShopCard from '../shop/components/shop-card';
 import cns from 'classnames';
+import { isLoggedIn } from '../utils/auth';
 
 export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
   const siteData = data.site.siteMetadata;
@@ -88,7 +89,7 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
         <ScrollIntoView selector="#offer">
           <Button title="ZOBACZ OFERTĘ" />
         </ScrollIntoView>
-        <Button className="ml-2" title="ZALOGUJ" to="/app/login" />
+        {!isLoggedIn() && <Button className="ml-2" title="ZALOGUJ" to="/app/login" />}
       </div>
     </React.Fragment>
   );
