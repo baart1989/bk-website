@@ -113,7 +113,7 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
           ></div>
           <Img fluid={image} className="h-full w-auto max-w-none lg:h-auto lg:w-full" />
         </div>
-        <div className="flex-1 text-center p-3 relative z-10 lg:text-left lg:pl-8">
+        <div className="flex-1 text-center p-3 relative z-10 lg:text-left lg:pl-8 mt-48 lg:mt-0">
           {innerComponents}
         </div>
       </div>
