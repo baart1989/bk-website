@@ -10,6 +10,9 @@
 export interface NavigationListQuery_site_siteMetadata_navLinks {
   name: string | null;
   url: string | null;
+  isDropdown: boolean | null;
+  requireAuth: boolean | null;
+  callbackFnc: string | null;
 }
 
 export interface NavigationListQuery_site_siteMetadata {

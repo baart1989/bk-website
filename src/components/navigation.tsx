@@ -1,10 +1,10 @@
 import { Link, graphql, useStaticQuery } from 'gatsby';
+import { Menu, PlusCircle, ShoppingCart } from 'react-feather';
 import React, { useEffect, useRef, useState } from 'react';
 import { Theme, ThemeType } from './layout';
 
 import List from './navigation-list';
 import { Logo } from './utils';
-import { Menu } from 'react-feather';
 import { NavigationQuery } from './__generated__/NavigationQuery';
 import { Sidebar } from 'react-tailwind-component';
 import cns from 'classnames';
@@ -14,14 +14,8 @@ type NavbarProps = {
   switchTheme: () => void;
   currentTheme: ThemeType;
   themes: { [id: string]: Theme };
-  allowThemeSwitch: boolean;
 };
-const Navbar: React.FC<NavbarProps> = ({
-  currentTheme,
-  switchTheme,
-  themes,
-  allowThemeSwitch = true,
-}) => {
+const Navbar: React.FC<NavbarProps> = ({ currentTheme, switchTheme, themes }) => {
   const { pathname } = useLocation();
   const [, currentLocation] = pathname.split('/');
 
@@ -59,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = ({
     <React.Fragment>
       <div
         className={cns(
-          'duration-300 transition-all flex justify-center lg:justify-between items-center z-30 fixed w-full nav',
+          'duration-300 transition-all flex justify-between items-center z-30 fixed w-full nav',
           {
             'scrolled bg-bg p-4': scrolled,
           },
@@ -70,12 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({
         ref={navbar}
       >
         <button
-          className="absolute text-primary outline-0 lg:hidden"
-          style={{
-            transform: 'translateY(-50%)',
-            top: '50%',
-            left: '10px',
-          }}
+          className="text-primary outline-0 focus:outline-none lg:hidden"
           onClick={() => {
             setSidebarOpen(true);
           }}
@@ -91,12 +80,11 @@ const Navbar: React.FC<NavbarProps> = ({
             </div>
             <div className="text-center">
               <List
-                name="sidebar-nav"
                 current={currentLocation}
+                displayType="sidebar"
                 currentTheme={currentTheme}
                 switchTheme={switchTheme}
                 themes={themes}
-                withThemeSwitch={allowThemeSwitch}
                 liClassName="block my-2"
               />
             </div>
@@ -105,15 +93,17 @@ const Navbar: React.FC<NavbarProps> = ({
         <Link to="/" title={data.site.siteMetadata.title}>
           <Logo className={`duration-300 transition-all ${scrolled ? 'w-6' : 'w-8'}`} />
         </Link>
+        <Link className="text-primary outline-0 focus:outline-none lg:hidden" to="/cart/">
+          <ShoppingCart />
+        </Link>
         <div className="hidden lg:block">
           <List
-            name="navbar"
             className="nav-links flex"
             current={currentLocation}
+            displayType="top"
             currentTheme={currentTheme}
             switchTheme={switchTheme}
             themes={themes}
-            withThemeSwitch={allowThemeSwitch}
           />
         </div>
         <div className="absolute line h-px left-0 bottom-0 bg-gradient-primary"></div>

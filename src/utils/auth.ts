@@ -56,25 +56,22 @@ export async function answerCustomChallenge(
 }
 
 export async function singInOrSignUp({ email, forename, surname }): Promise<CognitoUser> {
-  return new Promise(async (resolve, reject) => {
-    try {
-      await Auth.signUp({
-        username: email,
-        password: getRandomString(30),
-        attributes: {
-          name: `${forename} ${surname}`,
-          email: email,
-        },
-      });
-    } catch (error) {
-      console.log({ error });
-      if (error.code !== 'UsernameExistsException') {
-        reject(error);
-      }
+  try {
+    await Auth.signUp({
+      username: email,
+      password: getRandomString(30),
+      attributes: {
+        name: `${forename} ${surname}`,
+        email: email,
+      },
+    });
+  } catch (error) {
+    if (error.code !== 'UsernameExistsException') {
+      console.error({ error });
+      throw new Error(error);
     }
-    const cognitoUser = await Auth.signIn(email);
-    return resolve(cognitoUser);
-  });
+  }
+  return Auth.signIn(email);
 }
 
 const getRandomString = (bytes: number) => {

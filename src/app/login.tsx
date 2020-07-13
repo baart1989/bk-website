@@ -55,6 +55,7 @@ export const Login: React.FC<{ path: string }> = () => {
         ],
       });
     } catch (err) {
+      console.error(err);
       setSubmitting(false);
       alert.showAlert({
         header: 'Coś poszło nie tak',

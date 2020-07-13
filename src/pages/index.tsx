@@ -83,9 +83,13 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
           {data.title}
         </h1>
       </div>
-      <p className="text-lg lg:text-xl text-color-2 pt-4 lg:pt-0">{data.introTag}</p>
-      <p className="text-base lg:text-lg mt-4">{data.description}</p>
-      <div className="flex">
+      <p className="text-lg lg:text-xl text-gray-200 lg:text-color-default font-bold pt-4 lg:pt-0">
+        {data.introTag}
+      </p>
+      <p className="text-base mt-4 lg:text-lg text-gray-300 lg:text-color-default">
+        {data.description}
+      </p>
+      <div className="flex justify-center lg:justify-start">
         <ScrollIntoView selector="#offer">
           <Button title="ZOBACZ OFERTĘ" />
         </ScrollIntoView>

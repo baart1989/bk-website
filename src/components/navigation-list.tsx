@@ -1,34 +1,37 @@
-import { Link, graphql, navigate, useStaticQuery } from 'gatsby';
 import { MoreVertical, ShoppingCart } from 'react-feather';
-import React, { useRef, useState } from 'react';
+import {
+  NavigationListQuery,
+  NavigationListQuery_site_siteMetadata_navLinks,
+} from './__generated__/NavigationListQuery';
+import React, { useState } from 'react';
 import { Theme, ThemeType } from './layout';
+import { WatchClickOutside, slugify } from 'react-frontend-common';
+import { graphql, navigate, useStaticQuery } from 'gatsby';
 import { isLoggedIn, logout } from '../utils/auth';
 
 import Auth from '@aws-amplify/auth';
-import { NavigationListQuery } from './__generated__/NavigationListQuery';
+import { Link } from './utils';
 import { Transition } from 'react-tailwind-component';
-import { WatchClickOutside } from 'react-frontend-common';
 import cns from 'classnames';
 
 type NavigationListProps = {
-  name?: string;
+  displayType: 'top' | 'bottom' | 'sidebar';
   className?: string;
-  liClassName?: string;
   current?: string;
-  withThemeSwitch?: boolean;
+  liClassName?: string;
   switchTheme?: () => void;
   currentTheme?: ThemeType;
   themes?: { [id: string]: Theme };
 };
+
 const List: React.FC<NavigationListProps> = ({
-  name,
+  displayType,
   className = '',
   liClassName = '',
   current,
-  withThemeSwitch: isTopNavigation = true,
   currentTheme,
   switchTheme,
-  themes,
+  themes = {},
 }) => {
   const data = useStaticQuery<NavigationListQuery>(graphql`
     query NavigationListQuery {
@@ -37,6 +40,9 @@ const List: React.FC<NavigationListProps> = ({
           navLinks {
             name
             url
+            isDropdown
+            requireAuth
+            callbackFnc
           }
           sourcePages {
             shop
@@ -47,17 +53,66 @@ const List: React.FC<NavigationListProps> = ({
       }
     }
   `);
+  const loggedIn = isLoggedIn();
   const items = data.site.siteMetadata.navLinks;
-  const list = items.map((e, i) => (
-    <ListItem
-      key={`navigation-${name}-${i}`}
-      data={e}
-      active={`/${current}` === e.url}
-      liClassName={liClassName}
-    />
-  ));
+  const callbacks = {
+    ['logoutUser']: async () => {
+      navigate('/');
+      await Auth.signOut();
+      logout();
+    },
+    ['switchTheme']: switchTheme,
+  };
 
-  if (isTopNavigation) {
+  const navigationLinks = items.reduce((acc, link) => {
+    if (link.requireAuth && !loggedIn) {
+      return acc;
+    }
+
+    if (link.requireAuth === false && loggedIn) {
+      return acc;
+    }
+
+    if (link.callbackFnc) {
+      link = { ...link, callbackFnc: callbacks[link.callbackFnc] };
+    }
+
+    if (link.name === 'switchTheme') {
+      const themesToSelect = Object.keys(themes).filter(key => currentTheme !== key);
+      themesToSelect.map(key => {
+        acc.push({
+          ...link,
+          name: `ZMIEŃ NA ${themes[key].label}`,
+        });
+      });
+      return acc;
+    }
+
+    acc.push(link);
+    return acc;
+  }, [] as NavigationListQuery_site_siteMetadata_navLinks[]);
+
+  const list: JSX.Element[] = [];
+  const dropdownLinks: NavigationListQuery_site_siteMetadata_navLinks[] = [];
+
+  navigationLinks.forEach(link => {
+    if (link.isDropdown) {
+      dropdownLinks.push(link);
+    }
+    if (link.isDropdown && displayType === 'top') {
+      return;
+    }
+    list.push(
+      <ListItem
+        key={`navigation-${displayType}-${slugify(link.name)}`}
+        data={link}
+        active={`/${current}` === link.url}
+        liClassName={liClassName}
+      />,
+    );
+  });
+
+  if (displayType === 'top') {
     list.push(
       <li className="theme-switcher" key="cart">
         <Link className="cursor-pointer text-color-2 focus:text-primary" to="/cart/">
@@ -68,7 +123,7 @@ const List: React.FC<NavigationListProps> = ({
 
     list.push(
       <li className="theme-switcher" key="dropdown">
-        <MoreDropdown themes={themes} switchTheme={switchTheme} currentTheme={currentTheme} />
+        <MoreDropdown navLinks={dropdownLinks} themes={themes} currentTheme={currentTheme} />
       </li>,
     );
   }
@@ -79,85 +134,47 @@ const List: React.FC<NavigationListProps> = ({
 const ListItem = ({ data, active, liClassName }) => {
   return (
     <li className={cns(liClassName, { active: active })}>
-      <Link to={data.url} title={data.name} className="link text-color-2 focus:text-primary">
+      <Link
+        to={data.url}
+        title={data.name}
+        onClick={data.callbackFnc}
+        className="link text-color-2 focus:text-primary"
+      >
         <span>{data.name}</span>
       </Link>
     </li>
   );
 };
 
-const MoreDropdown = ({ themes, switchTheme, currentTheme }) => {
+type MoreDropdownProps = {
+  navLinks: NavigationListQuery_site_siteMetadata_navLinks[];
+  currentTheme?: ThemeType;
+  themes?: { [id: string]: Theme };
+};
+const MoreDropdown: React.FC<MoreDropdownProps> = ({ navLinks }) => {
   const [isVisible, setVisible] = useState(false);
-  const loggedIn = isLoggedIn();
+  const list: JSX.Element[] = [];
   const liClassName =
     'block px-4 py-2 text-sm leading-5 hover:bg-medium focus:outline-none focus:bg-medium transition duration-150 ease-in-out';
 
-  const list: JSX.Element[] = [];
-
-  if (loggedIn) {
-    list.push(
-      <Link
-        onClick={() => setVisible(false)}
-        key="home"
-        to="/app/home/"
-        title="PANEL UZYTKOWNIKA"
-        className={liClassName}
-      >
-        PANEL UZYTKOWNIKA
-      </Link>,
-    );
-  }
-
-  const handleDropdownClick = callback => {
+  const handleDropdownClick = (callback?: any) => {
     setVisible(false);
-    callback();
+    callback && callback();
   };
 
-  const themeButtons = Object.keys(themes).map(key => {
-    if (currentTheme === key) {
-      return;
-    }
-    const theme = themes[key];
-    return (
-      <a className={liClassName} key={theme.name} onClick={() => handleDropdownClick(switchTheme)}>
-        ZMIEŃ NA {theme.label}
-      </a>
-    );
-  });
-
-  list.push(...themeButtons);
-
-  if (loggedIn) {
-    list.push(
-      <a
-        key="log-out"
-        title="WYLOGUJ"
-        className={liClassName}
-        onClick={() => {
-          const callback = async () => {
-            navigate('/');
-            await Auth.signOut();
-            logout();
-          };
-          handleDropdownClick(callback);
-        }}
-      >
-        WYLOGUJ
-      </a>,
-    );
-  } else {
+  navLinks.forEach(link => {
     list.push(
       <Link
-        key="log-in"
-        onClick={() => setVisible(false)}
-        to="/app/login/"
-        title="ZALOGUJ"
+        onClick={() => handleDropdownClick(link.callbackFnc)}
+        key={slugify(link.name)}
+        to={link.url}
+        title={link.name}
         className={liClassName}
       >
-        ZALOGUJ
+        {link.name}
       </Link>,
     );
-  }
+  });
 
   return (
     <>

@@ -37,6 +37,29 @@ const siteMetadata = {
       name: 'SKLEP',
       url: '/shop',
     },
+    {
+      name: 'PANEL UŻYTKOWNIKA',
+      isDropdown: true,
+      url: '/app/home',
+      requireAuth: true,
+    },
+    {
+      name: 'switchTheme',
+      isDropdown: true,
+      callbackFnc: 'switchTheme',
+    },
+    {
+      name: 'ZALOGUJ',
+      url: '/app/login',
+      isDropdown: true,
+      requireAuth: false,
+    },
+    {
+      name: 'WYLOGUJ',
+      isDropdown: true,
+      requireAuth: true,
+      callbackFnc: 'logoutUser',
+    },
   ],
   footerLinks: [
     {

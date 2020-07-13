@@ -1,7 +1,6 @@
 import { Button, SpinIcon } from '../../components/ui';
 
 import Input from './input';
-import { Link } from 'gatsby';
 import React from 'react';
 import { useFormikContext } from 'formik';
 

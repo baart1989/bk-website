@@ -29,10 +29,9 @@ const Link = props => {
     if (props.to.startsWith('/')) {
       return <GatsbyLink {...props}>{props.children}</GatsbyLink>;
     }
-
     return <a href={props.to}>{props.children}</a>;
   } else {
-    return <button {...props}></button>;
+    return <a {...props}></a>;
   }
 };
 
