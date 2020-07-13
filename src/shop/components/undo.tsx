@@ -21,7 +21,7 @@ export const Undo: React.FC<UndoProps> = ({ title, message, onUndo, closeToast }
           <div className="h-0 flex-1 flex border-b border-medium-light">
             <button
               onClick={handleClick}
-              className="-mb-px flex items-center justify-center w-full rounded-tr-lg border border-transparent px-4 py-3 text-sm leading-5 font-medium hover:text-indigo-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-indigo-700 active:bg-gray-50 transition ease-in-out duration-150"
+              className="-mb-px flex items-center justify-center w-full rounded-tr-lg border border-transparent px-4 py-3 text-sm leading-5 font-medium hover:text-indigo-500 focus:outline-none focus:shadow-outline-blue active:text-indigo-700 active:bg-gray-50 transition ease-in-out duration-150"
             >
               Cofnij
             </button>
@@ -29,7 +29,7 @@ export const Undo: React.FC<UndoProps> = ({ title, message, onUndo, closeToast }
           <div className="-mt-px h-0 flex-1 flex">
             <button
               onClick={closeToast}
-              className="flex items-center justify-center w-full rounded-br-lg border border-transparent px-4 py-3 text-sm leading-5 font-medium hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
+              className="flex items-center justify-center w-full rounded-br-lg border border-transparent px-4 py-3 text-sm leading-5 font-medium hover:text-gray-500 focus:outline-none focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150"
             >
               Zamknij
             </button>
