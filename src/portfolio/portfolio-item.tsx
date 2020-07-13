@@ -1,4 +1,4 @@
-import { Col, Row } from '../components/shortcodes/index';
+import { Col, Row } from '../components/shortcodes';
 import { PageProps, graphql } from 'gatsby';
 
 import { Calendar } from 'react-feather';

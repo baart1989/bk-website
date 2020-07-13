@@ -3,6 +3,7 @@ import { useLocalStorage, usePersistedReducer } from 'react-frontend-common';
 
 import { queries } from '../../graphql';
 import useDeepCompareEffect from 'use-deep-compare-effect';
+import { useState } from 'react';
 
 type UseQueryType<ResultType> = [boolean, any, ResultType, () => void];
 
@@ -17,8 +18,8 @@ export const useQuery = <ResultType extends {}, VariablesType extends {} = {}>(
   query: string,
   variables?: VariablesType,
 ): UseQueryType<ResultType> => {
-  const [loading, setLoading] = useLocalStorage(`${query}loading`, true);
-  const [error, setError] = useLocalStorage(`${query}error`, '');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [data, setData] = useLocalStorage(`${query}data`, {} as ResultType);
 
   const fetchQuery = async (query: string, variables?: VariablesType) => {

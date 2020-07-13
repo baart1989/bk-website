@@ -9,7 +9,6 @@ import { ActionButton } from '../shop/components/shop-ui';
 import CalendarWeekly from './components/weekly';
 import { EventSelect } from './components/event-select';
 import Helmet from 'react-helmet';
-import { awsConfig } from '../../aws-exports';
 import { eventTypeName } from './utils';
 import { queries } from '../graphql';
 

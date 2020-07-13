@@ -57,12 +57,11 @@ export const Appointment: React.FC<PageProps> = ({ navigate }) => {
     }
   }, [selectedEvent]);
 
-  // useEffect(() => {
-  //   API.configure({
-  //     ...awsConfig,
-  //     aws_appsync_authenticationType: 'API_KEY',
-  //   });
-  // }, []);
+  useEffect(() => {
+    API.configure({
+      aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
+    });
+  }, []);
 
   return (
     <>

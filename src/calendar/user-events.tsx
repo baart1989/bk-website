@@ -1,9 +1,10 @@
 import * as ApiModel from '../API';
 
 import { Heading, SectionHeading, SpinIcon } from '../components/ui';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { isFuture, isPast } from 'date-fns';
 
+import API from '@aws-amplify/api';
 import { ErrorPanel } from '../components/error';
 import { EventDetails } from './components/event-details';
 import Helmet from 'react-helmet';
@@ -30,6 +31,12 @@ const EventsSection: React.FC<{
 
 export const UserEvents = () => {
   const { sub } = getCurrentUser();
+
+  useEffect(() => {
+    API.configure({
+      aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
+    });
+  }, []);
 
   const variables: ApiModel.GetUserEventsQueryVariables = { userId: sub, startDate: '2020' };
   const [loading, error, result, refetch] = useQuery<ApiModel.GetUserEventsQuery>(
