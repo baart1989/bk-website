@@ -24,7 +24,7 @@ export const Checkout = () => {
 
   const submitButton = (
     <ActionButton
-      type="button"
+      type="submit"
       iconRight={<SpinIcon spin={isSubmitting} />}
       onClick={onSubmit}
       title="Kupuję i płacę"

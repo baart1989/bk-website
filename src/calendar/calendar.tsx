@@ -34,13 +34,11 @@ export const Page = () => {
 
   useEffect(() => {
     API.configure({
-      ...awsConfig,
       aws_appsync_authenticationType: 'API_KEY',
     });
 
     return () => {
       API.configure({
-        ...awsConfig,
         aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
       });
     };
@@ -58,7 +56,8 @@ export const Page = () => {
       <div className="container mx-auto py-12">
         <Heading title="Zarezerwuj wizytę" />
         <SectionHeading
-          title={`Rodzaj wizyty: ${eventTypeName(selectedEvent.eventType)}`}
+          title={`Rodzaj wizyty`}
+          subtitle={`${eventTypeName(selectedEvent.eventType)}`}
           button={
             <ActionButton
               type="button"

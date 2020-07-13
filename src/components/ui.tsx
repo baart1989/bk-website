@@ -54,7 +54,7 @@ export const Button: React.FC<ButtonProps> = ({
     const b = type.split(',');
     const t = b[1] ? b[1] : 'button';
     const dis = disabled === undefined ? false : disabled;
-    if (b[0] === 'button') {
+    if (b[0] === 'button' || b[0] === 'submit') {
       return (
         <button
           type={t}

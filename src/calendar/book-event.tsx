@@ -4,7 +4,7 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 import { CalendarProviderComponent, useCalendar } from '../calendar/provider';
 import { EventForm, WithEventForm } from '../calendar/components/event-form';
 import { Heading, SectionHeading, SpinIcon } from '../components/ui';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { getCurrentUser, isLoggedIn } from '../utils/auth';
 
 import { ActionButton } from '../shop/components/shop-ui';
@@ -13,6 +13,7 @@ import { EventSelect } from './components/event-select';
 import Helmet from 'react-helmet';
 import { PageProps } from 'gatsby';
 import { Toast } from '../components/toast';
+import { awsConfig } from '../../aws-exports';
 import { eventTypeName } from './utils';
 import { mutations } from '../graphql';
 import { toast } from 'react-toastify';
@@ -56,13 +57,21 @@ export const Appointment: React.FC<PageProps> = ({ navigate }) => {
     }
   }, [selectedEvent]);
 
+  // useEffect(() => {
+  //   API.configure({
+  //     ...awsConfig,
+  //     aws_appsync_authenticationType: 'API_KEY',
+  //   });
+  // }, []);
+
   return (
     <>
       <Helmet title="Umów wizytę" />
       <div className="container mx-auto py-12">
         <Heading title="Umawianie wizyty" />
         <SectionHeading
-          title={`Rodzaj wizyty: ${eventTypeName(selectedEvent.eventType)}`}
+          title={`Rodzaj wizyty`}
+          subtitle={`${eventTypeName(selectedEvent.eventType)}`}
           button={
             <ActionButton
               type="button"
@@ -79,7 +88,7 @@ export const Appointment: React.FC<PageProps> = ({ navigate }) => {
           title=" "
           button={
             <ActionButton
-              type="button"
+              type="submit"
               onClick={event => {
                 isLoggedIn() ? loggedInUserBookEvent() : handleSubmit(event);
               }}
