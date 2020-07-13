@@ -100,6 +100,11 @@ module.exports = {
           default: 'var(--secondary)',
           dark: 'var(--secondary-dark)',
         },
+        tertiary: {
+          light: 'var(--tertiary-light)',
+          default: 'var(--tertiary)',
+          dark: 'var(--tertiary-dark)',
+        }
       },
     },
   },

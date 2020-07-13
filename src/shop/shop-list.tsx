@@ -1,6 +1,6 @@
+import { Heading, SectionHeading } from '../components/ui';
 import { PageProps, graphql } from 'gatsby';
 
-import { Heading } from '../components/ui';
 import React from 'react';
 import ShopCard from './components/shop-card';
 import { ShopListQuery } from './__generated__/ShopListQuery';
@@ -17,9 +17,9 @@ export const ShopList: React.FC<PageProps<ShopListQuery, {}>> = ({ data }) => {
   return (
     <div className="container mx-auto py-12">
       <Heading title="Sklep" />
-      <h4>Diety</h4>
+      <SectionHeading title="Diety" />
       <div className="flex flex-wrap">{dietList}</div>
-      <h4>Ebooki</h4>
+      <SectionHeading title="Ebooki" />
       <div className="flex flex-wrap">{ebookList}</div>
     </div>
   );

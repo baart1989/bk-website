@@ -285,6 +285,15 @@ p {
   @apply bg-secondary-dark outline-none;
 }
 
+.btn-tertiary {
+  @apply bg-tertiary transition duration-150 ease-in-out px-6 py-3 leading-6;
+  color: #fff;
+}
+
+.btn-tertiary:hover, .btn-tertiary:focus {
+  @apply bg-tertiary-dark outline-none;
+}
+
 .link-secondary {
   @apply text-secondary transition ease-in-out duration-150
 }

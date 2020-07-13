@@ -46,6 +46,10 @@ export const Button: React.FC<ButtonProps> = ({
     baseClass = 'btn btn-secondary';
   }
 
+  if (className.indexOf('btn-tertiary') !== -1) {
+    baseClass = 'btn btn-tertiary';
+  }
+
   if (type) {
     const b = type.split(',');
     const t = b[1] ? b[1] : 'button';
