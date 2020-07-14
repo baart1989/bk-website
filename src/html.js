@@ -18,9 +18,12 @@ export default function HTML(props) {
                 try {
                   const mode = localStorage.getItem('theme');
                   const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
-                  if (!mode && supportDarkMode)
-                  document.documentElement.classList.add('theme-dark');
-                  if (!mode) return;
+                  if (!mode) {
+                    const theme = supportDarkMode ? 'theme-dark' : 'theme-light';
+                    document.documentElement.classList.add(theme);
+                    localStorage.setItem('theme', theme);
+                    return;
+                  }
                   document.documentElement.classList.add(mode);
                 } catch (e) {}
               })();`,
