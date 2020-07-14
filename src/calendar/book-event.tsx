@@ -4,7 +4,7 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 import { CalendarProviderComponent, useCalendar } from '../calendar/provider';
 import { EventForm, WithEventForm } from '../calendar/components/event-form';
 import { Heading, SectionHeading, SpinIcon } from '../components/ui';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { getCurrentUser, isLoggedIn } from '../utils/auth';
 
 import { ActionButton } from '../shop/components/shop-ui';
@@ -13,7 +13,6 @@ import { EventSelect } from './components/event-select';
 import Helmet from 'react-helmet';
 import { PageProps } from 'gatsby';
 import { Toast } from '../components/toast';
-import { awsConfig } from '../../aws-exports';
 import { eventTypeName } from './utils';
 import { mutations } from '../graphql';
 import { toast } from 'react-toastify';
@@ -56,12 +55,6 @@ export const Appointment: React.FC<PageProps> = ({ navigate }) => {
       });
     }
   }, [selectedEvent]);
-
-  useEffect(() => {
-    API.configure({
-      aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
-    });
-  }, []);
 
   return (
     <>
