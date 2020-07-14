@@ -15,8 +15,13 @@ export interface NavigationListQuery_site_siteMetadata_navLinks {
   callbackFnc: string | null;
 }
 
+export interface NavigationListQuery_site_siteMetadata_sourcePages {
+  shop: (string | null)[] | null;
+}
+
 export interface NavigationListQuery_site_siteMetadata {
   navLinks: (NavigationListQuery_site_siteMetadata_navLinks | null)[] | null;
+  sourcePages: NavigationListQuery_site_siteMetadata_sourcePages | null;
   darkmode: boolean | null;
   switchTheme: boolean | null;
 }
