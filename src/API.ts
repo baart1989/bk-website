@@ -41,6 +41,7 @@ export type AddUserMutation = {
     clientId: string,
     email: string,
     name: string,
+    active: boolean | null,
   } | null,
 };
 
@@ -61,6 +62,21 @@ export type AddEventMutation = {
   } | null,
 };
 
+export type GetClientUserQueryVariables = {
+  clientId?: string | null,
+};
+
+export type GetClientUserQuery = {
+  getClientUser:  {
+    __typename: "User",
+    id: string,
+    clientId: string,
+    email: string,
+    name: string,
+    active: boolean | null,
+  } | null,
+};
+
 export type GetClientUsersQueryVariables = {
   clientId?: string | null,
 };
@@ -72,6 +88,7 @@ export type GetClientUsersQuery = {
     clientId: string,
     email: string,
     name: string,
+    active: boolean | null,
   } | null > | null,
 };
 
@@ -122,5 +139,6 @@ export type GetUserQuery = {
     clientId: string,
     email: string,
     name: string,
+    active: boolean | null,
   } | null,
 };

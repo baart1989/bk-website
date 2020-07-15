@@ -25,11 +25,7 @@ export const wrapPageElement = ({ element }) => (
 export const onRouteUpdate = async (state: any, page: any, pages: any) => {
   try {
     const user = await Auth.currentAuthenticatedUser();
-    const userInfo = {
-      ...user.attributes,
-      username: user.username,
-    };
-    setUser(userInfo);
+    setUser(user);
   } catch (error) {
     console.error('onRouteUpdate: ', error);
     window.localStorage.setItem('gatsbyUser', null);

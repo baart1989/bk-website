@@ -13,6 +13,7 @@ export interface NavigationListQuery_site_siteMetadata_navLinks {
   isDropdown: boolean | null;
   requireAuth: boolean | null;
   callbackFnc: string | null;
+  adminAccessOnly: boolean | null;
 }
 
 export interface NavigationListQuery_site_siteMetadata_sourcePages {

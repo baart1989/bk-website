@@ -4,7 +4,23 @@ import Auth, { CognitoUser } from '@aws-amplify/auth';
 
 const isBrowser = typeof window !== `undefined`;
 
-export const setUser = user => (window.localStorage.gatsbyUser = JSON.stringify(user));
+export const setUser = user => {
+  if (!user) {
+    window.localStorage.gatsbyUser = JSON.stringify({});
+    return;
+  }
+  const cognitoGroups: string[] = user.signInUserSession?.idToken?.payload['cognito:groups'] || [];
+
+  const isAdmin = cognitoGroups.includes('Admins');
+  const userInfo = {
+    ...user.attributes,
+    username: user.username,
+  };
+  if (isAdmin) {
+    userInfo.isAdmin = isAdmin;
+  }
+  window.localStorage.gatsbyUser = JSON.stringify(userInfo);
+};
 
 const getUser = () => {
   if (window.localStorage.gatsbyUser) {
@@ -25,7 +41,7 @@ export const getCurrentUser = () => isBrowser && getUser();
 
 export const logout = (callback?: Function) => {
   if (!isBrowser) return;
-  setUser({});
+  setUser(null);
   callback ? callback() : undefined;
 };
 
@@ -43,11 +59,7 @@ export async function answerCustomChallenge(
     // So we should test if the user is authenticated now
     // This will throw an error if the user is not yet authenticated:
     const user = await Auth.currentAuthenticatedUser();
-    const userInfo = {
-      ...user.attributes,
-      username: user.username,
-    };
-    setUser(userInfo);
+    setUser(user);
     return true;
   } catch (err) {
     console.error('Apparently the user did not enter the right code: ', err);

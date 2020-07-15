@@ -17,8 +17,8 @@ export default function HTML(props) {
             __html: `(function() {
                 try {
                   const mode = localStorage.getItem('theme');
-                  const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
                   if (!mode) {
+                    const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
                     const theme = supportDarkMode ? 'theme-dark' : 'theme-light';
                     document.documentElement.classList.add(theme);
                     localStorage.setItem('theme', theme);

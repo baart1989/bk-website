@@ -2,6 +2,17 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getClientUser = /* GraphQL */ `
+  query GetClientUser($clientId: String) {
+    getClientUser(clientId: $clientId) {
+      id
+      clientId
+      email
+      name
+      active
+    }
+  }
+`;
 export const getClientUsers = /* GraphQL */ `
   query GetClientUsers($clientId: String) {
     getClientUsers(clientId: $clientId) {
@@ -9,6 +20,7 @@ export const getClientUsers = /* GraphQL */ `
       clientId
       email
       name
+      active
     }
   }
 `;
@@ -45,6 +57,7 @@ export const getUser = /* GraphQL */ `
       clientId
       email
       name
+      active
     }
   }
 `;

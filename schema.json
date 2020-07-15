@@ -17050,6 +17050,16 @@
               "defaultValue": null
             },
             {
+              "name": "adminAccessOnly",
+              "description": "",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BooleanQueryOperatorInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "callbackFnc",
               "description": "",
               "type": {
@@ -17874,6 +17884,18 @@
               "deprecationReason": null
             },
             {
+              "name": "adminAccessOnly",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "callbackFnc",
               "description": null,
               "args": [],
@@ -18348,6 +18370,12 @@
             },
             {
               "name": "siteMetadata___navLinks___requireAuth",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "siteMetadata___navLinks___adminAccessOnly",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null

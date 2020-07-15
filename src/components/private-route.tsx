@@ -1,19 +1,21 @@
-import { Choose } from 'react-frontend-common';
+import { getCurrentUser, isLoggedIn } from '../utils/auth';
+
 import React from 'react';
 import { Redirect } from '@reach/router';
-import { isLoggedIn } from '../utils/auth';
 
 const PrivateRoute = ({ component: Component, ...rest }: any) => {
-  return (
-    <Choose>
-      <Choose.When condition={!isLoggedIn()}>
-        <Redirect to="/app/login/" noThrow={true} />
-      </Choose.When>
-      <Choose.Otherwise>
-        <Component {...rest} />
-      </Choose.Otherwise>
-    </Choose>
-  );
+  const user = isLoggedIn() ? getCurrentUser() : undefined;
+  const { isAdminPath = false } = rest;
+
+  if (!user) {
+    return <Redirect to="/app/login/" noThrow={true} />;
+  }
+
+  if (isAdminPath && !user.isAdmin) {
+    return <Redirect to="/" noThrow={true} />;
+  }
+
+  return <Component {...rest} />;
 };
 
 export default PrivateRoute;

@@ -9,6 +9,7 @@ export const addUser = /* GraphQL */ `
       clientId
       email
       name
+      active
     }
   }
 `;

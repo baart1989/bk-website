@@ -17,3 +17,9 @@ gatsby build
 ```
 
 ### Configuring
+
+
+### Codegen
+```
+amplify codegen
+```

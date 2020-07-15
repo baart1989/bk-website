@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 import Auth, { CognitoUser } from '@aws-amplify/auth';
 import React, { useState } from 'react';
-import { answerCustomChallenge, isLoggedIn, setUser, singInOrSignUp } from '../utils/auth';
+import { answerCustomChallenge, isLoggedIn, singInOrSignUp } from '../utils/auth';
 
 import { Formik } from 'formik';
 import LoginForm from './components/login-form';
