@@ -169,3 +169,26 @@ export const SectionHeading: React.FC<{
     </div>
   </div>
 );
+
+export const ThemeIcons = ({ themes, currentTheme, switchTheme, className }) => {
+  const themeOptions = Object.keys(themes).map(key => (
+    <button
+      key={themes[key].name}
+      type="button"
+      className={cns(
+        className,
+        'text-primary transition-transform duration-200 transform top-0 left-0',
+        {
+          'scale-100': key === currentTheme,
+        },
+        {
+          'scale-0 absolute': key !== currentTheme,
+        },
+      )}
+      onClick={switchTheme}
+    >
+      {themes[key].icon}
+    </button>
+  ));
+  return <React.Fragment>{themeOptions}</React.Fragment>;
+};

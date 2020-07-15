@@ -7,6 +7,7 @@ import List from './navigation-list';
 import { Logo } from './utils';
 import { NavigationQuery } from './__generated__/NavigationQuery';
 import { Sidebar } from 'react-tailwind-component';
+import { ThemeIcons } from './ui';
 import cns from 'classnames';
 import { useLocation } from '@reach/router';
 
@@ -93,9 +94,17 @@ const Navbar: React.FC<NavbarProps> = ({ currentTheme, switchTheme, themes }) =>
         <Link to="/" title={data.site.siteMetadata.title}>
           <Logo className={`duration-300 transition-all ${scrolled ? 'w-6' : 'w-8'}`} />
         </Link>
-        <Link className="text-primary outline-0 focus:outline-none lg:hidden" to="/cart/">
-          <ShoppingCart />
-        </Link>
+        <div className="flex lg:hidden">
+          <Link className="text-primary outline-0 focus:outline-none" to="/cart/">
+            <ShoppingCart />
+          </Link>
+          <ThemeIcons
+            className="ml-4"
+            themes={themes}
+            currentTheme={currentTheme}
+            switchTheme={switchTheme}
+          />
+        </div>
         <div className="hidden lg:block">
           <List
             className="nav-links flex"

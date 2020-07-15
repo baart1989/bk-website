@@ -6,11 +6,12 @@ import {
 import React, { useState } from 'react';
 import { Theme, ThemeType } from './layout';
 import { WatchClickOutside, slugify } from 'react-frontend-common';
+import { getCurrentUser, isLoggedIn, logout } from '../utils/auth';
 import { graphql, navigate, useStaticQuery } from 'gatsby';
-import { isLoggedIn, logout } from '../utils/auth';
 
 import Auth from '@aws-amplify/auth';
 import { Link } from './utils';
+import { ThemeIcons } from './ui';
 import { Transition } from 'react-tailwind-component';
 import cns from 'classnames';
 
@@ -43,6 +44,7 @@ const List: React.FC<NavigationListProps> = ({
             isDropdown
             requireAuth
             callbackFnc
+            adminAccessOnly
           }
           sourcePages {
             shop
@@ -54,6 +56,9 @@ const List: React.FC<NavigationListProps> = ({
     }
   `);
   const loggedIn = isLoggedIn();
+  const currentUser = getCurrentUser();
+  const isAdmin = !!currentUser.isAdmin;
+
   const items = data.site.siteMetadata.navLinks;
   const callbacks = {
     ['logoutUser']: async () => {
@@ -73,19 +78,12 @@ const List: React.FC<NavigationListProps> = ({
       return acc;
     }
 
-    if (link.callbackFnc) {
-      link = { ...link, callbackFnc: callbacks[link.callbackFnc] };
+    if (link.adminAccessOnly && !isAdmin) {
+      return acc;
     }
 
-    if (link.name === 'switchTheme') {
-      const themesToSelect = Object.keys(themes).filter(key => currentTheme !== key);
-      themesToSelect.map(key => {
-        acc.push({
-          ...link,
-          name: `ZMIEŃ NA ${themes[key].label}`,
-        });
-      });
-      return acc;
+    if (link.callbackFnc) {
+      link = { ...link, callbackFnc: callbacks[link.callbackFnc] };
     }
 
     acc.push(link);
@@ -118,6 +116,12 @@ const List: React.FC<NavigationListProps> = ({
         <Link className="cursor-pointer text-color-2 focus:text-primary" to="/cart/">
           <ShoppingCart />
         </Link>
+      </li>,
+    );
+
+    list.push(
+      <li className="theme-switcher" key="switch-t">
+        <ThemeIcons themes={themes} currentTheme={currentTheme} switchTheme={switchTheme} />
       </li>,
     );
 

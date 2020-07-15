@@ -44,9 +44,11 @@ const siteMetadata = {
       requireAuth: true,
     },
     {
-      name: 'switchTheme',
+      name: 'PANEL ADMINA',
       isDropdown: true,
-      callbackFnc: 'switchTheme',
+      url: '/app/admin',
+      requireAuth: true,
+      adminAccessOnly: true,
     },
     {
       name: 'ZALOGUJ',
