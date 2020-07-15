@@ -95,19 +95,25 @@ export type GetClientUsersQuery = {
 export type GetClientEventsQueryVariables = {
   startDate: string,
   clientId?: string | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
 export type GetClientEventsQuery = {
-  getClientEvents:  Array< {
-    __typename: "Event",
-    id: string,
-    userId: string,
-    startDate: string,
-    duration: string,
-    clientId: string,
-    eventType: EventType,
-    paymentType: PaymentType,
-  } | null > | null,
+  getClientEvents:  {
+    __typename: "EventConnection",
+    items:  Array< {
+      __typename: "Event",
+      id: string,
+      userId: string,
+      startDate: string,
+      duration: string,
+      clientId: string,
+      eventType: EventType,
+      paymentType: PaymentType,
+    } | null > | null,
+    nextToken: string | null,
+  } | null,
 };
 
 export type GetUserEventsQueryVariables = {

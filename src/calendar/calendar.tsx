@@ -21,7 +21,10 @@ export const Page = () => {
   const fetchData = useCallback(async () => {
     try {
       // TODO - add end range
-      const variables: ApiModel.GetClientEventsQueryVariables = { startDate: '2020' };
+      const variables: ApiModel.GetClientEventsQueryVariables = {
+        startDate: new Date().toISOString().slice(0, 10),
+        limit: 1000,
+      };
       const result = (await API.graphql(
         graphqlOperation(queries.getClientEvents, variables),
       )) as GraphQLResult<ApiModel.GetClientEventsQuery>;

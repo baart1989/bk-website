@@ -25,15 +25,28 @@ export const getClientUsers = /* GraphQL */ `
   }
 `;
 export const getClientEvents = /* GraphQL */ `
-  query GetClientEvents($startDate: String!, $clientId: String) {
-    getClientEvents(startDate: $startDate, clientId: $clientId) {
-      id
-      userId
-      startDate
-      duration
-      clientId
-      eventType
-      paymentType
+  query GetClientEvents(
+    $startDate: String!
+    $clientId: String
+    $limit: Int
+    $nextToken: String
+  ) {
+    getClientEvents(
+      startDate: $startDate
+      clientId: $clientId
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userId
+        startDate
+        duration
+        clientId
+        eventType
+        paymentType
+      }
+      nextToken
     }
   }
 `;

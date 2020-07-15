@@ -99,7 +99,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentTheme, switchTheme, themes }) =>
             <ShoppingCart />
           </Link>
           <ThemeIcons
-            className="ml-4"
+            className="ml-4 text-primary"
             themes={themes}
             currentTheme={currentTheme}
             switchTheme={switchTheme}

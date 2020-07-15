@@ -121,7 +121,12 @@ const List: React.FC<NavigationListProps> = ({
 
     list.push(
       <li className="theme-switcher" key="switch-t">
-        <ThemeIcons themes={themes} currentTheme={currentTheme} switchTheme={switchTheme} />
+        <ThemeIcons
+          className="text-color-2"
+          themes={themes}
+          currentTheme={currentTheme}
+          switchTheme={switchTheme}
+        />
       </li>,
     );
 

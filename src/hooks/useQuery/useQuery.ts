@@ -1,5 +1,5 @@
 import API, { graphqlOperation } from '@aws-amplify/api';
-import { useLocalStorage, usePersistedReducer } from 'react-frontend-common';
+import { useLocalStorage } from 'react-frontend-common';
 
 import { queries } from '../../graphql';
 import useDeepCompareEffect from 'use-deep-compare-effect';

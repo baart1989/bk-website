@@ -177,7 +177,7 @@ export const ThemeIcons = ({ themes, currentTheme, switchTheme, className }) => 
       type="button"
       className={cns(
         className,
-        'text-primary transition-transform duration-200 transform top-0 left-0',
+        'transition-transform duration-200 transform top-0 left-0',
         {
           'scale-100': key === currentTheme,
         },

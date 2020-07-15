@@ -62,15 +62,16 @@ export function calendarReducer(
       const { data } = action.payload;
 
       if (data && data.getClientEvents) {
-        const normalizedData = action.payload.data.getClientEvents.reduce(
+        const normalizedData = action.payload.data.getClientEvents.items.reduce(
           (acc, next) => {
-            if (next.type === 'unavailable') {
-              acc['unavailable'] = {
-                ...acc['unavailable'],
-                [new Date(next.startDate).toISOString()]: true,
-              };
-              return acc;
-            }
+            // TODO - unavailable events
+            // if (next.eventType === '') {
+            //   acc['unavailable'] = {
+            //     ...acc['unavailable'],
+            //     [new Date(next.startDate).toISOString()]: true,
+            //   };
+            //   return acc;
+            // }
             acc['bookedEvents'] = {
               ...acc['bookedEvents'],
               [new Date(next.startDate).toISOString()]: 60,

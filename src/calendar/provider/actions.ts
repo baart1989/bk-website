@@ -26,7 +26,7 @@ export type BookEvent = Action<typeof BOOK_EVENT, Partial<ApiModel.EventInput>>;
 export type ToggleView = Action<typeof TOGGLE_VIEW, undefined>;
 export type NextWeek = Action<typeof NEXT_WEEK, undefined>;
 export type PreviousWeek = Action<typeof PREVIOUS_WEEK, undefined>;
-export type SetEvents = Action<typeof SET_EVENTS, GraphQLResult<any>>;
+export type SetEvents = Action<typeof SET_EVENTS, GraphQLResult<ApiModel.GetClientEventsQuery>>;
 
 export const add = (payload: ApiModel.EventInput): Add => ({ type: ADD, payload });
 export const remove = (payload: ApiModel.EventInput): Remove => ({ type: REMOVE, payload });
