@@ -51,8 +51,8 @@ export const getClientEvents = /* GraphQL */ `
   }
 `;
 export const getUserEvents = /* GraphQL */ `
-  query GetUserEvents($startDate: String!, $userId: String!) {
-    getUserEvents(startDate: $startDate, userId: $userId) {
+  query GetUserEvents($startDate: String!) {
+    getUserEvents(startDate: $startDate) {
       id
       userId
       startDate

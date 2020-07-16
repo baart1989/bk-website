@@ -29,9 +29,7 @@ const EventsSection: React.FC<{
 };
 
 export const UserEvents = () => {
-  const { sub } = getCurrentUser();
-
-  const variables: ApiModel.GetUserEventsQueryVariables = { userId: sub, startDate: '2020' };
+  const variables: ApiModel.GetUserEventsQueryVariables = { startDate: '2020' };
   const [loading, error, result, refetch] = useQuery<ApiModel.GetUserEventsQuery>(
     'getUserEvents',
     variables,

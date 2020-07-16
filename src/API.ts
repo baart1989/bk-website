@@ -118,7 +118,6 @@ export type GetClientEventsQuery = {
 
 export type GetUserEventsQueryVariables = {
   startDate: string,
-  userId: string,
 };
 
 export type GetUserEventsQuery = {

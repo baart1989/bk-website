@@ -26,7 +26,7 @@ const Page = () => {
       <Helmet title="Admin Panel" />
       <div className="container mx-auto py-12">
         <Heading title="Admin Panel" />
-        <SectionHeading title="Najblizsze wizyty" button={<SpinIcon spin={loadingEvents} />} />
+        <SectionHeading title="Najbliższe wizyty" button={<SpinIcon spin={loadingEvents} />} />
         <div className="mt-8"></div>
         <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
           {(events?.getClientEvents?.items || []).map(event => (
