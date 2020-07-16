@@ -7,7 +7,6 @@ import { isFuture, isPast } from 'date-fns';
 import { ErrorPanel } from '../components/error';
 import { EventDetails } from './components/event-details';
 import Helmet from 'react-helmet';
-import { getCurrentUser } from '../utils/auth';
 import { useQuery } from '../hooks/useQuery/useQuery';
 
 const EventsSection: React.FC<{

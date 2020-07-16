@@ -1,12 +1,52 @@
-type User  {
-  id: ID!
-  clientId: String!
-  email: String!
-  name: String!
-  active: Boolean
+schema {
+  query: Query
+  mutation: Mutation
 }
 
 type Client {
+  id: ID!
+  name: String!
+}
+
+type Event @aws_api_key @aws_cognito_user_pools {
+  clientId: String!
+  #  String as we pass it as metadata on AWS.Auth
+  # which allows only string values
+  duration: String!
+  eventType: EventType!
+  id: ID!
+  paymentType: PaymentType!
+  startDate: String!
+  userId: String!
+}
+
+type EventConnection @aws_api_key {
+  items: [Event]
+  nextToken: String
+}
+
+type Mutation {
+  addEvent(input: EventInput!): Event
+  addUser(input: UserInput!): User
+}
+
+type Query {
+  getClientEvents(clientId: String, limit: Int, nextToken: String, startDate: String!): EventConnection @aws_api_key
+  getClientUser(clientId: String): User
+  getClientUsers(clientId: String): [User]
+  getServiceVersion: ServiceVersion
+  getUser(id: String): User
+  getUserEvents(startDate: String!): [Event]
+}
+
+type ServiceVersion {
+  version: String!
+}
+
+type User {
+  active: Boolean
+  clientId: String!
+  email: String!
   id: ID!
   name: String!
 }
@@ -21,48 +61,18 @@ enum PaymentType {
   bank_transfer
 }
 
-type Event @aws_api_key @aws_cognito_user_pools {
-  id: ID!
-  userId: String!
-  startDate: String!
-  # String as we pass it as metadata on AWS.Auth
-  # which allows only string values
-  duration: String!
+input EventInput {
   clientId: String!
+  duration: String!
   eventType: EventType!
+  id: ID
   paymentType: PaymentType!
+  startDate: String!
+  userId: String
 }
 
 input UserInput {
   clientId: String!
   email: String!
   name: String!
-}
-
-input EventInput {
-  id: ID
-  startDate: String!
-  clientId: String!
-  userId: String
-  duration: String!
-  eventType: EventType!
-  paymentType: PaymentType!
-}
-
-type Mutation {
-  addUser(input: UserInput!): User
-  addEvent(input: EventInput!): Event
-}
-
-type EventConnection @aws_api_key {
-  items: [Event]
-  nextToken: String
-}
-
-type Query {
-  getClientUser(clientId: String): User
-  getClientUsers(clientId: String): [User]
-  getClientEvents(startDate: String!, clientId: String, limit: Int, nextToken: String): EventConnection @aws_api_key
-  getUserEvents(startDate: String!): [Event]
-  getUser(id: String): User
 }
