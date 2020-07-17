@@ -69,12 +69,7 @@ export const Layout = ({ children }) => {
         toastClassName="bg-medium-light text-color-default"
         closeButton={false}
       />
-      <Navbar
-        currentTheme={currentTheme}
-        switchTheme={switchTheme}
-        themes={themes}
-        allowThemeSwitch={siteMetadata.switchTheme}
-      />
+      <Navbar currentTheme={currentTheme} switchTheme={switchTheme} themes={themes} />
       <div className="bg-bg">{children}</div>
       <Footer />
     </>
