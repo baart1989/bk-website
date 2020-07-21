@@ -62,9 +62,9 @@ p {
 }
 
 .supports-blend .title h1 {
-  color: #000;
-  background: #fff;
-  mix-blend-mode: multiply;
+  color: #fff;
+  background: #000;
+  mix-blend-mode: lighten;
 }
 
 .supports-blend .title h1 span {
