@@ -53,11 +53,10 @@ export const query = graphql`
             image: banner {
               publicURL
               childImageSharp {
-                fluid(maxWidth: 1920) {
-                  srcSet
+                id
+                fluid(maxWidth: 1440) {
                   ...GatsbyImageSharpFluid
                 }
-                id
               }
             }
           }
