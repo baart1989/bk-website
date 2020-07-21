@@ -1,39 +1,47 @@
+import { Button, Heading } from '../components/ui';
 import { Description as ContactDescription, Form } from '../components/contact';
 import { IndexPageQuery, IndexPageQuery_site_siteMetadata } from './__generated__/IndexPageQuery';
 import { PageProps, graphql } from 'gatsby';
+import { Projects, Team } from '../components/bk';
 import React, { useEffect, useRef, useState } from 'react';
 
-import BlogCard from '../blog/components/blog-card';
-import { Button } from '../components/ui';
 import Helmet from 'react-helmet';
 import Img from 'gatsby-image';
-import OfferDetails from '../offer/components/offer';
+import ItemPortfolio from '../portfolio/components/portfolio-parallax';
 import ScrollIntoView from 'react-scroll-into-view';
-import ShopCard from '../shop/components/shop-card';
 import cns from 'classnames';
-import { isLoggedIn } from '../utils/auth';
 
 export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
   const siteData = data.site.siteMetadata;
-  // const portfolioList = data.portfolio.edges.map(({ node }, index) => (
-  //   <PortfolioParallax data={node} key={node.id} even={(index + 1) % 2 === 0} />
-  // ));
-  // <div className="px-4 lg:px-0" id="portfolio">
-  //   {portfolioList}
-  // </div>;
-  const blogList = data.blog.edges.map(item => <BlogCard data={item.node} key={item.node.id} />);
-  const shopList = data.shop.edges.map(item => <ShopCard key={item.node.id} data={item.node} />);
-  const offer = <OfferDetails data={data.offer.edges} />;
-
+  const portfolioList = data.portfolio.edges.map((item, index) => (
+    <ItemPortfolio data={item.node} key={item.node.id} even={(index + 1) % 2 === 0} />
+  ));
   return (
     <>
       <Helmet title="Start" />
       <Wall data={siteData} image={data.wallImage.childImageSharp.fluid} />
-      <About data={siteData.about} />
-      <Offer>{offer}</Offer>
-      <Shop>{shopList}</Shop>
-      <Blog>{blogList}</Blog>
-      <Contact data={siteData.contact} />
+
+      <BoxedSection title="O nas" text={siteData.aboutText} />
+
+      <Section title="Nasz zespół">
+        <Team></Team>
+      </Section>
+
+      <BoxedSection title="Oferta" text={siteData.offerText} id="offer">
+        <div className="container mx-auto">
+          <Projects />
+        </div>
+      </BoxedSection>
+
+      <Section title="Realizacje">
+        <div className="px-4 lg:px-0" id="portfolio">
+          {portfolioList}
+        </div>
+      </Section>
+
+      <Section title="Kontakt" id="contact">
+        <Contact data={siteData.contact} />
+      </Section>
     </>
   );
 }
@@ -90,10 +98,12 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
         {data.description}
       </p>
       <div className="flex justify-center lg:justify-start">
-        <ScrollIntoView selector="#offer">
-          <Button title="ZOBACZ OFERTĘ" />
+        <ScrollIntoView selector="#contact">
+          <Button title="KONTAKT" />
         </ScrollIntoView>
-        {!isLoggedIn() && <Button className="ml-2" title="ZALOGUJ" to="/app/login" />}
+        <ScrollIntoView selector="#offer">
+          <Button title="OFERTA" className="ml-2" />
+        </ScrollIntoView>
       </div>
     </React.Fragment>
   );
@@ -127,46 +137,27 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
   );
 };
 
-const About: React.FC<{ data: string }> = ({ data }) => {
+const BoxedSection = ({ title, text, id = undefined, children = null }) => {
   return (
-    <div className="boxed">
-      <div className="px-4 py-20 text-center lg:py-40 lg:px-0">
-        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">O nas</h2>
-        <p className="mt-5 text-lg">{data}</p>
+    <>
+      <div className="boxed">
+        <div id={id} className="px-4 py-20 text-center lg:py-40 lg:px-0">
+          <Heading title={title} />
+          <p className="mt-5 text-lg">{text}</p>
+        </div>
       </div>
-    </div>
+      {children}
+    </>
   );
 };
 
-const Offer = ({ children }) => {
+const Section = ({ id = undefined, title, children = null }) => {
   return (
-    <div id="offer" className="container mx-auto px-0">
-      <div className="pt-20 pb-10 text-center lg:pt-40 lg:pb-20">
-        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">Współpraca</h2>
+    <div className="container mx-auto">
+      <div id={id} className="pt-20 pb-10 lg:pt-40 lg:pb-20 text-center">
+        <Heading title={title} />
       </div>
-      <div>{children}</div>
-    </div>
-  );
-};
-
-const Blog = ({ children }) => {
-  return (
-    <div className="container mx-auto px-0">
-      <div className="pt-20 pb-10 text-center lg:pt-40 lg:pb-20">
-        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">Blog</h2>
-      </div>
-      <div className="flex flex-wrap">{children}</div>
-    </div>
-  );
-};
-
-const Shop = ({ children }) => {
-  return (
-    <div className="container mx-auto px-0">
-      <div className="pt-20 pb-10 text-center lg:pt-40 lg:pb-20">
-        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">Sklep</h2>
-      </div>
-      <div className="flex flex-wrap">{children}</div>
+      {children}
     </div>
   );
 };
@@ -174,19 +165,14 @@ const Shop = ({ children }) => {
 const Contact = ({ data }) => {
   const hasContactForm = data.api_url;
   return (
-    <div className="container mx-auto">
-      <div className="pt-20 pb-10 lg:pt-40 lg:pb-20 text-center">
-        <h2 className="text-color-1 font-black text-5xl lg:text-6xl">Kontakt</h2>
-      </div>
-      <div className="flex flex-wrap pb-40">
-        {hasContactForm && (
-          <div className="w-full lg:w-1/2 px-4 lg:pl-2 lg:pr-6">
-            <Form api={data.api_url} />
-          </div>
-        )}
-        <div className={`w-full ${hasContactForm ? 'lg:w-1/2' : 'lg:w-2/3 mx-auto'} px-6 pt-8`}>
-          <ContactDescription data={data} />
+    <div className="flex flex-wrap pb-40">
+      {hasContactForm && (
+        <div className="w-full lg:w-1/2 px-4 lg:pl-2 lg:pr-6">
+          <Form api={data.api_url} />
         </div>
+      )}
+      <div className={`w-full ${hasContactForm ? 'lg:w-1/2' : 'lg:w-2/3 mx-auto'} px-6 pt-8`}>
+        <ContactDescription data={data} />
       </div>
     </div>
   );
@@ -211,13 +197,15 @@ export const query = graphql`
         twoColumnWall
         introTag
         description
-        about
+        aboutText
+        offerText
         contact {
           api_url
           description
           mail
           phone
           address
+          navUrl
         }
         social {
           name
@@ -226,118 +214,30 @@ export const query = graphql`
         }
       }
     }
-    portfolio: allMdx(filter: { fields: { sourceName: { eq: "portfolio" } } }, limit: 6) {
+    portfolio: allMdx(
+      filter: { fields: { sourceName: { eq: "portfolio" } } }
+      limit: 3
+      sort: { fields: [frontmatter___date], order: ASC }
+    ) {
       edges {
         node {
           id
           frontmatter {
             title
+            investor
             description
-            image {
+            image: banner {
+              id
               publicURL
               childImageSharp {
                 fluid(maxWidth: 1000) {
                   ...GatsbyImageSharpFluid
                 }
-                id
               }
             }
           }
           fields {
             slug
-          }
-        }
-      }
-    }
-    blog: allMdx(filter: { fields: { sourceName: { eq: "blog" } } }, limit: 3) {
-      edges {
-        node {
-          id
-          timeToRead
-          excerpt
-          frontmatter {
-            title
-            description
-            author
-            date(formatString: "DD MMMM YYYY")
-            authorImage {
-              childImageSharp {
-                fluid(maxWidth: 200) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-            image {
-              publicURL
-              childImageSharp {
-                fluid(maxWidth: 1920) {
-                  srcSet
-                  ...GatsbyImageSharpFluid
-                }
-                id
-              }
-            }
-          }
-          fields {
-            slug
-          }
-        }
-      }
-    }
-    offer: allMdx(
-      filter: { fields: { sourceName: { eq: "offer" } } }
-      sort: { fields: [frontmatter___date] }
-    ) {
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            price
-            currency
-            details
-            description
-            image {
-              publicURL
-              childImageSharp {
-                fluid(maxWidth: 640) {
-                  srcSet
-                  ...GatsbyImageSharpFluid
-                }
-                id
-              }
-            }
-          }
-        }
-      }
-    }
-    shop: allMdx(
-      limit: 3
-      filter: { fields: { sourceName: { eq: "shop" } } }
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
-      edges {
-        node {
-          id
-          fields {
-            slug
-          }
-          excerpt
-          frontmatter {
-            title
-            price
-            currency
-            type
-            image {
-              publicURL
-              childImageSharp {
-                fluid(maxWidth: 640) {
-                  srcSet
-                  ...GatsbyImageSharpFluid
-                }
-                id
-              }
-            }
           }
         }
       }

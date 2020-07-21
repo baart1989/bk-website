@@ -1,0 +1,9 @@
+[
+  { "name": "ucees.png", "baseImagePath": "ucees.png", "siteUrl": "http://ucees.pl/" },
+  { "name": "Partner 1","baseImagePath": "ucees-black.jpg", "siteUrl": "http://ucees.pl/" },
+  { "name": "Partner 2","baseImagePath": "ucees.png" },
+  { "name": "Partner 3","baseImagePath": "ucees-black.jpg" },
+  { "name": "Partner 4","baseImagePath": "ucees.png" },
+  { "name": "Partner 5","baseImagePath": "ucees-black.jpg" },
+  { "name": "Partner 6","baseImagePath": "ucees.png" }
+]

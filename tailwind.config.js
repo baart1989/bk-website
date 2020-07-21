@@ -5,17 +5,11 @@ const _ = require('lodash');
 const gradient = plugin(({ addUtilities, e, theme, variants }) => {
   const gradients = theme('gradients', {});
   const gradientVariants = variants('gradients', []);
-
-  console.log({ gradients });
-  console.log({ gradientVariants });
-
   const utilities = _.map(gradients, ([start, end], name) => ({
     [`.bg-gradient-${e(name)}`]: {
       backgroundImage: `linear-gradient(to right, ${start}, ${end})`,
     },
   }));
-  console.log({ utilities });
-
   addUtilities(utilities, gradientVariants);
 });
 
@@ -88,8 +82,8 @@ module.exports = {
         'color-1': 'var(--color-1)',
         'color-2': 'var(--color-2)',
         primary: 'var(--primary)',
-        'primary-gradient-color': '#298c92',
-        'secondary-gradient-color': '#364f6b',
+        'primary-gradient-color': '#654062',
+        'secondary-gradient-color': '#ff9c71',
         medium: {
           light: 'var(--medium-light)',
           default: 'var(--medium)',

@@ -81,7 +81,7 @@ const Head = ({ siteIcon }) => {
     <Helmet>
       <link rel="icon" href={siteIcon} type="image/png" />
       <link
-        href="https://fonts.googleapis.com/css?family=Raleway:500,800&display=swap"
+        href="https://fonts.googleapis.com/css?family=Poppins:500,800&display=swap"
         rel="stylesheet"
       />
     </Helmet>

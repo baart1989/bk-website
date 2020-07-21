@@ -38,17 +38,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, getNode, 
   }
 };
 
-export const onCreatePage = async ({ page, actions }) => {
-  const { createPage } = actions;
-  // page.matchPath is a special key that's used for matching pages
-  // only on the client.
-  if (page.path.match(/^\/app/)) {
-    page.matchPath = `/app/*`;
-    // Update the page.
-    createPage(page);
-  }
-};
-
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
 
@@ -62,13 +51,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
               slug
               sourceName
             }
-          }
-        }
-      }
-      blog: allMdx(filter: { fields: { sourceName: { eq: "blog" } } }) {
-        edges {
-          node {
-            id
           }
         }
       }
@@ -138,4 +120,42 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
       });
     });
   });
+};
+
+const resolveFnc = (source: any, _args, context) => {
+  const isValidQuery = source && source.baseImagePath;
+  if (isValidQuery == null) return null;
+  return context.nodeModel.runQuery({
+    query: {
+      filter: {
+        base: { eq: source.baseImagePath },
+      },
+    },
+    type: 'File',
+    firstOnly: true,
+  });
+};
+
+export const createResolvers: GatsbyNode['createResolvers'] = async ({ createResolvers }) => {
+  const resolvers = {
+    PartnersJson: {
+      localFile: {
+        type: 'File',
+        resolve: resolveFnc,
+      },
+    },
+    ProjectsJson: {
+      localFile: {
+        type: 'File',
+        resolve: resolveFnc,
+      },
+    },
+    EmployeeJson: {
+      localFile: {
+        type: 'File',
+        resolve: resolveFnc,
+      },
+    },
+  };
+  return createResolvers(resolvers);
 };

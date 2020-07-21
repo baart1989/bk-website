@@ -6,6 +6,7 @@ import { PaginatedPageContext } from '../../gatsby-node';
 import Pagination from '../components/pagination';
 import { PortfolioListQuery } from './__generated__/PortfolioListQuery';
 import PortfolioParallax from './components/portfolio-parallax';
+import { Heading } from '../components/ui';
 
 export const PortfolioList: React.FC<PageProps<PortfolioListQuery, PaginatedPageContext>> = ({
   data,
@@ -21,10 +22,10 @@ export const PortfolioList: React.FC<PageProps<PortfolioListQuery, PaginatedPage
 
   return (
     <>
-      <Helmet title="Portfolio" />
-      <div className="py-12 px-4 lg:px-0">
+      <Helmet title="Realizacje" />
+      <div className="container mx-auto py-12 px-4 lg:px-0">
         <div className="title py-8 text-center">
-          <h2 className="font-black text-5xl text-color-1">Portfolio</h2>
+          <h2 className="font-black text-5xl lg:text-6xl text-color-1">Realizacje</h2>
         </div>
         <div className="flex flex-wrap">{portfolioItems}</div>
         <div className="mt-8 lg:mt-24">
@@ -39,7 +40,7 @@ export const query = graphql`
   query PortfolioListQuery($skip: Int!, $limit: Int!) {
     allMdx(
       filter: { fields: { sourceName: { eq: "portfolio" } } }
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { fields: [frontmatter___date], order: ASC }
       limit: $limit
       skip: $skip
     ) {
@@ -49,7 +50,7 @@ export const query = graphql`
           frontmatter {
             title
             description
-            image {
+            image: banner {
               publicURL
               childImageSharp {
                 fluid(maxWidth: 1920) {

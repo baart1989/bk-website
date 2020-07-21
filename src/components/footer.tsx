@@ -5,7 +5,6 @@ import {
 import { Link, graphql, useStaticQuery } from 'gatsby';
 
 import { Logo } from './utils';
-import Navlinks from './navigation-list';
 import React from 'react';
 
 export default function footer() {
@@ -18,43 +17,49 @@ export default function footer() {
             name
             url
           }
+          navLinks {
+            name
+            url
+          }
         }
       }
     }
   `);
 
-  const footerLinks = query.site.siteMetadata.footerLinks.map((item, _) => (
-    <ListItem data={item} key={`footer-n-l-${_}`} />
+  const allLinks = [...query.site.siteMetadata.navLinks, ...query.site.siteMetadata.footerLinks];
+
+  const footerLinks = allLinks.map((item, index) => (
+    <ListItem data={item} key={`footer-n-l-${index}`} />
   ));
 
   return (
-    <footer className="footer bg-bgalt py-12">
-      <div className="container mx-auto text-center">
-        <div className="flex justify-center my-3 mb-6">
+    <div className="bg-bgalt">
+      <div className="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+        <nav className="-mx-5 -my-2 flex flex-wrap justify-center">{footerLinks}</nav>
+        <div className="mt-8 flex justify-center">
           <Link to="/" title={query.site.siteMetadata.title}>
             <Logo className="w-12" />
           </Link>
         </div>
-        <div className="text-color-2 my-3 footer-links animated-link-parent">
-          <Navlinks className="flex items-center justify-center flex-wrap" displayType="bottom" />
+        <div className="mt-8">
+          <p className="text-center text-base leading-6">
+            &copy; {new Date().getFullYear()} {query.site.siteMetadata.title}, Inc. All rights
+            reserved.
+          </p>
         </div>
-        <div className="text-color-2 my-3">
-          <ul>{footerLinks}</ul>
-        </div>
-        <p className="text-lg">
-          Copyright &copy; {query.site.siteMetadata.title} {new Date().getFullYear()}
-        </p>
       </div>
-    </footer>
+    </div>
   );
 }
 
 const ListItem: React.FC<{ data: FooterLinksQuery_site_siteMetadata_footerLinks }> = ({ data }) => {
   return (
-    <li className="inline-block mx-3 animated-link-parent">
-      <Link to={data.url} title={data.name}>
-        <span>{data.name}</span>
-      </Link>
-    </li>
+    <>
+      <div className="px-5 py-2 animated-link-parent">
+        <Link to={data.url} className="text-base leading-6">
+          {data.name}
+        </Link>
+      </div>
+    </>
   );
 };

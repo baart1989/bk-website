@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import { beforeContactFormSubmit, contactFormSubmit } from '../../config';
 
 import { ContactQuery_site_siteMetadata_contact } from '../pages/__generated__/ContactQuery';
-import SocialLinks from '../utils/sociallinks';
+import SocialLinks from './sociallinks';
+import { Link } from './utils';
 
 type FeedbackState = { [id: number]: { message?: string; type?: string } };
 
@@ -144,7 +145,7 @@ const Description: React.FC<{ data: ContactQuery_site_siteMetadata_contact }> = 
       <ul className="my-4">
         {data.mail && (
           <li className="flex items-center">
-            <span className="text-secondary icon">
+            <span className="icon">
               <Mail />
             </span>
             <a className="ml-4" href={'mailto:' + data.mail}>
@@ -154,20 +155,22 @@ const Description: React.FC<{ data: ContactQuery_site_siteMetadata_contact }> = 
         )}
         {data.phone && (
           <li className="flex items-center mt-4">
-            <span className="text-secondary icon">
+            <span className="icon">
               <Phone />
             </span>
-            <a className="ml-4" href={'tel:' + data.phone}>
+            <Link className="ml-4" href={'tel:' + data.phone}>
               {data.phone}
-            </a>
+            </Link>
           </li>
         )}
         {data.address && (
           <li className="flex items-start mt-4">
-            <span className="mt-1 text-secondary icon">
+            <span className="mt-1 icon">
               <MapPin />
             </span>
-            <p className="whitespace-pre ml-4">{data.address}</p>
+            <Link href={data.navUrl}>
+              <p className="whitespace-pre ml-4">{data.address}</p>
+            </Link>
           </li>
         )}
         <li>

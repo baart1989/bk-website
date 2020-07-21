@@ -1,0 +1,6 @@
+[
+  { "name": "Budynki jednorodzinne", "baseImagePath": "family.jpg" },
+  { "name": "Budynki wielorodzinne", "baseImagePath": "multifamily.jpg" },
+  { "name": "Budynki użyteczności publicznej", "baseImagePath": "public.jpg" },
+  { "name": "Budynki przemysłowe", "baseImagePath": "factory.jpg" }
+]

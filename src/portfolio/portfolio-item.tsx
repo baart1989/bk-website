@@ -1,7 +1,6 @@
 import { Col, Row } from '../components/shortcodes';
 import { PageProps, graphql } from 'gatsby';
 
-import { Calendar } from 'react-feather';
 import Img from 'gatsby-image';
 import { MDXProvider } from '@mdx-js/react';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
@@ -16,19 +15,20 @@ export default function PortfolioItem({ data }: PageProps<PortfolioQuery, {}>) {
   // }}
   return (
     <>
-      <div className="md:px-4 mt-12 py-6 md:w-11/12 mx-auto">
+      <div className="md:px-4 py-32 md:w-11/12 mx-auto">
         <div className="mx-auto relative">
           <Img fluid={data.mdx.frontmatter.banner.childImageSharp.fluid} />
           <div className="flex items-center justify-center relative lg:absolute w-full h-full top-0 left-0">
             <div className="hidden lg:block absolute w-full h-full bg-black opacity-50"></div>
             <div className="px-4 py-8 lg:p-0 relative z-10 text-center lg:text-white bg-bgalt lg:bg-transparent">
-              <h1 className="text-5xl font-bold text-color-1 lg:text-white">
-                {data.mdx.frontmatter.title}
-              </h1>
-              <p className="mt-1 flex items-center justify-center">
-                <Calendar /> <span className="ml-2">{data.mdx.frontmatter.date}</span>
-              </p>
+              <h2 className="font-bold text-color-1 lg:text-white">{data.mdx.frontmatter.title}</h2>
+              <h3 className="text-color-1 lg:text-white">
+                Inwestor: {data.mdx.frontmatter.investor}
+              </h3>
               <p className="mt-3 md:w-3/4 mx-auto">{data.mdx.frontmatter.description}</p>
+              <p className="mt-1 flex items-center justify-center">
+                Data realizacji: {data.mdx.frontmatter.date}
+              </p>
             </div>
           </div>
         </div>
@@ -48,7 +48,8 @@ export const query = graphql`
       body
       frontmatter {
         title
-        date(formatString: "DD MMMM YYYY")
+        investor
+        date(formatString: "YYYY")
         description
         banner {
           publicURL

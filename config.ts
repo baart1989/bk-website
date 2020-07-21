@@ -1,83 +1,48 @@
 const siteMetadata = {
-  title: `AT website`,
-  siteName: `AT website`,
-  siteUrl: `http://localhost`,
+  title: `be37`,
+  siteName: 'Be37 Pracownia Projektowa',
+  siteUrl: 'https://www.be37.pl',
   capitalizeTitleOnHome: false,
   logo: `/images/logo.png`,
   icon: `/images/icon.png`,
-  titleImage: `/images/wall.png`,
-  ogImage: `/images/wall.png`,
+  titleImage: `/images/wall.jpg`,
+  ogImage: `/images/wall.jpg`,
   twoColumnWall: true,
-  introTag: `INDYWIDUALNE PLANY ODŻYWIANIA`,
-  description: `Plan odżywiania indywidualnie dopasowane do Twojego celu, stanu zdrowia, aktywności i preferencji`,
-  about: `Cras accumsan a lectus at tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus elementum dapibus dictum. Mauris auctor quam nec est tincidunt hendrerit. Donec pulvinar lobortis mauris. Cras vulputate ullamcorper ligula a rhoncus. Nunc venenatis elementum ligula in semper. Mauris malesuada purus nunc, et ultricies leo aliquam ac. Ut sit amet nunc id magna accumsan hendrerit in eget metus.`,
-  author: `baart1989`,
-  blogItemsPerPage: 20,
+  introTag: `BIURO KONSTRUKCYJNE`,
+  description: `Be37 to pracownia projektowa specjalizująca się w projektowaniu konstrukcji budowlanych i inżynierskich`,
+  aboutText: `Be37 to pracownia projektowa oferująca swoje usługi Architektom i Inwestorom w zakresie projektowania
+  konstrukcji budowlanych i inżynierskich.
+  Pracujący tu inżynierowie zapewniają profesjonalną współpracę przy realizacji procesu budowlanego we
+  wszystkich jego fazach, od koncepcji poprzez projekt, do realizacji włącznie.
+  Posiadamy wieloletnie doświadczenie w projektowaniu konstrukcji budowlanych różnego typu: konstrukcje
+  żelbetowe, stalowe, drewniane, murowane.`,
+  offerText: `Zapewniamy profesjonalną współpracę przy realizacji procesu budowlanego we wszystkich jego fazach, od koncepcji poprzez projekt, do realizacji włącznie.`,
+  author: `BIT Bartosz Szpinda`,
   portfolioItemsPerPage: 20,
   darkmode: true,
-  switchTheme: true,
-  sourcePages: {
-    shop: ['cart', 'checkout'],
-    calendar: ['book-event', 'calendar'],
-  },
+  switchTheme: false,
+  sourcePages: {},
   navLinks: [
     {
-      name: 'START',
+      name: 'Start',
       url: '/',
     },
     {
-      name: 'BLOG',
-      url: '/blog',
+      name: 'Realizacje',
+      url: '/portfolio',
     },
     {
-      name: 'WSPÓŁPRACA',
-      url: '/cooperation',
-    },
-    {
-      name: 'SKLEP',
-      url: '/shop',
-    },
-    {
-      name: 'PANEL UŻYTKOWNIKA',
-      isDropdown: true,
-      url: '/app/home',
-      requireAuth: true,
-    },
-    {
-      name: 'PANEL ADMINA',
-      isDropdown: true,
-      url: '/app/admin',
-      requireAuth: true,
-      adminAccessOnly: true,
-    },
-    {
-      name: 'ZALOGUJ',
-      url: '/app/login',
-      isDropdown: true,
-      requireAuth: false,
-    },
-    {
-      name: 'WYLOGUJ',
-      isDropdown: true,
-      requireAuth: true,
-      callbackFnc: 'logoutUser',
+      name: 'Kontakt',
+      url: '/contact',
     },
   ],
   footerLinks: [
     {
-      name: 'POLITYKA PRYWATNOŚCI',
-      url: '/privacy-policy',
-    },
-    {
-      name: 'O NAS',
+      name: 'O nas',
       url: '/about',
     },
     {
-      name: 'KONTAKT',
-      url: '/contact',
-    },
-    {
-      name: 'OFERTA',
+      name: 'Oferta',
       url: '/offer',
     },
   ],
@@ -85,33 +50,24 @@ const siteMetadata = {
     {
       name: 'Facebook',
       icon: '/images/Facebook.svg',
-      url: '#',
+      url: 'https://www.facebook.com/be37konstrukcja',
     },
     {
-      name: 'Twitter',
-      icon: '/images/Twitter.svg',
-      url: '#',
-    },
-    {
-      name: 'Instagram',
-      icon: '/images/Instagram.svg',
-      url: '#',
-    },
-    {
-      name: 'Youtube',
-      icon: '/images/Youtube.svg',
-      url: '#',
+      name: 'Google Maps',
+      icon: '/images/GoogleMaps.svg',
+      url:
+        'https://www.google.com/maps/search/?api=1&query=50.0270367,19.9017593&query_place_id=ChIJH3v1f6NcFkcRII9B8MORPfE',
     },
   ],
   contact: {
-    // leave empty ('') or false to hide form
     api_url: 'https://getform.io/f/f227a36e-096a-4c6a-9963-9f1918a85bb3',
     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet accumsan arcu. Proin ac consequat arcu.`,
-    mail: 'email@example.com',
-    phone: '000-000-0000',
-    address: '1234 \nLocation \nLocation',
+    mail: 'dorota.szpinda@be37.pl',
+    phone: '608-691-246',
+    navUrl:
+      'https://www.google.com/maps/search/?api=1&query=50.0270367,19.9017593&query_place_id=ChIJH3v1f6NcFkcRII9B8MORPfE',
+    address: 'ul. Na Grządkach 5/7 \n30-421 \nKraków',
   },
-  disqus: '',
 };
 
 const beforeContactFormSubmit = data => {

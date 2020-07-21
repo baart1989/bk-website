@@ -25,6 +25,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentTheme, switchTheme, themes }) =>
       site {
         siteMetadata {
           title
+          canSwitchTheme: switchTheme
         }
       }
     }
@@ -54,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentTheme, switchTheme, themes }) =>
     <React.Fragment>
       <div
         className={cns(
-          'duration-300 transition-all flex justify-between items-center z-30 fixed w-full nav',
+          'duration-300 transition-all flex justify-between lg:justify-start items-center z-30 fixed w-full nav',
           {
             'scrolled bg-bg p-4': scrolled,
           },
@@ -64,6 +65,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentTheme, switchTheme, themes }) =>
         )}
         ref={navbar}
       >
+        <Link to="/" title={data.site.siteMetadata.title}>
+          <Logo className={`duration-300 transition-all ${scrolled ? 'w-12' : 'w-16'}`} />
+        </Link>
         <button
           className="text-primary outline-0 focus:outline-none lg:hidden"
           onClick={() => {
@@ -76,7 +80,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentTheme, switchTheme, themes }) =>
           <div className="bg-bg h-full flex flex-col justify-center relative">
             <div className="absolute top-0 my-4 text-center w-full">
               <Link to="/" title={data.site.siteMetadata.title} className="inline-block">
-                <Logo className={`duration-300 transition-all ${scrolled ? 'w-10' : 'w-12'}`} />
+                <Logo className={`duration-300 transition-all ${scrolled ? 'w-6' : 'w-8'}`} />
               </Link>
             </div>
             <div className="text-center">
@@ -91,23 +95,20 @@ const Navbar: React.FC<NavbarProps> = ({ currentTheme, switchTheme, themes }) =>
             </div>
           </div>
         </Sidebar>
-        <Link to="/" title={data.site.siteMetadata.title}>
-          <Logo className={`duration-300 transition-all ${scrolled ? 'w-6' : 'w-8'}`} />
-        </Link>
-        <div className="flex lg:hidden">
-          <Link className="text-primary outline-0 focus:outline-none" to="/cart/">
-            <ShoppingCart />
-          </Link>
-          <ThemeIcons
-            className="ml-4 text-primary"
-            themes={themes}
-            currentTheme={currentTheme}
-            switchTheme={switchTheme}
-          />
-        </div>
-        <div className="hidden lg:block">
+
+        {data.site.siteMetadata.canSwitchTheme && (
+          <div className="flex lg:hidden">
+            <ThemeIcons
+              className="ml-4 text-primary"
+              themes={themes}
+              currentTheme={currentTheme}
+              switchTheme={switchTheme}
+            />
+          </div>
+        )}
+        <div className="container mx-auto hidden lg:block">
           <List
-            className="nav-links flex"
+            className="nav-links flex justify-center"
             current={currentLocation}
             displayType="top"
             currentTheme={currentTheme}

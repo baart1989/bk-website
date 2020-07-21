@@ -120,7 +120,7 @@ export const TextInput = ({
       })}
     >
       <p className="text-color-secondary">{label}</p>
-      <div className="bg-gradient-primary p-2px">{elem}</div>
+      <div className="bg-medium p-2px">{elem}</div>
       {footer && <>{footer}</>}
     </div>
   );
@@ -129,7 +129,7 @@ export const TextInput = ({
 export const Heading = ({ title }) => {
   return (
     <div className="title py-12 text-center">
-      <h2 className="font-black text-5xl text-color-1">{title}</h2>
+      <h2 className="font-black text-5xl lg:text-6xl text-color-1">{title}</h2>
     </div>
   );
 };

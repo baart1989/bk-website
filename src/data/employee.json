@@ -1,0 +1,6 @@
+[
+  { "name": "Dorota Szpinda", "title": "Właściciel", "baseImagePath": "employee1.jpg" },
+  { "name": "Jarosław Kowalski", "title": "Konstruktor", "baseImagePath": "employee2.jpg" },
+  { "name": "Agnieszka Kowalski", "title": "Konstruktor", "baseImagePath": "employee3.jpg" },
+  { "name": "Sebastian Kowalski", "title": "Konstruktor", "baseImagePath": "employee4.jpg" }
+]

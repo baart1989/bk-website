@@ -9,6 +9,7 @@
 
 export interface NavigationQuery_site_siteMetadata {
   title: string | null;
+  canSwitchTheme: boolean | null;
 }
 
 export interface NavigationQuery_site {

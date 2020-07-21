@@ -9,6 +9,14 @@ const plugins = [
   `gatsby-plugin-react-helmet`,
   `gatsby-plugin-typescript`,
   `gatsby-plugin-codegen`,
+  `gatsby-transformer-json`,
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      name: 'data',
+      path: `${__dirname}/src/data`,
+    },
+  },
   {
     resolve: `gatsby-source-filesystem`,
     options: {
@@ -19,36 +27,8 @@ const plugins = [
   {
     resolve: `gatsby-source-filesystem`,
     options: {
-      name: `blog`,
-      path: `${__dirname}/contents/blog/`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `offer`,
-      path: `${__dirname}/contents/offer/`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `shop`,
-      path: `${__dirname}/contents/shop/`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
       name: `portfolio`,
       path: `${__dirname}/contents/portfolio/`,
-    },
-  },
-  {
-    resolve: `gatsby-source-filesystem`,
-    options: {
-      name: `basepage`,
-      path: `${__dirname}/contents/basepage/`,
     },
   },
   {
@@ -75,15 +55,6 @@ const plugins = [
     },
   },
 ];
-
-if (siteMetadata.disqus) {
-  plugins.push({
-    resolve: `gatsby-plugin-disqus`,
-    options: {
-      shortname: siteMetadata.disqus,
-    },
-  } as any);
-}
 
 export default {
   siteMetadata: siteMetadata,
