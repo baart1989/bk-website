@@ -25,7 +25,6 @@ export default function PortfolioItem({ data }: PageProps<PortfolioQuery, {}>) {
               <h3 className="text-color-1 lg:text-white">
                 Inwestor: {data.mdx.frontmatter.investor}
               </h3>
-              <p className="mt-3 md:w-3/4 mx-auto">{data.mdx.frontmatter.description}</p>
               <p className="mt-1 flex items-center justify-center">
                 Data realizacji: {data.mdx.frontmatter.date}
               </p>
@@ -33,6 +32,11 @@ export default function PortfolioItem({ data }: PageProps<PortfolioQuery, {}>) {
           </div>
         </div>
         <div className="lg:w-3/4 md:w-11/12 sm:w-full p-3 mt-4 md:mt-6 mx-auto lg:mt-12">
+          <div className="boxed">
+            <div className="px-4 pb-20 text-center lg:py-40 lg:px-0">
+              <p className="mt-5 text-lg">{data.mdx.frontmatter.description}</p>
+            </div>
+          </div>
           <MDXProvider components={{ Row, Col }}>
             <MDXRenderer>{data.mdx.body}</MDXRenderer>
           </MDXProvider>
