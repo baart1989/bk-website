@@ -18,15 +18,18 @@ const secretAccessKey = reqEnvVarWithFallback('AWS_SECRET_ACCESS_KEY');
 const awsRegion = reqEnvVarWithFallback('AWS_REGION');
 aws.config.update({ accessKeyId, secretAccessKey, awsRegion });
 
-const baseName = `${env}-AtBackendStack`;
+const baseName = `${env}-BiuroKonstrukcyjne`;
 
 const { getApi, getApiKey, getApiSchema, getCognitoPool, getCognitoPoolClient } = queries;
 
 const createConfigFile = async () => {
   const api = await getApi(baseName);
   const apiKey = await getApiKey(api.apiId);
-  const pool = await getCognitoPool(baseName);
+
+  const pool = (await getCognitoPool(baseName)) || { Id: '', ClientId: '' };
   const poolClient = await getCognitoPoolClient(pool.Id);
+
+  console.log({ api })
 
   const schema = await getApiSchema(api.apiId);
   const config = createConfig(

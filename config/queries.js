@@ -20,6 +20,10 @@ module.exports.getCognitoPool = async poolName => {
 };
 
 module.exports.getCognitoPoolClient = async UserPoolId => {
+  if (!UserPoolId) {
+    return Promise.resolve({ ClientId: '' });
+  }
+
   const result = await new aws.CognitoIdentityServiceProvider()
     .listUserPoolClients({ UserPoolId })
     .promise();

@@ -3,76 +3,19 @@ schema {
   mutation: Mutation
 }
 
-type Client {
-  id: ID!
-  name: String!
-}
-
-type Event @aws_api_key @aws_cognito_user_pools {
-  clientId: String!
-  #  String as we pass it as metadata on AWS.Auth
-  # which allows only string values
-  duration: String!
-  eventType: EventType!
-  id: ID!
-  paymentType: PaymentType!
-  startDate: String!
-  userId: String!
-}
-
-type EventConnection @aws_api_key {
-  items: [Event]
-  nextToken: String
-}
-
 type Mutation {
-  addEvent(input: EventInput!): Event
-  addUser(input: UserInput!): User
+  sendEmail(content: String, from: String, name: String): SendEmailResult
 }
 
 type Query {
-  getClientEvents(clientId: String, limit: Int, nextToken: String, startDate: String!): EventConnection @aws_api_key
-  getClientUser(clientId: String): User
-  getClientUsers(clientId: String): [User]
   getServiceVersion: ServiceVersion
-  getUser(id: String): User
-  getUserEvents(startDate: String!): [Event]
+}
+
+type SendEmailResult {
+  id: ID
+  result: String
 }
 
 type ServiceVersion {
   version: String!
-}
-
-type User {
-  active: Boolean
-  clientId: String!
-  email: String!
-  id: ID!
-  name: String!
-}
-
-enum EventType {
-  consultation
-  research_analysis
-  research_analysis_with_diet
-}
-
-enum PaymentType {
-  bank_transfer
-}
-
-input EventInput {
-  clientId: String!
-  duration: String!
-  eventType: EventType!
-  id: ID
-  paymentType: PaymentType!
-  startDate: String!
-  userId: String
-}
-
-input UserInput {
-  clientId: String!
-  email: String!
-  name: String!
 }
