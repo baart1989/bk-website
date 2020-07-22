@@ -1,3 +1,14 @@
+import API, { graphqlOperation } from '@aws-amplify/api';
+
+export const sendEmail = /* GraphQL */ `
+  mutation sendEmail($from: String!, $content: String!, $name: String) {
+    sendEmail(from: $from, content: $content, name: $name) {
+      id
+      result
+    }
+  }
+`;
+
 const siteMetadata = {
   title: `be37`,
   siteName: 'Be37 Pracownia Projektowa',
@@ -24,28 +35,27 @@ const siteMetadata = {
   sourcePages: {},
   navLinks: [
     {
-      name: 'Start',
-      url: '/',
-    },
-    {
-      name: 'Realizacje',
-      url: '/portfolio',
-    },
-    {
       name: 'Kontakt',
       url: '/contact',
-    },
-  ],
-  footerLinks: [
-    {
-      name: 'O nas',
-      url: '/about',
+      id: '#contact',
     },
     {
       name: 'Oferta',
       url: '/offer',
+      id: '#offer',
+    },
+    {
+      name: 'Zespół',
+      url: '/team',
+      id: '#team',
+    },
+    {
+      name: 'Realizacje',
+      url: '/portfolio',
+      id: '#portfolio',
     },
   ],
+  footerLinks: [],
   social: [
     {
       name: 'Facebook',
@@ -60,17 +70,23 @@ const siteMetadata = {
     },
   ],
   contact: {
-    api_url: 'https://getform.io/f/f227a36e-096a-4c6a-9963-9f1918a85bb3',
+    api_url: 'https://dihi737yujcapgxqltt3feavhu.appsync-api.eu-central-1.amazonaws.com/graphql',
     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet accumsan arcu. Proin ac consequat arcu.`,
     mail: 'dorota.szpinda@be37.pl',
     phone: '608-691-246',
     navUrl:
       'https://www.google.com/maps/search/?api=1&query=50.0270367,19.9017593&query_place_id=ChIJH3v1f6NcFkcRII9B8MORPfE',
-    address: 'ul. Na Grządkach 5/7 \n30-421 \nKraków',
+    address: 'ul. Na Grządkach 5/7 \n30-421 Kraków',
   },
 };
 
-const beforeContactFormSubmit = data => {
+type FormData = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+const beforeContactFormSubmit = (data: FormData) => {
   // Code 0 - success
   // Code 1 - Name
   // Code 2 - Email
@@ -115,27 +131,23 @@ const beforeContactFormSubmit = data => {
   };
 };
 
-const contactFormSubmit = async (api, data) => {
-  let res: any = await fetch(api, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  });
-
-  res = await res.json();
-
-  if (res.success) {
+const contactFormSubmit = async (data: FormData) => {
+  try {
+    await API.graphql(
+      graphqlOperation(sendEmail, {
+        from: data.email,
+        content: data.message,
+        name: data.name,
+      }),
+    );
     return {
-      result: true,
+      isSuccess: true,
+    };
+  } catch (err) {
+    return {
+      isSuccess: false,
     };
   }
-  return {
-    result: false,
-    ...res,
-  };
 };
 
 const defaults = {

@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import { beforeContactFormSubmit, contactFormSubmit } from '../../config';
 
 import { ContactQuery_site_siteMetadata_contact } from '../pages/__generated__/ContactQuery';
-import SocialLinks from './sociallinks';
 import { Link } from './utils';
+import SocialLinks from './sociallinks';
 
 type FeedbackState = { [id: number]: { message?: string; type?: string } };
 
-const Form: React.FC<{ api: string }> = ({ api }) => {
+const Form: React.FC<{ api: string }> = () => {
   const [data, changeData] = useState({
     name: '',
     email: '',
@@ -17,57 +17,46 @@ const Form: React.FC<{ api: string }> = ({ api }) => {
   });
 
   const [feedback, setFeedback] = useState<FeedbackState>({});
-
   const [transactionState, setTransactionState] = useState(false);
 
   const updateData = v => changeData({ ...data, ...v });
 
   return (
     <form
-      onSubmit={event => {
+      onSubmit={async event => {
         event.preventDefault();
         setTransactionState(true);
 
         const validate = beforeContactFormSubmit(data);
 
-        if (validate.result) {
-          setFeedback({});
-          contactFormSubmit(api, validate.data)
-            .then(res => {
-              if (res.result) {
-                setFeedback({
-                  4: {
-                    type: 'success',
-                    message: 'Your message has been sent.',
-                  },
-                });
-              } else {
-                setFeedback({
-                  4: {
-                    message: 'There was an error sending the message. Please try again.',
-                  },
-                });
-              }
-              setTransactionState(false);
-            })
-            .catch(err => {
-              setFeedback({
-                4: {
-                  message: 'There was an error sending the message. Please try again.',
-                },
-              });
-              setTransactionState(false);
-            });
-        } else {
+        if (!validate.result) {
           const errs = {};
-
           validate.errors.forEach(err => {
             errs[err.code] = { message: err.message };
           });
-
           setFeedback(errs);
           setTransactionState(false);
+          return;
         }
+
+        setFeedback({});
+        setTransactionState(false);
+
+        const { isSuccess } = await contactFormSubmit(validate.data);
+        if (isSuccess) {
+          setFeedback({
+            4: {
+              type: 'success',
+              message: 'Twoja wiadomość została wysłana.',
+            },
+          });
+          return;
+        }
+        setFeedback({
+          4: {
+            message: 'Ups, wystąpił problem. Spróbuj ponownie później.',
+          },
+        });
       }}
     >
       <TextInput
