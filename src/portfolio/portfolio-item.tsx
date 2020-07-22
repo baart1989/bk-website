@@ -28,6 +28,9 @@ export default function PortfolioItem({ data }: PageProps<PortfolioQuery, {}>) {
               <p className="mt-1 flex items-center justify-center">
                 Data realizacji: {data.mdx.frontmatter.date}
               </p>
+              <p className="mt-1 flex items-center justify-center">
+                Adres: {data.mdx.frontmatter.address}
+              </p>
             </div>
           </div>
         </div>
@@ -52,6 +55,7 @@ export const query = graphql`
       body
       frontmatter {
         title
+        address
         investor
         date(formatString: "YYYY")
         description

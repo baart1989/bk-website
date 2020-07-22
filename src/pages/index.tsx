@@ -102,11 +102,11 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
         <ScrollIntoView selector="#offer">
           <Button title="Oferta" className="ml-2" />
         </ScrollIntoView>
-        <ScrollIntoView selector="#team">
+        <ScrollIntoView className="lg:hidden" selector="#team">
           <Button title="Zespół" className="ml-2" />
         </ScrollIntoView>
       </div>
-      <div className="flex justify-center lg:justify-start">
+      <div className="flex justify-center lg:justify-start lg:hidden">
         <ScrollIntoView selector="#portfolio">
           <Button title="Realizacje" />
         </ScrollIntoView>
@@ -230,7 +230,6 @@ export const query = graphql`
           id
           frontmatter {
             title
-            investor
             description
             image: banner {
               id

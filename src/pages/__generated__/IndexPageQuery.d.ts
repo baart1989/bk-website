@@ -80,7 +80,6 @@ export interface IndexPageQuery_portfolio_edges_node_frontmatter_image {
 
 export interface IndexPageQuery_portfolio_edges_node_frontmatter {
   title: string;
-  investor: string | null;
   description: string | null;
   image: IndexPageQuery_portfolio_edges_node_frontmatter_image | null;
 }

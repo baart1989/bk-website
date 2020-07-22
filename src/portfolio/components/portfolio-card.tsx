@@ -7,7 +7,11 @@ import { Parallax } from 'react-tailwind-component';
 import { PortfolioListQuery_allMdx_edges_node } from '../__generated__/PortfolioListQuery';
 import cns from 'classnames';
 
-type ItemPortfolioProps = { data: PortfolioListQuery_allMdx_edges_node; even: boolean };
+type ItemPortfolioProps = { data: Partial<PortfolioListQuery_allMdx_edges_node>; even: boolean };
+
+const truncateText = (text: string, limit = 120) =>
+  text.length > limit ? `${text.substring(0, limit)}...` : text;
+
 export const PortfolioCard: React.FC<ItemPortfolioProps> = ({ data, even }) => {
   const [state, changeState] = useState({
     animated: false,
@@ -76,7 +80,7 @@ export const PortfolioCard: React.FC<ItemPortfolioProps> = ({ data, even }) => {
               <h3 className="text-color-1 text-4xl lg:text-5xl font-bold to-up">
                 {data.frontmatter.title}
               </h3>
-              <p className="lg:mt-4 to-up">{data.frontmatter.description}</p>
+              <p className="lg:mt-4 to-up">{truncateText(data.frontmatter.description)}</p>
               <Button to={data.fields.slug} title="Zobacz więcej" iconRight={<ArrowRight />} />
             </div>
           </div>
