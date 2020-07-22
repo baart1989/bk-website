@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import Helmet from 'react-helmet';
 import Img from 'gatsby-image';
-import ItemPortfolio from '../portfolio/components/portfolio-parallax';
+import ItemPortfolio from '../portfolio/components/portfolio-card';
 import ScrollIntoView from 'react-scroll-into-view';
 import cns from 'classnames';
 
@@ -23,7 +23,7 @@ export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
 
       <BoxedSection title="O nas" text={siteData.aboutText} />
 
-      <Section title="Nasz zespół">
+      <Section title="Nasz zespół" id="team">
         <Team></Team>
       </Section>
 
@@ -33,10 +33,8 @@ export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
         </div>
       </BoxedSection>
 
-      <Section title="Realizacje">
-        <div className="px-4 lg:px-0" id="portfolio">
-          {portfolioList}
-        </div>
+      <Section title="Realizacje" id="portfolio">
+        <div className="px-4 lg:px-0">{portfolioList}</div>
       </Section>
 
       <Section title="Kontakt" id="contact">
@@ -99,10 +97,18 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
       </p>
       <div className="flex justify-center lg:justify-start">
         <ScrollIntoView selector="#contact">
-          <Button title="KONTAKT" />
+          <Button title="Kontakt" />
         </ScrollIntoView>
         <ScrollIntoView selector="#offer">
-          <Button title="OFERTA" className="ml-2" />
+          <Button title="Oferta" className="ml-2" />
+        </ScrollIntoView>
+        <ScrollIntoView selector="#team">
+          <Button title="Zespół" className="ml-2" />
+        </ScrollIntoView>
+      </div>
+      <div className="flex justify-center lg:justify-start">
+        <ScrollIntoView selector="#portfolio">
+          <Button title="Realizacje" />
         </ScrollIntoView>
       </div>
     </React.Fragment>
@@ -216,7 +222,7 @@ export const query = graphql`
     }
     portfolio: allMdx(
       filter: { fields: { sourceName: { eq: "portfolio" } } }
-      limit: 3
+      limit: 8
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {

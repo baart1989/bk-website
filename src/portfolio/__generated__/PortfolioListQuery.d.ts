@@ -8,16 +8,16 @@
 // ====================================================
 
 export interface PortfolioListQuery_allMdx_edges_node_frontmatter_image_childImageSharp_fluid {
-  srcSet: string;
   base64: string | null;
   aspectRatio: number;
   src: string;
+  srcSet: string;
   sizes: string;
 }
 
 export interface PortfolioListQuery_allMdx_edges_node_frontmatter_image_childImageSharp {
-  fluid: PortfolioListQuery_allMdx_edges_node_frontmatter_image_childImageSharp_fluid | null;
   id: string;
+  fluid: PortfolioListQuery_allMdx_edges_node_frontmatter_image_childImageSharp_fluid | null;
 }
 
 export interface PortfolioListQuery_allMdx_edges_node_frontmatter_image {

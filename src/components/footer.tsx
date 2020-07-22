@@ -1,11 +1,12 @@
 import {
   FooterLinksQuery,
-  FooterLinksQuery_site_siteMetadata_footerLinks,
+  FooterLinksQuery_site_siteMetadata_navLinks,
 } from './__generated__/FooterLinksQuery';
 import { Link, graphql, useStaticQuery } from 'gatsby';
 
 import { Logo } from './utils';
 import React from 'react';
+import ScrollIntoView from 'react-scroll-into-view';
 
 export default function footer() {
   const query = useStaticQuery<FooterLinksQuery>(graphql`
@@ -13,11 +14,8 @@ export default function footer() {
       site {
         siteMetadata {
           title
-          footerLinks {
-            name
-            url
-          }
           navLinks {
+            id
             name
             url
           }
@@ -26,9 +24,7 @@ export default function footer() {
     }
   `);
 
-  const allLinks = [...query.site.siteMetadata.navLinks, ...query.site.siteMetadata.footerLinks];
-
-  const footerLinks = allLinks.map((item, index) => (
+  const footerLinks = query.site.siteMetadata.navLinks.map((item, index) => (
     <ListItem data={item} key={`footer-n-l-${index}`} />
   ));
 
@@ -52,14 +48,12 @@ export default function footer() {
   );
 }
 
-const ListItem: React.FC<{ data: FooterLinksQuery_site_siteMetadata_footerLinks }> = ({ data }) => {
+const ListItem: React.FC<{ data: FooterLinksQuery_site_siteMetadata_navLinks }> = ({ data }) => {
   return (
-    <>
+    <ScrollIntoView selector={data.id}>
       <div className="px-5 py-2 animated-link-parent">
-        <Link to={data.url} className="text-base leading-6">
-          {data.name}
-        </Link>
+        <a className="text-base leading-6">{data.name}</a>
       </div>
-    </>
+    </ScrollIntoView>
   );
 };

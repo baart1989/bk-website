@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { Link } from './utils';
 import { NavigationListQuery } from './__generated__/NavigationListQuery';
 import React from 'react';
+import ScrollIntoView from 'react-scroll-into-view';
 import { ThemeIcons } from './ui';
 import cns from 'classnames';
 import { slugify } from 'react-frontend-common';
@@ -34,6 +35,7 @@ const List: React.FC<NavigationListProps> = ({
           navLinks {
             name
             url
+            id
           }
           darkmode
           switchTheme
@@ -74,16 +76,13 @@ const List: React.FC<NavigationListProps> = ({
 
 const ListItem = ({ data, active, liClassName }) => {
   return (
-    <li className={cns(liClassName, { active: active })}>
-      <Link
-        to={data.url}
-        title={data.name}
-        onClick={data.callbackFnc}
-        className="link text-white"
-      >
-        <span>{data.name}</span>
-      </Link>
-    </li>
+    <ScrollIntoView smooth={true} selector={data.id}>
+      <li className={cns(liClassName, { active: active })}>
+        <div>
+          <span>{data.name}</span>
+        </div>
+      </li>
+    </ScrollIntoView>
   );
 };
 

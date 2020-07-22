@@ -65,6 +65,7 @@ export interface IndexPageQuery_portfolio_edges_node_frontmatter_image_childImag
 }
 
 export interface IndexPageQuery_portfolio_edges_node_frontmatter_image_childImageSharp {
+  id: string;
   fluid: IndexPageQuery_portfolio_edges_node_frontmatter_image_childImageSharp_fluid | null;
 }
 

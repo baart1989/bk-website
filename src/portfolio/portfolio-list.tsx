@@ -4,9 +4,8 @@ import React, { useEffect } from 'react';
 import Helmet from 'react-helmet';
 import { PaginatedPageContext } from '../../gatsby-node';
 import Pagination from '../components/pagination';
+import PortfolioCard from './components/portfolio-card';
 import { PortfolioListQuery } from './__generated__/PortfolioListQuery';
-import PortfolioParallax from './components/portfolio-parallax';
-import { Heading } from '../components/ui';
 
 export const PortfolioList: React.FC<PageProps<PortfolioListQuery, PaginatedPageContext>> = ({
   data,
@@ -17,7 +16,7 @@ export const PortfolioList: React.FC<PageProps<PortfolioListQuery, PaginatedPage
   }, []);
 
   const portfolioItems = data.allMdx.edges.map((item, i) => (
-    <PortfolioParallax data={item.node} key={item.node.id} even={(i + 1) % 2 === 0} />
+    <PortfolioCard data={item.node} key={item.node.id} even={(i + 1) % 2 === 0} />
   ));
 
   return (

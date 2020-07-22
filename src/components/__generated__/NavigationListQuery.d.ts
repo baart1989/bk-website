@@ -10,6 +10,7 @@
 export interface NavigationListQuery_site_siteMetadata_navLinks {
   name: string | null;
   url: string | null;
+  id: string | null;
 }
 
 export interface NavigationListQuery_site_siteMetadata {

@@ -7,19 +7,14 @@
 // GraphQL query operation: FooterLinksQuery
 // ====================================================
 
-export interface FooterLinksQuery_site_siteMetadata_footerLinks {
-  name: string | null;
-  url: string | null;
-}
-
 export interface FooterLinksQuery_site_siteMetadata_navLinks {
+  id: string | null;
   name: string | null;
   url: string | null;
 }
 
 export interface FooterLinksQuery_site_siteMetadata {
   title: string | null;
-  footerLinks: (FooterLinksQuery_site_siteMetadata_footerLinks | null)[] | null;
   navLinks: (FooterLinksQuery_site_siteMetadata_navLinks | null)[] | null;
 }
 
