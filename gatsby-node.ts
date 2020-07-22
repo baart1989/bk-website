@@ -16,6 +16,15 @@ const paginatedPageContext = (
     currentPage: currentIndex + 1,
   };
 };
+
+export type ItemPageContext = {
+  slug: string;
+  previousPath: string;
+  nextPath: string;
+  currentCount: number;
+  totalPagesCount: number;
+};
+
 export type PaginatedPageContext = ReturnType<typeof paginatedPageContext>;
 
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, getNode, actions }) => {
@@ -72,20 +81,35 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
   const sources: { [id: string]: any[] } = {};
 
+  // we need sources reference for next/previous path
   result.data.all.edges.forEach(({ node }) => {
     const template = node.fields.sourceName;
+    const sourceItems = sources[template] || [];
+    sourceItems.push(node);
+    sources[template] = sourceItems;
+  });
+
+  result.data.all.edges.forEach(({ node }) => {
+    const template = node.fields.sourceName;
+    const edges = sources[node.fields.sourceName];
+
+    const currentIndex = edges.findIndex(edge => edge.fields.slug === node.fields.slug);
+    const nextIndex = currentIndex + 1;
+    const previousIndex = currentIndex - 1;
+
+    const context: ItemPageContext = {
+      slug: node.fields.slug,
+      previousPath: edges[previousIndex] ? edges[previousIndex].fields.slug : undefined,
+      nextPath: edges[nextIndex] ? edges[nextIndex].fields.slug : undefined,
+      currentCount: currentIndex + 1,
+      totalPagesCount: edges.length,
+    };
+
     createPage({
       path: node.fields.slug,
       component: path.resolve(`./src/${template}/${template}-item.tsx`),
-      context: {
-        slug: node.fields.slug,
-      },
+      context: context,
     });
-
-    const sourceItems = sources[template] || [];
-    sourceItems.push(node);
-
-    sources[template] = sourceItems;
   });
 
   Object.keys(siteMetadata.sourcePages).forEach(sourceName => {

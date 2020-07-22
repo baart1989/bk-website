@@ -28,6 +28,7 @@
     "gatsby-plugin-codegen": "^1.1.1",
     "gatsby-plugin-disqus": "^1.1.4",
     "gatsby-plugin-mdx": "^1.1.3",
+    "gatsby-plugin-modal-routing": "^1.2.0",
     "gatsby-plugin-postcss": "^2.2.1",
     "gatsby-plugin-react-helmet": "^3.2.1",
     "gatsby-plugin-sharp": "^2.5.3",
@@ -41,6 +42,7 @@
     "react-feather": "^2.0.3",
     "react-frontend-common": "git+ssh://git@bitbucket.org/bszpinda/react-frontend-common.git",
     "react-helmet": "^5.2.1",
+    "react-modal": "^3.11.2",
     "react-scroll-into-view": "^1.8.2",
     "react-tailwind-component": "git+ssh://git@bitbucket.org/bszpinda/react-tailwind-component.git",
     "react-toastify": "^6.0.5"

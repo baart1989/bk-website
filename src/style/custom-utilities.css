@@ -213,6 +213,15 @@ p {
 .portfolio-item.begin-animation .to-up {
   transform: translate(0, 0px);
 }
+/* CUSTOM CSS */
+.btn-secondary {
+  @apply bg-secondary transition duration-150 ease-in-out px-6 py-3 my-3 leading-6;
+  color: #fff;
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+  @apply bg-secondary-dark outline-none;
+}
 
 .Toastify__toast {
   width: 100%;
@@ -222,12 +231,40 @@ p {
   margin-bottom: 1rem;
   border-radius: 0.375rem;
 }
-/* CUSTOM CSS */
-.btn-secondary {
-  @apply bg-secondary transition duration-150 ease-in-out px-6 py-3 my-3 leading-6;
-  color: #fff;
+
+.ReactModal__Html--open {
+  overflow: hidden;
 }
 
-.btn-secondary:hover, .btn-secondary:focus {
-  @apply bg-secondary-dark outline-none;
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+/* react-modal transitions */
+.ReactModal__Overlay {
+  overflow: auto;
+  opacity: 0;
+  transform: translateY(-10%);
+  transition: opacity 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95), transform 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.ReactModal__Content--after-open {
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+}
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 999;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+  transform: translateY(-10%);
+}
+
+.ReactModal__Content {
+  padding: 0 !important;
 }

@@ -81,7 +81,12 @@ export const PortfolioCard: React.FC<ItemPortfolioProps> = ({ data, even }) => {
                 {data.frontmatter.title}
               </h3>
               <p className="lg:mt-4 to-up">{truncateText(data.frontmatter.description)}</p>
-              <Button to={data.fields.slug} title="Zobacz więcej" iconRight={<ArrowRight />} />
+              <Button
+                to={data.fields.slug}
+                state={{ modal: true }}
+                title="Zobacz więcej"
+                iconRight={<ArrowRight />}
+              />
             </div>
           </div>
         </div>
