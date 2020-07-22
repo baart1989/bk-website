@@ -27,7 +27,7 @@ p {
 }
 
 .nav .nav-links li {
-  @apply relative inline-block mx-2;
+  @apply relative inline-block mx-4;
 }
 
 .nav .nav-links li a.link{
@@ -182,6 +182,36 @@ p {
   html {
       font-size: 15px;
   }
+}
+
+.portfolio-item .image {
+  clip-path: polygon(0 0, 0% 0, 0% 100%, 0% 100%);
+  transition: clip-path 0.50s;
+  transition-timing-function: ease-in-out;
+  z-index: 3;
+  transform: translateY(0);
+}
+
+.portfolio-item.even .image {
+  clip-path: polygon(100% 0, 100% 0, 100% 99%, 100% 100%);
+}
+
+
+.portfolio-item.begin-animation .image{
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.portfolio-item .to-up {
+  transform: translate(0, 50px);
+  transition: transform 0.25s;
+}
+
+.portfolio-item .to-up:nth-child(2){
+  transition-delay: 0.2s;
+}
+
+.portfolio-item.begin-animation .to-up {
+  transform: translate(0, 0px);
 }
 
 .Toastify__toast {
