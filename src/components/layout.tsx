@@ -2,6 +2,7 @@ import { Moon, Sun } from 'react-feather';
 import React, { useEffect, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
+import CookieBox from './cookie';
 import Footer from './footer';
 import Helmet from 'react-helmet';
 import Navbar from './navigation';
@@ -21,6 +22,7 @@ export const Layout = ({ children }) => {
           icon
           switchTheme
           darkmode
+          cookiePolicy
         }
       }
     }
@@ -39,6 +41,9 @@ export const Layout = ({ children }) => {
     },
   };
 
+  const cookiePolicyEnabled = siteMetadata.cookiePolicy;
+
+  const [cookieShown, setCookieShown] = useState(false);
   const [currentTheme, changeTheme] = useState<ThemeType>(
     siteMetadata.darkmode ? 'theme-dark' : 'theme-light',
   );
@@ -47,6 +52,9 @@ export const Layout = ({ children }) => {
     if (localStorage.getItem('theme')) {
       const t = localStorage.getItem('theme') as ThemeType;
       changeTheme(t);
+    }
+    if (localStorage.getItem('cookie-accept')) {
+      setCookieShown(true);
     }
   }, []);
 
@@ -58,6 +66,12 @@ export const Layout = ({ children }) => {
     localStorage.setItem('theme', next);
   };
 
+  const onCookieAccept = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    localStorage.setItem('cookie-accept', '1');
+    setCookieShown(true);
+  };
+
   return (
     <>
       <Head siteIcon={siteMetadata.icon} />
@@ -65,6 +79,9 @@ export const Layout = ({ children }) => {
       <Navbar currentTheme={currentTheme} switchTheme={switchTheme} themes={themes} />
       <div className="bg-bg">{children}</div>
       <Footer />
+      {!!siteMetadata.cookiePolicy && !cookieShown && (
+        <CookieBox text={siteMetadata.cookiePolicy} onChange={onCookieAccept} />
+      )}
     </>
   );
 };

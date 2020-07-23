@@ -11,6 +11,7 @@ export interface ThemeQuery_site_siteMetadata {
   icon: string | null;
   switchTheme: boolean | null;
   darkmode: boolean | null;
+  cookiePolicy: string | null;
 }
 
 export interface ThemeQuery_site {

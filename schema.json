@@ -18711,6 +18711,16 @@
               "defaultValue": null
             },
             {
+              "name": "cookiePolicy",
+              "description": "",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "StringQueryOperatorInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "navLinks",
               "description": "",
               "type": {
@@ -19389,6 +19399,18 @@
               "deprecationReason": null
             },
             {
+              "name": "cookiePolicy",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "navLinks",
               "description": null,
               "args": [],
@@ -19877,6 +19899,12 @@
             },
             {
               "name": "siteMetadata___switchTheme",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "siteMetadata___cookiePolicy",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null

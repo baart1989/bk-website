@@ -32,6 +32,8 @@ const siteMetadata = {
   portfolioItemsPerPage: 20,
   darkmode: true,
   switchTheme: false,
+  // cookiePolicy: 'Serwis wykorzystuje pliki Cookies do celów statystycznych. Jeśli nie blokujesz tych plików, to zgadzasz się na ich użycie oraz zapisanie w pamięci urządzenia. Pamiętaj, że możesz samodzielnie zarządzać cookies, zmieniając ustawienia przeglądarki.',
+  cookiePolicy: '',
   sourcePages: {},
   navLinks: [
     {
