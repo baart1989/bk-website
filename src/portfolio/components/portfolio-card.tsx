@@ -60,7 +60,7 @@ export const PortfolioCard: React.FC<ItemPortfolioProps> = ({ data, even }) => {
       <div className="large-container mx-auto">
         <div
           className={cns(
-            'my-4 py-8 lg:py-24 portfolio-item md:flex',
+            'my-4 py-8 lg:py-12 portfolio-item md:flex',
             { 'begin-animation': state.animated },
             {
               'even flex-row-reverse': even,

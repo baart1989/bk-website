@@ -83,7 +83,7 @@ module.exports = {
         'color-2': 'var(--color-2)',
         primary: 'var(--primary)',
         'primary-gradient-color': '#cdde4e',
-        'secondary-gradient-color': '#881b45',
+        'secondary-gradient-color': '#5F6D81',
         medium: {
           light: 'var(--medium-light)',
           default: 'var(--medium)',

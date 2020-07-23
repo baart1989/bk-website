@@ -1,8 +1,8 @@
 import { Button, Heading } from '../components/ui';
 import { Description as ContactDescription, Form } from '../components/contact';
 import { IndexPageQuery, IndexPageQuery_site_siteMetadata } from './__generated__/IndexPageQuery';
-import { Projects, Team } from '../components/bk';
 import { PageProps, graphql } from 'gatsby';
+import { Projects, Team } from '../components/bk';
 import React, { useEffect, useRef, useState } from 'react';
 
 import Helmet from 'react-helmet';
@@ -21,20 +21,20 @@ export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
       <Helmet title="Start" />
       <Wall data={siteData} image={data.wallImage.childImageSharp.fluid} />
 
-      <BoxedSection title="O nas" text={siteData.aboutText} />
+      <About title="O nas" text={siteData.aboutText} />
 
       <Section title="Nasz zespół" id="team">
         <Team></Team>
       </Section>
 
-      <BoxedSection title="Oferta" text={siteData.offerText} id="offer">
+      <Offer title="Oferta" text={siteData.offerText} id="offer">
         <div className="container mx-auto">
           <Projects />
         </div>
-      </BoxedSection>
+      </Offer>
 
       <Section title="Realizacje" id="portfolio">
-        <div className="px-4 lg:px-0">{portfolioList}</div>
+        {portfolioList}
       </Section>
 
       <Section title="Kontakt" id="contact">
@@ -144,11 +144,25 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
   );
 };
 
-const BoxedSection = ({ title, text, id = undefined, children = null }) => {
+const About = ({ title, text, id = undefined, children = null }) => {
   return (
     <>
       <div className="boxed">
-        <div id={id} className="px-4 py-20 text-center lg:py-40 lg:px-0">
+        <div id={id} className="px-4 py-12 text-center lg:py-20 lg:px-0">
+          <Heading title={title} />
+          <p className="mt-5 text-lg">{text}</p>
+        </div>
+      </div>
+      {children}
+    </>
+  );
+};
+
+const Offer = ({ title, text, id = undefined, children = null }) => {
+  return (
+    <>
+      <div className="boxed">
+        <div id={id} className="px-4 pt-20 pb-10 text-center lg:px-0">
           <Heading title={title} />
           <p className="mt-5 text-lg">{text}</p>
         </div>
@@ -161,7 +175,7 @@ const BoxedSection = ({ title, text, id = undefined, children = null }) => {
 const Section = ({ id = undefined, title, children = null }) => {
   return (
     <div className="container mx-auto">
-      <div id={id} className="pt-20 pb-10 lg:pt-40 lg:pb-20 text-center">
+      <div id={id} className="pt-20 pb-10 lg:pt-30 lg:pb-20 text-center">
         <Heading title={title} />
       </div>
       {children}
