@@ -1,12 +1,13 @@
 import { graphql, useStaticQuery } from 'gatsby';
 
-import React from 'react';
 import { Link } from '../components/utils';
+import React from 'react';
 
 const ListItem = ({ data }) => {
   return (
     <li className="inline-block social-link mx-2">
       <Link
+        target="_blank"
         href={data.url}
         title={data.name}
         className="rounded-full inline-block transition-shadow duration-300 hover:shadow-2xl"
