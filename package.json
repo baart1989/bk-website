@@ -44,8 +44,7 @@
     "react-helmet": "^5.2.1",
     "react-modal": "^3.11.2",
     "react-scroll-into-view": "^1.8.2",
-    "react-tailwind-component": "git+ssh://git@bitbucket.org/bszpinda/react-tailwind-component.git",
-    "react-toastify": "^6.0.5"
+    "react-tailwind-component": "git+ssh://git@bitbucket.org/bszpinda/react-tailwind-component.git"
   },
   "devDependencies": {
     "@babel/compat-data": "^7.10.1",

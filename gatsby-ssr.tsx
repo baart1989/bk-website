@@ -1,4 +1,3 @@
-import 'react-toastify/dist/ReactToastify.min.css';
 import './src/style/index.css';
 
 import Api from '@aws-amplify/api';

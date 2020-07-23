@@ -11,11 +11,9 @@ import { PortfolioQuery } from './__generated__/PortfolioQuery';
 import React from 'react';
 import { Redirect } from '@reach/router';
 import { X } from 'react-feather';
-import cns from 'classnames';
 import { useKeyPress } from 'react-frontend-common';
 
 export default function PortfolioItem({
-  path,
   data,
   pageContext,
 }: PageProps<PortfolioQuery, ItemPageContext>) {
@@ -46,7 +44,7 @@ export default function PortfolioItem({
           <div className="p-6">
             <div className="flex justify-between items-center pb-6">
               <Link
-                className="flex items-center py-2 px-4 mr-4 bg-medium-light hover:text-medium rounded-md text-sm"
+                className="flex items-center py-2 px-4 mr-4 bg-medium-light hover:text-color-secondary rounded-md text-sm"
                 state={{
                   noScroll: true,
                 }}
@@ -59,10 +57,18 @@ export default function PortfolioItem({
                 {currentCount}/{totalPagesCount}
               </div>
               <div>
-                <Link className="hover:text-medium" state={{ modal: true }} to={previousPath}>
+                <Link
+                  className="hover:text-color-secondary"
+                  state={{ modal: true }}
+                  to={previousPath}
+                >
                   Poprzedni
                 </Link>
-                <Link className="ml-2 hover:text-medium" state={{ modal: true }} to={nextPath}>
+                <Link
+                  className="ml-2 hover:text-color-secondary"
+                  state={{ modal: true }}
+                  to={nextPath}
+                >
                   Następny
                 </Link>
               </div>
@@ -120,7 +126,6 @@ export const query = graphql`
           publicURL
           childImageSharp {
             fluid(maxWidth: 1920) {
-              srcSet
               ...GatsbyImageSharpFluid
             }
             id

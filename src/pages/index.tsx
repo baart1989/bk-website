@@ -1,15 +1,15 @@
 import { Button, Heading } from '../components/ui';
 import { Description as ContactDescription, Form } from '../components/contact';
 import { IndexPageQuery, IndexPageQuery_site_siteMetadata } from './__generated__/IndexPageQuery';
-import { PageProps, graphql } from 'gatsby';
 import { Projects, Team } from '../components/bk';
+import { PageProps, graphql } from 'gatsby';
 import React, { useEffect, useRef, useState } from 'react';
 
 import Helmet from 'react-helmet';
 import Img from 'gatsby-image';
 import ItemPortfolio from '../portfolio/components/portfolio-card';
+import { Logo } from '../components/utils';
 import ScrollIntoView from 'react-scroll-into-view';
-import cns from 'classnames';
 
 export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
   const siteData = data.site.siteMetadata;
@@ -79,20 +79,21 @@ const Wall: React.FC<{ data: IndexPageQuery_site_siteMetadata; image: any }> = (
 
   const innerComponents = (
     <React.Fragment>
-      <div className="title bg-bg">
-        <h1
+      <div className="flex justify-center lg:justify-start pb-4">
+        <Logo />
+        {/* <h1
           className={cns(`text-6xl relative lg:text-7xl`, {
             uppercase: data.capitalizeTitleOnHome,
           })}
         >
           <span {...spanAttrs}></span>
           {data.title}
-        </h1>
+        </h1> */}
       </div>
-      <p className="text-lg lg:text-xl text-gray-200 lg:text-color-default font-bold pt-4 lg:pt-0">
+      <p className="text-lg lg:text-xl text-color-secondary font-bold pt-4 lg:pt-0">
         {data.introTag}
       </p>
-      <p className="text-base mt-4 lg:text-lg text-gray-300 lg:text-color-default">
+      <p className="text-base mt-4 lg:text-lg text-white lg:text-color-default">
         {data.description}
       </p>
       <div className="flex justify-center lg:justify-start">
@@ -222,7 +223,7 @@ export const query = graphql`
     }
     portfolio: allMdx(
       filter: { fields: { sourceName: { eq: "portfolio" } } }
-      limit: 8
+      limit: 10
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {

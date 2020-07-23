@@ -120,7 +120,7 @@ export const TextInput = ({
       })}
     >
       <p className="text-color-secondary">{label}</p>
-      <div className="bg-gradient-primary p-2px rounded-sm">{elem}</div>
+      <div className="bg-primary p-2px rounded-sm">{elem}</div>
       {footer && <>{footer}</>}
     </div>
   );

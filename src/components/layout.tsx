@@ -7,7 +7,6 @@ import Helmet from 'react-helmet';
 import Navbar from './navigation';
 import SEO from './seo';
 import { ThemeQuery } from './__generated__/ThemeQuery';
-import { ToastContainer } from 'react-toastify';
 
 export type Theme = { name: ThemeType; label: string; icon: JSX.Element };
 export type ThemeType = 'theme-light' | 'theme-dark';
@@ -63,12 +62,6 @@ export const Layout = ({ children }) => {
     <>
       <Head siteIcon={siteMetadata.icon} />
       <SEO />
-      <ToastContainer
-        className="max-w-md w-full"
-        bodyClassName="flex"
-        toastClassName="bg-medium-light text-color-default"
-        closeButton={false}
-      />
       <Navbar currentTheme={currentTheme} switchTheme={switchTheme} themes={themes} />
       <div className="bg-bg">{children}</div>
       <Footer />

@@ -1,6 +1,10 @@
 [
   { "name": "Dorota Szpinda", "title": "Właściciel", "baseImagePath": "employee1.jpg" },
-  { "name": "Jarosław Kowalski", "title": "Konstruktor", "baseImagePath": "employee2.jpg" },
-  { "name": "Agnieszka Kowalski", "title": "Konstruktor", "baseImagePath": "employee3.jpg" },
-  { "name": "Sebastian Kowalski", "title": "Konstruktor", "baseImagePath": "employee4.jpg" }
+  { "name": "Jarosław Kowalski", "title": "Współpraca", "baseImagePath": "employee2.jpg" },
+  { "name": "Agnieszka Ziomoch-Smuga", "title": "Konstruktor", "baseImagePath": "employee3.jpg" },
+  { "name": "Jan Mrozowski", "title": "Konstruktor" },
+  { "name": "Sonia Machowska", "title": "Konstruktor" },
+  { "name": "Michał Boczoń", "title": "Konstruktor" },
+  { "name": "Aleksandra Gaża", "title": "Konstruktor" }
 ]
+
