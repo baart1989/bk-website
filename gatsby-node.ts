@@ -52,7 +52,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
   const result = await graphql<any>(`
     query GatsbyNodeQuery {
-      all: allMdx {
+      all: allMdx(sort: { order: DESC, fields: frontmatter___date }) {
         edges {
           node {
             id
