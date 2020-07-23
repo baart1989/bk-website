@@ -3,12 +3,7 @@
 // this is an auto generated file. This will be overwritten
 
 export const getClientEvents = /* GraphQL */ `
-  query GetClientEvents(
-    $clientId: String
-    $limit: Int
-    $nextToken: String
-    $startDate: String!
-  ) {
+  query GetClientEvents($clientId: String, $limit: Int, $nextToken: String, $startDate: String!) {
     getClientEvents(
       clientId: $clientId
       limit: $limit

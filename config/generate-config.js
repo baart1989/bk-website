@@ -29,8 +29,6 @@ const createConfigFile = async () => {
   const pool = (await getCognitoPool(baseName)) || { Id: '', ClientId: '' };
   const poolClient = await getCognitoPoolClient(pool.Id);
 
-  console.log({ api })
-
   const schema = await getApiSchema(api.apiId);
   const config = createConfig(
     env,
