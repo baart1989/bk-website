@@ -34,7 +34,7 @@ export default function IndexPage({ data }: PageProps<IndexPageQuery>) {
       </Offer>
 
       <Section title="Realizacje" id="portfolio">
-        {portfolioList}
+        <div className="px-8 lg:px-0">{portfolioList}</div>
       </Section>
 
       <Section title="Kontakt" id="contact">
