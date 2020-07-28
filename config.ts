@@ -30,7 +30,7 @@ const siteMetadata = {
   offerText: `Zapewniamy profesjonalną współpracę przy realizacji procesu budowlanego we wszystkich jego fazach, od koncepcji poprzez projekt, do realizacji włącznie.`,
   author: `BIT Bartosz Szpinda`,
   portfolioItemsPerPage: 20,
-  darkmode: true,
+  darkmode: false,
   switchTheme: false,
   // cookiePolicy: 'Serwis wykorzystuje pliki Cookies do celów statystycznych. Jeśli nie blokujesz tych plików, to zgadzasz się na ich użycie oraz zapisanie w pamięci urządzenia. Pamiętaj, że możesz samodzielnie zarządzać cookies, zmieniając ustawienia przeglądarki.',
   cookiePolicy: '',
