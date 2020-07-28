@@ -1,3 +1,4 @@
+import { ArrowLeft, ArrowRight, X } from 'react-feather';
 import { Col, Row } from '../components/shortcodes';
 import { PageProps, graphql, navigate } from 'gatsby';
 
@@ -10,7 +11,6 @@ import { ModalRoutingContext } from 'gatsby-plugin-modal-routing';
 import { PortfolioQuery } from './__generated__/PortfolioQuery';
 import React from 'react';
 import { Redirect } from '@reach/router';
-import { X } from 'react-feather';
 import { useKeyPress } from 'react-frontend-common';
 
 export default function PortfolioItem({
@@ -37,39 +37,45 @@ export default function PortfolioItem({
     return null;
   }
 
+  const CloseButton = ({ closeTo, modal }) => (
+    <Link
+      className="flex items-center py-2 px-4 mr-4 bg-medium-light hover:text-color-secondary rounded-md text-sm"
+      state={{
+        noScroll: true,
+      }}
+      to={modal ? closeTo : '/'}
+    >
+      <X className="mr-1" size={16} />
+      Zamknij
+    </Link>
+  );
+
   return (
     <ModalRoutingContext.Consumer>
       {({ modal, closeTo }) =>
         modal ? (
           <div className="p-6">
             <div className="flex justify-between items-center pb-6">
-              <Link
-                className="flex items-center py-2 px-4 mr-4 bg-medium-light hover:text-color-secondary rounded-md text-sm"
-                state={{
-                  noScroll: true,
-                }}
-                to={modal ? closeTo : '/'}
-              >
-                <X className="mr-1" size={16} />
-                Zamknij
-              </Link>
+              <CloseButton closeTo={closeTo} modal={modal} />
               <div>
                 {currentCount}/{totalPagesCount}
               </div>
-              <div>
+              <div className="flex items-center">
                 <Link
                   className="hover:text-color-secondary"
                   state={{ modal: true }}
                   to={previousPath}
                 >
-                  Poprzedni
+                  <span className="hidden lg:block">Poprzedni</span>
+                  <ArrowLeft className="lg:hidden" />
                 </Link>
                 <Link
                   className="ml-2 hover:text-color-secondary"
                   state={{ modal: true }}
                   to={nextPath}
                 >
-                  Następny
+                  <span className="hidden lg:block">Następny</span>
+                  <ArrowRight className="ml-2 lg:hidden" />
                 </Link>
               </div>
             </div>
@@ -77,7 +83,7 @@ export default function PortfolioItem({
               <Img fluid={data.mdx.frontmatter.banner.childImageSharp.fluid} />
               <div className="flex items-center justify-center relative lg:absolute w-full h-full top-0 left-0">
                 <div className="hidden lg:block absolute w-full h-full bg-black opacity-50"></div>
-                <div className="px-4 py-8 lg:p-0 relative z-10 text-center lg:text-white bg-bgalt lg:bg-transparent">
+                <div className="px-4 py-8 lg:p-0 relative z-10 text-center lg:text-white">
                   <h2 className="font-bold text-color-1 lg:text-white">
                     {data.mdx.frontmatter.title}
                   </h2>
@@ -103,10 +109,13 @@ export default function PortfolioItem({
                 <MDXRenderer>{data.mdx.body}</MDXRenderer>
               </MDXProvider>
             </div>
+            <div className="flex justify-center lg:justify-start items-center pb-6">
+              <CloseButton closeTo={closeTo} modal={modal} />
+            </div>
           </div>
         ) : (
-          <Redirect to="/" noThrow={true} />
-        )
+            <Redirect to="/" noThrow={true} />
+          )
       }
     </ModalRoutingContext.Consumer>
   );
