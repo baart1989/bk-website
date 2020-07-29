@@ -26,6 +26,7 @@ export interface EmployeeQuery_items_edges_node {
   id: string;
   name: string | null;
   title: string | null;
+  email: string | null;
   baseImagePath: string | null;
   localFile: EmployeeQuery_items_edges_node_localFile | null;
 }

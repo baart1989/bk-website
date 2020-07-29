@@ -27,7 +27,7 @@ p {
 }
 
 .nav .nav-links li {
-  @apply relative inline-block mx-4;
+  @apply relative inline-block mx-4 px-1 cursor-pointer;
 }
 
 .nav .nav-links li a.link{
@@ -36,12 +36,12 @@ p {
 
 .nav .nav-links li:before{
   content: "";
-  @apply absolute w-0 h-0 bg-primary left-0 right-0 bottom-0 top-0 m-auto opacity-25;
+  @apply absolute w-0 h-0 bg-primary left-0 right-0 bottom-0 top-0 m-auto opacity-50;
   transition: width .25s, height .25s;
 }
 
 .nav .nav-links li.active:before ,.nav .nav-links li:hover:before {
-  @apply w-6 h-6;
+  @apply w-8 h-8;
 }
 
 .nav .nav-links .theme-switcher:before{

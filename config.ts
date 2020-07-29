@@ -74,8 +74,8 @@ const siteMetadata = {
   contact: {
     api_url: 'https://dihi737yujcapgxqltt3feavhu.appsync-api.eu-central-1.amazonaws.com/graphql',
     description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet accumsan arcu. Proin ac consequat arcu.`,
-    mail: 'dorota.szpinda@be37.pl',
-    phone: '608-691-246',
+    mail: ['biuro@be37.pl', 'dorota.szpinda@be37.pl'],
+    phone: ['12 346 18 25', '664 492 728', '608 691 246'],
     navUrl:
       'https://www.google.com/maps/search/?api=1&query=50.0270367,19.9017593&query_place_id=ChIJH3v1f6NcFkcRII9B8MORPfE',
     address: 'ul. Na Grządkach 5/7 \n30-421 Kraków',

@@ -26,8 +26,8 @@ export interface IndexPageQuery_wallImage {
 export interface IndexPageQuery_site_siteMetadata_contact {
   api_url: string | null;
   description: string | null;
-  mail: string | null;
-  phone: string | null;
+  mail: (string | null)[] | null;
+  phone: (string | null)[] | null;
   address: string | null;
   navUrl: string | null;
 }

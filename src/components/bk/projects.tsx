@@ -1,9 +1,9 @@
 import React from 'react';
 
 const projectListItems = [
-  'Projekty przetargowe',
   'Projekty koncepcyjne',
   'Projekty budowlane',
+  'Projekty przetargowe',
   'Projekty wykonawcze',
   'Projekty rozbiórki',
   'Projekty autorskie',

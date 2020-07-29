@@ -3,7 +3,7 @@ import { Loader, Mail, MapPin, Phone, Send } from 'react-feather';
 import React, { useState } from 'react';
 import { beforeContactFormSubmit, contactFormSubmit } from '../../config';
 
-import { ContactQuery_site_siteMetadata_contact } from '../pages/__generated__/ContactQuery';
+import { IndexPageQuery_site_siteMetadata_contact } from '../pages/__generated__/IndexPageQuery';
 import { Link } from './utils';
 import SocialLinks from './sociallinks';
 
@@ -127,31 +127,32 @@ const Form: React.FC<{ api: string }> = () => {
   );
 };
 
-const Description: React.FC<{ data: ContactQuery_site_siteMetadata_contact }> = ({ data }) => {
+const Description: React.FC<{ data: IndexPageQuery_site_siteMetadata_contact }> = ({ data }) => {
   return (
     <div>
       {data.description && <p>{data.description}</p>}
       <ul className="my-4">
-        {data.mail && (
-          <li className="flex items-center">
+        {data.mail.map((mail, i) => (
+          <li key={`email-contact-${i}`} className="flex items-center">
             <span className="icon">
               <Mail />
             </span>
-            <a className="ml-4" href={'mailto:' + data.mail}>
-              {data.mail}
+            <a className="ml-4" href={'mailto:' + mail}>
+              {mail}
             </a>
           </li>
-        )}
-        {data.phone && (
-          <li className="flex items-center mt-4">
+        ))}
+        <div className="mt-4"></div>
+        {data.phone.map((phone, i) => (
+          <li key={`phone-contact-${i}`} className="flex items-center">
             <span className="icon">
               <Phone />
             </span>
-            <Link className="ml-4" href={'tel:' + data.phone}>
-              {data.phone}
+            <Link className="ml-4" href={'tel:' + phone}>
+              {phone}
             </Link>
           </li>
-        )}
+        ))}
         {data.address && (
           <li className="flex items-start mt-4">
             <span className="mt-1 icon">

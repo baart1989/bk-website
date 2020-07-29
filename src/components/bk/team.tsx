@@ -5,7 +5,7 @@ import BackgroundImage from 'gatsby-background-image';
 import { EmployeeQuery } from './__generated__/EmployeeQuery';
 import React from 'react';
 
-const EmployeeImage = ({ image, title, name }) => {
+const EmployeeImage = ({ image, title, name, email }) => {
   const backgroundPositionY = ['-400px', '-800px'];
   const [hoverRef, isHovered] = useHover();
   return (
@@ -20,15 +20,18 @@ const EmployeeImage = ({ image, title, name }) => {
       >
         <div ref={hoverRef} className="w-full h-full"></div>
       </BackgroundImage>
-      <div>
+      <div className="text-center">
         <p>{title}</p>
         <h6>{name}</h6>
+        <a className="text-sm" href={`mailto:${email}`}>
+          {email}
+        </a>
       </div>
     </div>
   );
 };
 
-const EmployeeNoImage = ({ title, name }) => {
+const EmployeeNoImage = ({ title, name, email }) => {
   return (
     <div className="m-4 flex flex-col justify-center">
       <div
@@ -42,9 +45,12 @@ const EmployeeNoImage = ({ title, name }) => {
           </svg>
         </span>
       </div>
-      <div>
+      <div className="text-center">
         <p>{title}</p>
         <h6>{name}</h6>
+        <a className="text-sm" href={`mailto:${email}`}>
+          {email}
+        </a>
       </div>
     </div>
   );
@@ -59,6 +65,7 @@ export const Team = () => {
             id
             name
             title
+            email
             baseImagePath
             localFile {
               childImageSharp {
@@ -85,13 +92,19 @@ export const Team = () => {
           key={node.id}
           title={node.title}
           name={node.name}
+          email={node.email}
           image={node.localFile ? node.localFile.childImageSharp.fixed : null}
         />,
       );
       return;
     }
     teamMembers.push(
-      <EmployeeNoImage key={node.id} title={node.title} name={node.name}></EmployeeNoImage>,
+      <EmployeeNoImage
+        key={node.id}
+        title={node.title}
+        name={node.name}
+        email={node.email}
+      ></EmployeeNoImage>,
     );
   });
 
