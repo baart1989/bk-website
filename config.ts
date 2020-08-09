@@ -73,7 +73,7 @@ const siteMetadata = {
   ],
   contact: {
     api_url: 'https://dihi737yujcapgxqltt3feavhu.appsync-api.eu-central-1.amazonaws.com/graphql',
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet accumsan arcu. Proin ac consequat arcu.`,
+    description: ``,
     mail: ['biuro@be37.pl', 'dorota.szpinda@be37.pl'],
     phone: ['12 346 18 25', '664 492 728', '608 691 246'],
     navUrl:
