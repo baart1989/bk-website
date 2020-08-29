@@ -1,9 +1,9 @@
 [
   { "name": "Dorota Szpinda", "title": "Właściciel", "baseImagePath": "employee1.jpg", "email": "dorota.szpinda@be37.pl" },
   { "name": "Agnieszka Zimoch-Smuga", "title": "Projektant", "baseImagePath": "employee3.jpg", "email": "agnieszka.zimoch@be37.pl" },
-  { "name": "Jan Mrozowski", "title": "Projektant", "baseImagePath": "men.png", "email": "jan.mrozowski@be37.pl" },
-  { "name": "Sonia Machowska", "title": "Asystent Projektanta", "baseImagePath": "women.png", "email": "sonia.machowska@be37.pl" },
-  { "name": "Michał Boczoń", "title": "Asystent Projektanta", "baseImagePath": "men.png", "email": "michal.boczon@be37.pl" },
-  { "name": "Aleksandra Gaża", "title": "Asystent Projektanta", "baseImagePath": "men.png", "email": "aleksandra.gaza@be37.pl" },
+  { "name": "Jan Mrozowski", "title": "Projektant", "baseImagePath": "employee6.png", "email": "jan.mrozowski@be37.pl" },
+  { "name": "Sonia Machowska", "title": "Asystent Projektanta", "baseImagePath": "employee5.png", "email": "sonia.machowska@be37.pl" },
+  { "name": "Michał Boczoń", "title": "Asystent Projektanta", "baseImagePath": "employee7.png", "email": "michal.boczon@be37.pl" },
+  { "name": "Aleksandra Gaża", "title": "Asystent Projektanta", "baseImagePath": "employee8.png", "email": "aleksandra.gaza@be37.pl" },
   { "name": "Jarosław Michura", "title": "Współpraca", "baseImagePath": "employee2.jpg", "email": "jaroslaw.michura@be37.pl" }
 ]
