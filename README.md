@@ -1,8 +1,12 @@
-## Frontend
+## Site
+https://www.be37.pl/
 
-## Gatsby
 
-### Getting Started.
+## Development setup
+
+### Frontend - Gatsby
+
+#### Getting Started.
 
 You will need node and [Gatsby](https://www.gatsbyjs.org/tutorial/part-zero/) installed.
 
@@ -15,15 +19,15 @@ And for the final build
 
 Please refer package.json scripts for more commands.
 
-### 
+####
 
 Projects based on below gatsby-starter
 - https://github.com/akzhy/gatsby-starter-elemental
 
 
-## Backend
+### Backend
 
-### Generate AWS config
+#### Generate AWS config
 
 1. Export AWS enviroment variables
    `export AWS_SECRET_ACCESS_KEY=fake_secret`
