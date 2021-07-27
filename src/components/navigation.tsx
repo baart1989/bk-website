@@ -1,12 +1,12 @@
 import { Link, graphql, useStaticQuery } from 'gatsby';
-import { Menu, PlusCircle, ShoppingCart } from 'react-feather';
+import { Menu } from 'react-feather';
 import React, { useEffect, useRef, useState } from 'react';
 import { Theme, ThemeType } from './layout';
 
 import List from './navigation-list';
 import { Logo } from './utils';
 import { NavigationQuery } from './__generated__/NavigationQuery';
-import { Sidebar } from 'react-tailwind-component';
+import Sidebar from './sidebar';
 import { ThemeIcons } from './ui';
 import cns from 'classnames';
 import { useLocation } from '@reach/router';
@@ -33,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentTheme, switchTheme, themes }) =>
 
   const navbar = useRef(null);
   const [scrolled, changeState] = useState(false);
-  const [navbarHeight, setNavbarHeight] = useState(0);
+  const [, setNavbarHeight] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {

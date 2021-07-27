@@ -1,4 +1,4 @@
-import { getRandomValueFromArray, useHover } from 'react-frontend-common';
+import { useHover } from '../../hooks';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundImage from 'gatsby-background-image';
@@ -74,3 +74,7 @@ export const Team = () => {
     </section>
   );
 };
+
+function getRandomValueFromArray<T>(array: T[]) {
+  return array[Math.floor(Math.random() * array.length)];
+}

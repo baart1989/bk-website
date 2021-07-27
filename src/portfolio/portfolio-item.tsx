@@ -11,7 +11,7 @@ import { ModalRoutingContext } from 'gatsby-plugin-modal-routing';
 import { PortfolioQuery } from './__generated__/PortfolioQuery';
 import React from 'react';
 import { Redirect } from '@reach/router';
-import { useKeyPress } from 'react-frontend-common';
+import { useKeyPress } from '../hooks';
 
 export default function PortfolioItem({
   data,
@@ -114,8 +114,8 @@ export default function PortfolioItem({
             </div>
           </div>
         ) : (
-            <Redirect to="/" noThrow={true} />
-          )
+          <Redirect to="/" noThrow={true} />
+        )
       }
     </ModalRoutingContext.Consumer>
   );

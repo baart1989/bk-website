@@ -1743,6 +1743,276 @@
               "deprecationReason": null
             },
             {
+              "name": "partnersJson",
+              "description": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "StringQueryOperatorInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "parent",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "NodeFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "children",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "NodeFilterListInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "internal",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "InternalFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "name",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "StringQueryOperatorInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "baseImagePath",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "StringQueryOperatorInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "siteUrl",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "StringQueryOperatorInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "PartnersJson",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "allPartnersJson",
+              "description": null,
+              "args": [
+                {
+                  "name": "filter",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "PartnersJsonFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "PartnersJsonSortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "skip",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "limit",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PartnersJsonConnection",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "projectsJson",
+              "description": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "StringQueryOperatorInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "parent",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "NodeFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "children",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "NodeFilterListInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "internal",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "InternalFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "name",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "StringQueryOperatorInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "baseImagePath",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "StringQueryOperatorInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "ProjectsJson",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "allProjectsJson",
+              "description": null,
+              "args": [
+                {
+                  "name": "filter",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ProjectsJsonFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ProjectsJsonSortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "skip",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "limit",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "ProjectsJsonConnection",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "employeeJson",
               "description": null,
               "args": [
@@ -1886,276 +2156,6 @@
                 "ofType": {
                   "kind": "OBJECT",
                   "name": "EmployeeJsonConnection",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "projectsJson",
-              "description": null,
-              "args": [
-                {
-                  "name": "id",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "StringQueryOperatorInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "parent",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "NodeFilterInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "children",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "NodeFilterListInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "internal",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "InternalFilterInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "name",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "StringQueryOperatorInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "baseImagePath",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "StringQueryOperatorInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "ProjectsJson",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "allProjectsJson",
-              "description": null,
-              "args": [
-                {
-                  "name": "filter",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "ProjectsJsonFilterInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "sort",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "ProjectsJsonSortInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "skip",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "limit",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "ProjectsJsonConnection",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "partnersJson",
-              "description": null,
-              "args": [
-                {
-                  "name": "id",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "StringQueryOperatorInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "parent",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "NodeFilterInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "children",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "NodeFilterListInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "internal",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "InternalFilterInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "name",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "StringQueryOperatorInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "baseImagePath",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "StringQueryOperatorInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "siteUrl",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "StringQueryOperatorInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "OBJECT",
-                "name": "PartnersJson",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "allPartnersJson",
-              "description": null,
-              "args": [
-                {
-                  "name": "filter",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PartnersJsonFilterInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "sort",
-                  "description": "",
-                  "type": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "PartnersJsonSortInput",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "skip",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                },
-                {
-                  "name": "limit",
-                  "description": null,
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  },
-                  "defaultValue": null
-                }
-              ],
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "PartnersJsonConnection",
                   "ofType": null
                 }
               },
@@ -23723,7 +23723,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "EmployeeJsonSortInput",
+          "name": "PartnersJsonSortInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -23735,7 +23735,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "ENUM",
-                  "name": "EmployeeJsonFieldsEnum",
+                  "name": "PartnersJsonFieldsEnum",
                   "ofType": null
                 }
               },
@@ -23762,7 +23762,7 @@
         },
         {
           "kind": "ENUM",
-          "name": "EmployeeJsonFieldsEnum",
+          "name": "PartnersJsonFieldsEnum",
           "description": null,
           "fields": null,
           "inputFields": null,
@@ -24291,19 +24291,13 @@
               "deprecationReason": null
             },
             {
-              "name": "title",
-              "description": null,
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "baseImagePath",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "email",
+              "name": "siteUrl",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -24313,7 +24307,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "EmployeeJsonConnection",
+          "name": "PartnersJsonConnection",
           "description": null,
           "fields": [
             {
@@ -24347,7 +24341,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "EmployeeJsonEdge",
+                      "name": "PartnersJsonEdge",
                       "ofType": null
                     }
                   }
@@ -24371,7 +24365,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "EmployeeJson",
+                      "name": "PartnersJson",
                       "ofType": null
                     }
                   }
@@ -24408,7 +24402,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "EmployeeJsonFieldsEnum",
+                      "name": "PartnersJsonFieldsEnum",
                       "ofType": null
                     }
                   },
@@ -24467,7 +24461,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "EmployeeJsonFieldsEnum",
+                      "name": "PartnersJsonFieldsEnum",
                       "ofType": null
                     }
                   },
@@ -24485,7 +24479,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "EmployeeJsonGroupConnection",
+                      "name": "PartnersJsonGroupConnection",
                       "ofType": null
                     }
                   }
@@ -24502,7 +24496,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "EmployeeJsonEdge",
+          "name": "PartnersJsonEdge",
           "description": null,
           "fields": [
             {
@@ -24511,7 +24505,7 @@
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "EmployeeJson",
+                "name": "PartnersJson",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -24526,7 +24520,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "EmployeeJson",
+                  "name": "PartnersJson",
                   "ofType": null
                 }
               },
@@ -24539,7 +24533,7 @@
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "EmployeeJson",
+                "name": "PartnersJson",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -24553,7 +24547,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "EmployeeJsonGroupConnection",
+          "name": "PartnersJsonGroupConnection",
           "description": null,
           "fields": [
             {
@@ -24587,7 +24581,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "EmployeeJsonEdge",
+                      "name": "PartnersJsonEdge",
                       "ofType": null
                     }
                   }
@@ -24611,7 +24605,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "EmployeeJson",
+                      "name": "PartnersJson",
                       "ofType": null
                     }
                   }
@@ -25609,7 +25603,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "PartnersJsonSortInput",
+          "name": "EmployeeJsonSortInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -25621,7 +25615,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "ENUM",
-                  "name": "PartnersJsonFieldsEnum",
+                  "name": "EmployeeJsonFieldsEnum",
                   "ofType": null
                 }
               },
@@ -25648,7 +25642,7 @@
         },
         {
           "kind": "ENUM",
-          "name": "PartnersJsonFieldsEnum",
+          "name": "EmployeeJsonFieldsEnum",
           "description": null,
           "fields": null,
           "inputFields": null,
@@ -26177,13 +26171,19 @@
               "deprecationReason": null
             },
             {
+              "name": "title",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "baseImagePath",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "siteUrl",
+              "name": "email",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -26193,7 +26193,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "PartnersJsonConnection",
+          "name": "EmployeeJsonConnection",
           "description": null,
           "fields": [
             {
@@ -26227,7 +26227,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "PartnersJsonEdge",
+                      "name": "EmployeeJsonEdge",
                       "ofType": null
                     }
                   }
@@ -26251,7 +26251,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "PartnersJson",
+                      "name": "EmployeeJson",
                       "ofType": null
                     }
                   }
@@ -26288,7 +26288,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "PartnersJsonFieldsEnum",
+                      "name": "EmployeeJsonFieldsEnum",
                       "ofType": null
                     }
                   },
@@ -26347,7 +26347,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "ENUM",
-                      "name": "PartnersJsonFieldsEnum",
+                      "name": "EmployeeJsonFieldsEnum",
                       "ofType": null
                     }
                   },
@@ -26365,7 +26365,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "PartnersJsonGroupConnection",
+                      "name": "EmployeeJsonGroupConnection",
                       "ofType": null
                     }
                   }
@@ -26382,7 +26382,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "PartnersJsonEdge",
+          "name": "EmployeeJsonEdge",
           "description": null,
           "fields": [
             {
@@ -26391,7 +26391,7 @@
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "PartnersJson",
+                "name": "EmployeeJson",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -26406,7 +26406,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "PartnersJson",
+                  "name": "EmployeeJson",
                   "ofType": null
                 }
               },
@@ -26419,7 +26419,7 @@
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "PartnersJson",
+                "name": "EmployeeJson",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -26433,7 +26433,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "PartnersJsonGroupConnection",
+          "name": "EmployeeJsonGroupConnection",
           "description": null,
           "fields": [
             {
@@ -26467,7 +26467,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "PartnersJsonEdge",
+                      "name": "EmployeeJsonEdge",
                       "ofType": null
                     }
                   }
@@ -26491,7 +26491,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "OBJECT",
-                      "name": "PartnersJson",
+                      "name": "EmployeeJson",
                       "ofType": null
                     }
                   }

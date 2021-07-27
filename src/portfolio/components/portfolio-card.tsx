@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'react-feather';
 import { Button } from '../../components/ui';
 import Img from 'gatsby-image';
-import { Parallax } from 'react-tailwind-component';
+import Parallax from '../../components/parallax';
 import { PortfolioListQuery_allMdx_edges_node } from '../__generated__/PortfolioListQuery';
 import cns from 'classnames';
 

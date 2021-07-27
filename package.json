@@ -40,11 +40,9 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-feather": "^2.0.3",
-    "react-frontend-common": "git+ssh://git@bitbucket.org/bszpinda/react-frontend-common.git",
     "react-helmet": "^5.2.1",
     "react-modal": "^3.11.2",
-    "react-scroll-into-view": "^1.8.2",
-    "react-tailwind-component": "git+ssh://git@bitbucket.org/bszpinda/react-tailwind-component.git"
+    "react-scroll-into-view": "^1.8.2"
   },
   "devDependencies": {
     "@babel/compat-data": "^7.10.1",

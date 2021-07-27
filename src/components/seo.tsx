@@ -11,7 +11,7 @@ export type SEOProps = {
   title?: string;
   image?: any;
 };
-const SEO: React.FC<SEOProps> = ({ title, image, description = '', lang = 'en', meta = [] }) => {
+const SEO: React.FC<SEOProps> = ({ title, image, description = '', lang = 'pl', meta = [] }) => {
   const { site } = useStaticQuery<SeoQuery>(
     graphql`
       query SeoQuery {
