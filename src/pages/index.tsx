@@ -237,8 +237,8 @@ export const query = graphql`
     }
     portfolio: allMdx(
       filter: { fields: { sourceName: { eq: "portfolio" } } }
-      limit: 10
-      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 15
+      sort: { fields: [frontmatter___order], order: ASC }
     ) {
       edges {
         node {

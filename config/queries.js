@@ -3,11 +3,17 @@ const aws = require('aws-sdk');
 
 module.exports.getApi = async apiName => {
   const result = await new aws.AppSync().listGraphqlApis({ maxResults: 10 }).promise();
-  return result.graphqlApis.find(api => api.name.indexOf(apiName) !== -1);
+
+  return result.graphqlApis.find(api => {
+    const found = api.name.includes(apiName);
+    console.log({ name: api.name, apiName, found });
+    return found;
+  });
 };
 
 module.exports.getApiKey = async apiId => {
   const result = await new aws.AppSync().listApiKeys({ apiId, maxResults: 10 }).promise();
+  console.log({ result });
   return result.apiKeys[0];
 };
 

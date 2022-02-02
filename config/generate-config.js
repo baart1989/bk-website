@@ -3,7 +3,7 @@ const fs = require('fs');
 const aws = require('aws-sdk');
 const queries = require('./queries');
 
-const env = !!process.env.npm_config_stage ? process.env.npm_config_stage : 'dev';
+const env = !!process.env.npm_config_stage ? process.env.npm_config_stage : 'prod';
 
 console.log(`generate config for env: ${env} start`);
 
@@ -18,7 +18,7 @@ const secretAccessKey = reqEnvVarWithFallback('AWS_SECRET_ACCESS_KEY');
 const awsRegion = reqEnvVarWithFallback('AWS_REGION');
 aws.config.update({ accessKeyId, secretAccessKey, awsRegion });
 
-const baseName = `${env}-BiuroKonstrukcyjne`;
+const baseName = `${env}-BiuroKonstrukcyjneApi`;
 
 const { getApi, getApiKey, getApiSchema, getCognitoPool, getCognitoPoolClient } = queries;
 

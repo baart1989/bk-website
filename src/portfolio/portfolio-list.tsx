@@ -39,7 +39,7 @@ export const query = graphql`
   query PortfolioListQuery($skip: Int!, $limit: Int!) {
     allMdx(
       filter: { fields: { sourceName: { eq: "portfolio" } } }
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { fields: [frontmatter___order], order: ASC }
       limit: $limit
       skip: $skip
     ) {
